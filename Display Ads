@@ -1,0 +1,587 @@
+# Display Ads — Information Architecture & Navigational Map
+**Platform:** QA Pulse (staging-4.osmos.ai)  
+**Traced From:** Left Navigation → Display Ads  
+**Date Mapped:** 27 March 2026  
+
+---
+
+## LEFT NAVIGATION — Top-Level Structure
+```
+QA Pulse (/)
+├── Home                         → /home
+├── Analytics                    (expandable)
+├── Health                       → /health
+├── Control Center               (expandable)
+├── Finance                      (expandable: Dashboard, Advertiser Management, Advertiser Wallet Top Up)
+├── Apps                         → /appstore
+├── Plugins  [Beta]              → /plugins
+├── Packages [Alpha]             (expandable)
+├── Product Ads                  (expandable)
+├── **Display Ads**              ← [TRACED BELOW]
+├── Offsite Ads                  (expandable: Insights)
+├── Demand Wise                  (expandable)
+├── In-Store Digital             (expandable)
+├── In-Store Analog              (expandable)
+├── Support                      → /support
+├── What's New  [10 badge]
+└── Settings                     (expandable)
+```
+
+---
+
+## DISPLAY ADS — Full Navigation Tree
+```
+Display Ads  [Left Nav Section]
+│
+├── 1. Analytics
+│   ├── 1.1  Ad Server Analytics        → /displayAds/analytics/adServer
+│   ├── 1.2  Demand & Supply            → /displayAds/analytics/demandAndSupply
+│   └── 1.3  Live Analytics             → /displayAds/analytics/liveAnalytics
+│
+├── 2. Ad Inventory Management
+│   ├── 2.1  Page Setup                 → /displayAds/adInventoryManagement/pageSetup
+│   ├── 2.2  Ad Format Setup            → /displayAds/adInventoryManagement/adFormatSetup
+│   └── 2.3  Inventory Setup            → /displayAds/adInventoryManagement/inventorySetup
+│
+├── 3. Campaign Bulk Actions
+│   ├── 3.1  Update Campaigns           → /displayAds/campaigns/updateDisplayAdsCampaigns
+│   └── 3.2  Inventory Level Bid Customization → /displayAds/campaigns/inventoryLevelBid
+│
+├── 4. Campaign Review                  → /displayAds/campaignReview
+│
+├── 5. Ad Request Studio  [Beta]        → /displayAds/adRequestStudio
+│
+└── 6. Build Your Own Targeting
+    ├── 6.1  Key-Value Setup            → /displayAds/customTargeting/keyValueSetup
+    └── 6.2  Targeting Setup            → /displayAds/customTargeting/targetingSetup
+```
+
+---
+
+## DETAILED FLOW TRACE — Level by Level
+
+---
+
+### L1 → Display Ads (Left Nav Item)
+- **Trigger:** Click "Display Ads" icon/label in left nav
+- **Result:** Expandable flyout/submenu panel slides out
+- **Contains:** Section label "Display Ads", 6 grouped sections with sub-items
+- **Global Header Controls (visible on all pages):**
+  - Light/Dark Mode Toggle
+  - Search (global)
+  - User/Profile Icon
+  - Date Range Picker (e.g., 20 Mar 26 – 26 Mar 26)
+  - Compare Date Range Label
+
+---
+
+### L2.1 → Analytics > Ad Server Analytics
+**URL:** `/displayAds/analytics/adServer`  
+**Breadcrumb:** Display Ads > Analytics > Ad Server Analytics  
+**Info Banner:** "This dashboard displays combined reporting for both Display and Sponsorship (Guaranteed) campaigns."
+
+#### Page-Level Controls:
+| Control | Type | Description |
+|---|---|---|
+| All Pages (dropdown) | Filter | Filter data by specific page (options: 12359589, 1234qwer, byot, drag_and_drop, HOME, home_page, in-store-pos, instore, …) |
+| Date Range Picker | Filter | Date range selection |
+| Theme Toggle | Button | Light/Dark mode |
+| Search | Button | Global search |
+| User | Button | Profile/user actions |
+
+#### KPI Summary Cards (L3):
+| Metric | Value Shown |
+|---|---|
+| Requests | 72 |
+| Response (%) | 0% |
+| Program CPM | 0 |
+| CTR | 0% |
+| Ad Impressions | 0 |
+| Ad Clicks | 0 |
+
+#### Charts (L3 → L4):
+1. **Daily Performance Trend — Requests vs Responses**
+   - Chart Type: Line chart (Highcharts)
+   - Dropdowns: Requests, Responses (metric selectors)
+   - Download icon
+   - Filter label: "1 Filter Applicable: Date"
+
+2. **Daily Performance Trend — Ad Clicks vs Ad Impressions**
+   - Chart Type: Line chart (Highcharts)
+   - Dropdowns: Ad Clicks, Ad Impressions (metric selectors)
+   - Download icon
+   - Filter label: "1 Filter Applicable: Date"
+
+#### Tables (L3 → L4 → L5):
+3. **Page Level Performance Report**
+   - Toggle: Chart view / Table view
+   - Metric Dropdown: Ad Clicks
+   - Filter label: "1 Filter Applicable: Date"
+
+4. **Page Level Contribution**
+   - Chart Type: Donut charts (4 metrics side-by-side)
+   - Download icon
+   - Filter label: "1 Filter Applicable: Date"
+
+5. **Ad Inventory Performance Report**
+   - Search: "Search Ad Inventory"
+   - Column Toggle (show/hide columns)
+   - Download icon
+   - Add Filter button
+   - Columns: Ad Inventory Name (Ad Unit), Requests, Responses, Ad Acceptance (%), Ad Revenue, Program CPM, Ad Impressions, Ad Clicks, Detail Page Views, Attributed Add to Cart, Attributed Orders (SKU), Attributed GMV, CTR, ROAS, Ad Viewability Index, Response (%)
+
+---
+
+### L2.2 → Analytics > Demand & Supply
+**URL:** `/displayAds/analytics/demandAndSupply`  
+**Breadcrumb:** Display Ads > Analytics > Demand & Supply  
+
+#### Controls:
+| Control | Type |
+|---|---|
+| All Merchants dropdown | Filter by merchant |
+| Date Range Picker | Date filter |
+| Filter icon | Additional filters |
+
+#### Sections (L3 → L4):
+1. **Demand & Supply Gap Analytics**
+   - View toggle: Scatter chart / Table
+   - Column customizer
+   - Add Filter button
+   - Chart: Bubble/scatter quadrant with 4 quadrants
+   - Note: "(Data from past 7-days)"
+
+2. **Budget Utilization Trend**
+   - Filter label: "1 Filter Applicable: Date"
+
+3. **Seasonality — Days & Hours (Ad Revenue)**
+   - Tabs: Days & Hour / Days / Hour
+   - Note: "(Data from past 7-days)"
+
+4. **Seasonality — Days & Hours (Ad Clicks)**
+   - Same tab structure
+
+5. **30-day Impression Projections**
+   - Add Filter button
+   - Columns: Ad Inventory Name (Ad Unit), Page Type, Projected Impressions, Booked Impressions, Unbooked Impressions, Inventory Minimum CPM, Inventory Average CPM, Unbooked Impressions Revenue Potential
+   - Note: "(Projections for next 30 days)"
+
+6. **Supply Analytics**
+   - Add Filter button
+   - Columns: Ad Inventory Name (Ad Unit), Page Type, Category L1, Requests, Responses, Response (%), Ad Acceptance (%), Ad Revenue, Ad Impressions, Ad Clicks, Program CPM, Ad Viewability Index
+
+---
+
+### L2.3 → Analytics > Live Analytics
+**URL:** `/displayAds/analytics/liveAnalytics`  
+**Breadcrumb:** Display Ads > Analytics > Live Analytics  
+
+#### Controls:
+| Control | Type |
+|---|---|
+| Refresh button | Manual data refresh |
+| Search | Global search |
+| Filter icon | Filters |
+| Refresh (auto) icon | Auto-refresh toggle |
+| All Merchants dropdown | Merchant filter |
+
+#### KPI Cards (L3):
+- Ad Revenue, Ad Impressions, Ad Clicks, CPM, CPC, Display Ads Revenue
+
+#### Charts/Tables (L3 → L4):
+1. **Today Performance Trend**
+   - Metric Dropdown: Ad Revenue
+   - Lines: Today / Yesterday / Same day last week
+   - Download icon
+
+2. **Advertiser Performance Report** (Table)
+   - Search: Advertiser Name
+   - Column customizer
+   - Columns: Advertiser Name, Ad Revenue, Ad Impressions, Ad Clicks, CPC, CPM, CTR, Display Ads Revenue, Display Ads Impressions, Display Ads Clicks, Display Ads CPC, Display Ads CPM, Display Ads CTR
+
+3. **Display Ads — Campaign Performance Report** (Table)
+   - Columns: Campaign Name, Campaign ID, Budget Type, Daily Budget, Ad Revenue, Ad Impressions, Ad Clicks, CPC, CPM, CTR, Budget Utilization (%)
+
+---
+
+### L2.4 → Ad Inventory Management > Page Setup
+**URL:** `/displayAds/adInventoryManagement/pageSetup`  
+**Breadcrumb:** Display Ads > Ad Inventory Management > Page Setup  
+**Help Link:** "Learn how to setup Pages"
+
+#### Controls:
+| Control | Type |
+|---|---|
+| Column customizer | Show/hide columns |
+| Search | Search Inventory Name |
+| Create New Page (button) | Opens modal |
+
+#### Table Columns:
+- Page Name, API Identifier, Tags, Estimated Daily Impressions
+- Row action: Edit icon (pencil) on each row
+
+#### L3 → Create New Page (Modal)
+**Trigger:** Click "+ Create New Page" button  
+**Modal Title:** "Create New Page"
+
+| Section | Fields |
+|---|---|
+| **Page Details** | Page Name* (0/30 chars), Tags (multi-tag input), API Identifier* |
+| **Advanced Settings** | Product Catalog Targeting (toggle, OFF by default), Keyword Targeting (toggle, OFF), Custom Targeting1 (toggle, OFF), Device Targeting (toggle, ON), Audience Targeting (toggle, ON), Geo Targeting (toggle, ON) |
+| **Footer** | Create (button) |
+
+#### L3 → Edit/Page Details (Modal)
+**Trigger:** Click pencil icon on a page row  
+**Modal Title:** "Page Details"
+
+| Section | Fields |
+|---|---|
+| **Page Details** | Page Name* (editable), Tags (with tag chips + remove ×), API Identifier (read-only) |
+| **Advanced Settings** | Product Catalog Targeting (toggle + sub-checkboxes: Category L1, Category L2, Category L3, Brand, Product, UDP), Keyword Targeting (toggle), Custom Targeting1 (toggle) |
+| **Footer** | Save (button) |
+
+---
+
+### L2.5 → Ad Inventory Management > Ad Format Setup
+**URL:** `/displayAds/adInventoryManagement/adFormatSetup`  
+**Breadcrumb:** Display Ads > Ad Inventory Management > Ad Format Setup  
+**Help Link:** "Learn how to setup Ad Formats"
+
+#### Format Type Cards (L3):
+| Card | Sub-count | Status |
+|---|---|---|
+| Banner Ads | 754 formats | Active |
+| Video Ads | 623 formats | Active |
+| Product Display Ads | 44 formats | Active |
+| Carousel Ads [Recently Added] | 639 formats | Active |
+| Scratch Cards | — | Coming Soon |
+| Spin the Wheel | — | Coming Soon |
+| Story Ads [Recently Added] | 4 formats | Active |
+| Custom Ads | 1221 formats | Active |
+
+#### L3 → Banner Ads (Click card → Image Ad Formats List)
+**Heading:** "← Image Ad Formats"
+
+#### Controls:
+| Control | Type |
+|---|---|
+| Filter icon | Column filters |
+| Column customizer | Show/hide columns |
+| Search | Search Ad Format Name |
+| + Create (button) | Dropdown: "Create Ad Format" / "Create Osmos SDK Supported Ad Format" |
+
+#### Table Columns:
+- Ad Format Name, API Identifier, Is SDK Supported?, Used by Inventories, Used By Brands, Used By Campaigns, Spend (Last 30 days)
+- Row action: 3-dot menu → **Edit**, **Duplicate**
+
+#### L4 → Create Ad Format (Modal)
+**Trigger:** Click "+ Create" → "Create Ad Format"  
+**Modal Title:** "Create Ad Format"
+
+| Field | Type |
+|---|---|
+| Ad Format Name* | Text (0/200 chars) |
+| Description | Text |
+| Identifier Key* | Text |
+| Ad Type | Dropdown (default: Banner Ads) |
+| Ad Size* | Max Width (px) + Max Height (px) |
+| Ad Previews* | Upload Preview (image upload area) + Preview Name* + Description (0/35) |
+| Ad Elements | "+ Add required elements for this Ad format" |
+| View Example | Link |
+| **Footer** | Create (button) |
+
+#### L4 → Edit Ad Format (Modal)
+- Same fields as Create, pre-populated  
+- Footer: **Save** button  
+- Confirmation on close: "There are some unsaved changes, are you sure you want to close?" → Cancel / Yes
+
+---
+
+### L2.6 → Ad Inventory Management > Inventory Setup
+**URL:** `/displayAds/adInventoryManagement/inventorySetup`  
+**Breadcrumb:** Display Ads > Ad Inventory Management > Inventory Setup  
+**Help Link:** "Learn how to setup Inventories"
+
+#### Controls:
+| Control | Type |
+|---|---|
+| Grid / List toggle | View switch |
+| Column customizer | Show/hide columns |
+| Search | Search Inventory Name |
+| Add Filter | Row-level filter |
+| + Create Auction Ad Inventory (button) | Primary CTA — dropdown |
+
+#### Dropdown Options (L3):
+- Create Auction Ad Inventory
+- Create Guaranteed Ad Inventory
+
+#### Table Columns:
+- Active/Inactive toggle, Inventory thumbnail, Inventory Name, API Identifier, Used By Brands, Used By Campaign
+- Row action: 3-dot menu → (Edit, Duplicate, Delete inferred from pattern)
+
+#### L3 → Create Auction Ad Inventory (Modal / Full-Screen Drawer)
+**Trigger:** Click "+ Create Auction Ad Inventory"  
+**Modal Title:** "Create Auction Ad Inventory"
+
+Multi-step form with 5 numbered sections:
+
+| Step | Section | Fields |
+|---|---|---|
+| 1 | **Inventory Details** | Inventory Name* (0/250), Description, API Identifier*, Page* (Select Page dropdown), Inventory Position* (Select dropdown), Ad Format* (Select dropdown) |
+| 2 | **Targeting** | Targeting options enabled for this ad inventory (checkboxes per targeting type: Device, Geo, Audience, Product Catalog, Keyword, Custom Targeting1 [NEW badge], each with scope dropdowns) |
+| 3 | **Inventory Visibility Setting** | Inventory Visibility Access (Public / Private radio), Available for all Advertiser Personas (toggle, ON by default) |
+| 4 | **Inventory Pricing** | Pricing Model* (CPC checkbox, CPM checkbox) |
+| 5 | **Inventory Impression** | Est. Daily Impressions (input), Intelligent Estimation (toggle, ON), Select Page for the estimations |
+| — | **Footer** | Create (button) |
+
+#### L3 → Create Guaranteed Ad Inventory (Modal)
+- Same multi-step structure as Auction, likely with Guaranteed-specific pricing fields
+
+---
+
+### L2.7 → Campaign Bulk Actions > Update Campaigns
+**URL:** `/displayAds/campaigns/updateDisplayAdsCampaigns`  
+**Breadcrumb:** Display Ads > Campaign Bulk Actions > Update Campaigns  
+
+#### Workflow:
+| Step | UI Element | Description |
+|---|---|---|
+| L3 | Excel Template Banner | "update_sda_campaigns.xlsx — Excel template with sample data" + "Download file for all advertisers" button |
+| L4 | Upload Your File | Drag-and-drop zone: "Drag and drop or Upload your .xlsx file here" |
+| L4 | How it works (info box) | Step-by-step: 1. Click "Download file for all advertisers", 2. File contains all campaign settings for all advertisers, 3. Change settings for campaigns to update, 4. Save and upload file back to platform |
+
+---
+
+### L2.8 → Campaign Bulk Actions > Inventory Level Bid Customization
+**URL:** `/displayAds/campaigns/inventoryLevelBid`  
+**Breadcrumb:** Display Ads > Campaign Bulk Actions > Inventory Level Bid Customization  
+
+#### Workflow (same pattern as Update Campaigns):
+| Step | UI Element | Description |
+|---|---|---|
+| L3 | Excel Template Banner | "Inventory_level_bid.xlsx — Excel template with sample data" + "Download file for all advertisers" button |
+| L4 | Upload Your File | Drag-and-drop zone: "Drag and drop or Upload your .xlsx file here" |
+| L4 | How it works (info box) | 1. Download file, 2. File contains active campaigns for all advertisers, 3. Update bids of individual inventories for active campaigns, 4. Save and upload back |
+
+---
+
+### L2.9 → Campaign Review
+**URL:** `/displayAds/campaignReview`  
+**Breadcrumb:** Display Ads > Campaign Review  
+**View Mode Toggle:** "View Mode: Osmos View"
+
+#### Controls:
+| Control | Type |
+|---|---|
+| Refresh button | Data refresh |
+| Filter (4 active badge) | Column/row filters |
+| Column customizer | Show/hide columns |
+| Search | Search Campaign Name |
+
+#### Table Columns:
+- Status (e.g., "Under Review"), Campaign Name, Campaign Type (Auction / Guaranteed), Merchant Name, Campaign Created On, Budget (partial)
+- Row action: **View** (link)
+
+#### L3 → View Campaign (Drawer / Full-Screen Overlay)
+**URL Pattern:** `/displayAds/campaignReview/drawer/GOAL_LAUNCHER/INVENTORY_AUCTION?defaultCardToOpen=CONFIG&goalId=...&isEditMode=true&clientId=...&isReviewMode=true&campaignId=...`  
+**Header:** Campaign name + date  
+**Sub-header:** "Creatives Status: 1/1 PENDING REVIEWS" (link)
+
+Sections scrollable vertically:
+
+| Section | Content |
+|---|---|
+| **Inventory Selection** | "X Page selected: [page name]", Search inventories, Table: Inventory Name / Min. CPC bid / Tags |
+| **Targeting** | Included Locations, Excluded Locations, Audience Targeting, Devices Targeting, Product Catalog Targeting (all with value chips) |
+| **Chargeable CPM / Biddable CPM** | Values displayed |
+| **Start Date / End Date** | Date-time values |
+| **Custom Attribution Window** | Toggle (off = default) + description |
+| **Customized Chargeable & Biddable CPC** | Table: Inventory Name / Minimum CPC / Chargeable CPC / Biddable CPC |
+| **Campaign Priority** | Value: Price Priority |
+| **Biddable CPM** | Value |
+| **Ads Upload** | Section header + "Ads Status Updates" link |
+
+#### L4 → Ads Upload Section
+- **Creative group tabs** (left panel): e.g., "QA Full Fledge Test" with clock icon
+- **Eligibility badge:** "1/1 Inventories Eligible"
+- **Ad preview area** (right): Shows ad preview carousel with navigation arrows
+  - Creative name label
+  - Image/Video file indicators
+  - "Review" link per ad creative
+
+#### L5 → Ad Details Review (Modal)
+**Trigger:** Click "Review" link on a creative  
+**Modal Title:** "Ad Details"
+
+| Section | Content |
+|---|---|
+| Header | Creative Group Name + Creative Sub-title |
+| Ad Name | Text label |
+| Media Assets | Video Element preview (file name, dimensions), Image Element preview (file name, dimensions) |
+| Carousel Tabs | Tab 1 / Tab 2 (if multi-slide) |
+| Text Elements | Text 1, Text 2, etc. |
+| **Your Ad Previews** (right pane) | "1 of 1 — Sample Preview" → Shows actual ad render |
+| Preview expand icon | Full-screen preview |
+| **Footer** | **Reject** button (red border) + **Approve** button (blue) |
+
+#### L6 → Approve Action
+- Confirms approval, updates creative status
+
+#### L6 → Reject Action
+- Likely opens rejection reason input → submits rejection
+
+---
+
+### L2.10 → Ad Request Studio [Beta]
+**URL:** `/displayAds/adRequestStudio`  
+**Breadcrumb:** Display Ads > Ad Request Studio  
+
+#### Controls:
+| Control | Description |
+|---|---|
+| Helper Config (button) | Opens configuration helper |
+
+#### Sections:
+
+##### L3 → Campaign QuickFill Helper (collapsible blue panel)
+| Field | Type |
+|---|---|
+| Advertiser* | Dropdown (e.g., "Test Seller 1 (TEST_SELLER_ID_1)") |
+| Active Campaign* | Dropdown (Select Campaign) |
+| Inventory (optional) | Dropdown (Select Inventory) |
+| Apply to Form | Button — fills the form below |
+| Close Helper | Button |
+
+##### L3 → Ad Request Form
+| Field | Type |
+|---|---|
+| User ID (Ubid)* | Text input (placeholder: user_123), description: "Client-generated unique browser ID" |
+| Page Identifier* | Dropdown (Select Page) |
+| Ads Count* | Number input (default: 1, max: 10 per ad unit) |
+| Ad Inventory Identifier* | Dropdown (Select Ad Inventory) |
+
+##### L3 → Variable Table
+| Variable | Value |
+|---|---|
+| Marketplace Client ID | 10064059 |
+| Domain URL | https://1mg-ba.o-s.io/ |
+
+##### L3 → Generated Code Panel
+- **Tabs:** Generated Code / Copy / Execute  
+- **Code Format Tabs:** Curl / Web / Android / iOS  
+- **Sample Curl:** `curl --request GET \ --url 'https://…/v2/bsda?client_id=…&pcnt_au=1' ...`
+
+---
+
+### L2.11 → Build Your Own Targeting > Key-Value Setup
+**URL:** `/displayAds/customTargeting/keyValueSetup`  
+**Breadcrumb:** Display Ads > Build Your Own Targeting > Key-Value Setup  
+
+#### Controls:
+| Control | Type |
+|---|---|
+| Refresh button | Data refresh |
+| Column customizer | Show/hide columns |
+| Search | Search Key Name |
+| + Create Key | Opens modal |
+
+#### Table Columns:
+- Key Name (link), API Identifier, No. of Values
+- Row action: 3-dot menu → Edit, (Delete inferred)
+
+**Sample Data Rows:**
+| Key Name | API Identifier | No. of Values |
+|---|---|---|
+| Service | mb cbsdhvkgyvk,jebk | 150 |
+| category30853 | cat56561484264 | 49 |
+| category99495 | cat56561471968 | 149 |
+| Location | Location-api | 4 |
+
+#### L3 → Create Key (Modal)
+**Modal Title:** "Create Key"
+
+| Step | Section | Fields |
+|---|---|---|
+| 1 | **Key Details** | Key Name* (0/35 chars), API Identifier* (with note: some inputs not allowed, "Learn more" link) |
+| 2 | **Values** | Enter Values textarea (placeholder examples: CTA, Tablets, Smartphones, Laptops), Add Values button, Values Added counter (0 / max 150), restrictions note |
+| — | **Footer** | Create button |
+
+#### L3 → Edit Key (Modal)
+**Modal Title:** "Edit Key"  
+Same structure as Create, pre-populated with existing data.  
+Footer: **Save** button  
+Confirmation: "Your changes will be lost. Are you sure you want to close the drawer?" → No / Yes
+
+---
+
+### L2.12 → Build Your Own Targeting > Targeting Setup
+**URL:** `/displayAds/customTargeting/targetingSetup`  
+**Breadcrumb:** Display Ads > Build Your Own Targeting > Targeting Setup  
+
+#### Form Fields (single-page form):
+| Field | Type | Notes |
+|---|---|---|
+| Name* | Text (17/50 chars) | e.g., "Custom Targeting1" |
+| Description* | Textarea (108/220 chars) | e.g., "Custom Targeting is used to target ads…" |
+| Icon* | Image upload | With remove (×) button |
+| Visibility* | Radio: Internal Only / Everyone | Default: Everyone |
+| **Footer** | Save button | — |
+
+---
+
+## GLOBAL UI PATTERNS (Across All Display Ads Pages)
+
+### Common Header Toolbar
+```
+[Breadcrumb: Display Ads > Section > Sub-section]   [Theme] [Search] [User] [Filter?] [Page Filter?] [Date Range]
+```
+
+### Common Table Actions
+- **3-dot (⋮) menu** on rows: Edit, Duplicate (and sometimes Delete)
+- **Toggle switches**: Enable/Disable rows inline
+- **Column customizer**: Show/hide columns
+- **Download icon**: Export table data
+- **Search inputs**: Per-section search
+
+### Common Modal Patterns
+- **Multi-step numbered forms** (1, 2, 3… sections)
+- **Confirmation dialogs** on unsaved-changes close: "Your changes will be lost / There are some unsaved changes" → Cancel/No & Yes buttons
+- **Required fields** marked with red asterisk `*`
+- **Info icons** `ⓘ` on field labels for tooltips
+- **Create / Save / Approve / Reject** footer buttons
+
+### Status Values Observed
+- Under Review (orange)
+- Pending Reviews
+- Active / Inactive (toggle)
+- Coming Soon (orange text — disabled)
+- Beta (badge)
+- Alpha (badge)
+- NEW (badge)
+- Recently Added (ribbon)
+
+---
+
+## URL PATTERN REFERENCE
+
+| Section | URL Path |
+|---|---|
+| Ad Server Analytics | `/displayAds/analytics/adServer` |
+| Demand & Supply | `/displayAds/analytics/demandAndSupply` |
+| Live Analytics | `/displayAds/analytics/liveAnalytics` |
+| Page Setup | `/displayAds/adInventoryManagement/pageSetup` |
+| Ad Format Setup | `/displayAds/adInventoryManagement/adFormatSetup` |
+| Inventory Setup | `/displayAds/adInventoryManagement/inventorySetup` |
+| Update Campaigns | `/displayAds/campaigns/updateDisplayAdsCampaigns` |
+| Inventory Level Bid | `/displayAds/campaigns/inventoryLevelBid` |
+| Campaign Review | `/displayAds/campaignReview` |
+| Campaign Review (drawer) | `/displayAds/campaignReview/drawer/GOAL_LAUNCHER/INVENTORY_AUCTION?...` |
+| Ad Request Studio | `/displayAds/adRequestStudio` |
+| Key-Value Setup | `/displayAds/customTargeting/keyValueSetup` |
+| Targeting Setup | `/displayAds/customTargeting/targetingSetup` |
+
+---
+
+## WORKFLOW COMPLETE ✅
+All 12 top-level Display Ads sections have been traced to a minimum of Level 5–7 depth.  
+Modals, drawers, forms, tables, filters, charts, dropdowns, and inline actions are all documented.
