@@ -1,0 +1,912 @@
+# QA Pulse — Information Architecture & Navigational Map
+**Platform:** `https://qa-marketplace-pulse.osmos.ai`
+**Version:** 2-1-173
+**Org:** QA (OSX Techlabs Private Ltd.)
+**Plan:** PRO
+**Generated:** 2026-03-27
+
+---
+
+## GLOBAL HEADER ELEMENTS
+| Element | Description |
+|---|---|
+| Logo / Brand | `QA` — links to `/` (root redirect to `/home`) |
+| PRO Badge | Plan indicator (crown icon) |
+| Theme Toggle | Light / Dark / System |
+| Search `🔍` | Global search across the platform |
+| User Profile `👤` | Profile and account actions |
+| Date Range Picker | Contextual date range selector (most pages) |
+| Filter `⚙` | Contextual filter (analytics pages) |
+| Merchant Selector | Dropdown — "All Merchants" (analytics pages) |
+| Refresh `🔄` | Refresh data (analytics pages) |
+
+---
+
+## LEFT NAVIGATION — FULL STRUCTURE
+```
+Left Nav
+├── [Logo / Org Name]
+├── PRO (plan badge)
+├── Home
+├── Analytics (expandable)
+│   ├── Live Insights
+│   ├── Advertiser Insights
+│   └── Scheduled Reports
+├── Health
+├── Control Center (expandable)
+│   ├── Onboarding
+│   │   ├── Seller Advertiser Onboarding
+│   │   └── Brand Advertiser Onboarding
+│   ├── User Access Management
+│   │   ├── Super Admin Users
+│   │   ├── Ops Users
+│   │   ├── Advertiser Users
+│   │   └── Advertiser Account Manager Mapping
+│   ├── User Role Management
+│   │   ├── Admin User
+│   │   └── Advertiser User
+│   ├── Advertiser Persona Management
+│   │   ├── Persona Configuration
+│   │   └── Advertiser Persona Allocation
+│   ├── Advertiser Settings
+│   │   ├── Segment Manager
+│   │   └── Attribution Overrides
+│   ├── Automated Rules
+│   │   └── Wallet Rules
+│   ├── Debug Console
+│   │   ├── Product Catalog
+│   │   ├── Event Logs
+│   │   ├── Product Ads Request Logs
+│   │   └── Display Ads Request Logs
+│   └── Activity Log
+├── Finance (expandable)
+│   ├── Dashboard
+│   ├── Advertiser Management
+│   └── Advertiser Wallet Top Up
+├── Apps
+├── Plugins (Beta)
+├── Packages (Alpha) (expandable)
+│   ├── Packages
+│   ├── Bookings
+│   ├── Analytics
+│   │   ├── Package Analytics
+│   │   ├── Sales Analytics
+│   │   └── Live Analytics
+│   ├── Packages [Flexi]
+│   ├── Sales Planner
+│   └── All Bookings
+│       ├── Bookings
+│       └── Line Item Review
+├── Product Ads (expandable)
+│   ├── Analytics
+│   │   ├── Ad Server Analytics
+│   │   ├── Demand & Supply
+│   │   └── Live Analytics
+│   ├── Yield Controls
+│   │   ├── CPC Controls
+│   │   └── CPM Controls
+│   ├── Keyword Bid Setting
+│   │   ├── CPC Controls
+│   │   └── CPM Controls
+│   └── Campaign Bulk Actions
+│       ├── Create Campaign
+│       ├── Update Campaigns
+│       ├── Activate Campaigns
+│       ├── Pause Campaigns
+│       └── Product Selection
+├── Display Ads (expandable)
+│   ├── Analytics
+│   │   ├── Ad Server Analytics
+│   │   ├── Demand & Supply
+│   │   └── Live Analytics
+│   ├── Ad Inventory Management
+│   │   ├── Page Setup
+│   │   ├── Ad Format Setup
+│   │   └── Inventory Setup
+│   ├── Campaigns
+│   │   ├── Update Campaigns
+│   │   └── Inventory Level Bid Customization
+│   ├── Campaign Review
+│   ├── Ad Request Studio (Beta)
+│   └── Custom Targeting
+│       ├── Key-Value Setup
+│       └── Targeting Setup
+├── Offsite Ads (expandable)
+│   └── Insights
+├── Demand Wise (expandable)
+│   ├── Dashboard
+│   ├── Channel Setup
+│   ├── Communication Templates
+│   └── System Templates Configuration
+├── In-Store Digital (expandable)
+│   ├── Store Management
+│   ├── All Campaigns
+│   ├── In-Store Analytics
+│   │   ├── In-Store Analytics (Dashboard)
+│   │   └── Booking Calendar
+│   ├── Ad Screen Management
+│   │   ├── Playlist Templates
+│   │   ├── Screen Management
+│   │   └── Ad Format Setup
+│   ├── Compliance Report
+│   │   ├── Playback Logs
+│   │   └── Screenshot Logs
+│   ├── Schema Setup
+│   │   ├── Store Schema
+│   │   ├── Screen Schema
+│   │   └── Placement & Category Schema
+│   └── Campaign Review
+├── In-Store Analog (expandable)
+│   ├── Store Management
+│   ├── Campaign
+│   │   ├── Dashboard
+│   │   └── Booking Calendar
+│   ├── Asset Management
+│   │   ├── Activation Type
+│   │   └── Assets
+│   └── Schema Setup
+│       ├── Store Schema
+│       └── Assets Schema
+├── Support
+├── What's New (badge: 7)
+└── Settings (expandable)
+    ├── Switch to Old Experience
+    ├── Global Configurations
+    ├── Change History
+    ├── Integrations
+    ├── Metrics Config
+    ├── Developer Settings
+    │   ├── Setup Details
+    │   └── Events Debugging
+    ├── Help Center
+    └── Logout
+```
+
+---
+
+## DETAILED PAGE-BY-PAGE WORKFLOW MAP
+
+---
+
+### 1. HOME
+**URL:** `/home`
+**Description:** Main dashboard showing ad performance overview.
+```
+Home
+├── KPI Cards (clickable dropdowns)
+│   ├── M%G
+│   ├── Ad Revenue
+│   ├── Ad Impressions
+│   ├── Ad Clicks
+│   ├── ROAS
+│   └── Attributed GMV
+├── Daily Performance Trend (Charts)
+│   ├── Ad Revenue vs CPC (Line chart, downloadable)
+│   └── Ad Clicks vs CTR (Line chart, downloadable)
+├── Projects Table
+│   ├── Title
+│   ├── Status
+│   ├── Business Impact
+│   ├── Primary Owner
+│   ├── New ETA
+│   ├── Completion (%)
+│   ├── Latest Summary
+│   ├── Last Updated On
+│   ├── Original ETA
+│   ├── Delay in days
+│   ├── Impacts
+│   ├── Tasks
+│   └── Scope Document
+├── Theme Toggle (Light / Dark / System)
+└── Date Range Picker
+    └── Comparison Range auto-shown
+```
+
+---
+
+### 2. ANALYTICS
+
+#### 2.1 Live Insights
+**URL:** `/analytics/liveInsights`
+**Description:** Real-time today's ad performance at advertiser level.
+```
+Analytics > Live Insights
+├── Filter: Merchant Selector (All Merchants)
+├── Refresh Button
+├── KPI Tiles
+│   ├── Ad Revenue
+│   ├── Ad Impressions
+│   ├── Ad Clicks
+│   ├── CPM
+│   └── CPC
+├── Today Performance Trend (Chart)
+│   └── Metric Selector (dropdown: Ad Revenue, etc.)
+└── Advertiser Performance Report (Table)
+    └── Columns: Advertiser Name, Ad Revenue, Ad Impressions,
+        Ad Clicks, CPC, CPM, CTR
+    [WORKFLOW COMPLETE — Display only, no further actions]
+```
+
+#### 2.2 Advertiser Insights
+**URL:** `/analytics/programInsights`
+**Description:** Deep program-level advertiser analytics dashboard.
+```
+Analytics > Advertiser Insights
+├── Filters: Merchant Selector, Date Range, Add Filter
+├── KPI Cards
+│   ├── Ad Revenue
+│   ├── Ad Impressions
+│   ├── Ad Clicks
+│   ├── ROAS
+│   ├── Attributed GMV
+│   └── NTB Orders (SKU) (365 days)
+├── Daily Performance Trend Charts (2)
+│   ├── Ad Revenue vs CPC
+│   └── Ad Clicks vs CTR
+├── Budget Utilization Trend (Chart)
+├── Advertiser Snapshot (Table)
+│   ├── Add Filter
+│   ├── Search Category L1
+│   ├── Column Selector
+│   ├── Download Button
+│   └── Columns: Category L1, Yet to Advertise, Yet to Topup,
+│       Yet to Activate Campaign, Merchants with Active Campaigns
+│       but No SKUs, Merchants with Budget but No Active Campaigns,
+│       Merchants Low on Wallet Balance, Merchants with Exhausted
+│       Wallets, Merchants About to Churn, Churned Merchants,
+│       Spending Merchants (L7d), Overall GMV of Ad Merchants (L30d),
+│       Overall GMV of Non-Ad Merchants (L30d), Overall GMV (L30d),
+│       Total Ad Revenue (L30d)
+├── Movers And Shakers Report (Table)
+│   └── Columns: Advertiser Name, Product Ads Revenue, Display Ads
+│       Revenue, Offsite Ads Revenue, Ad Impressions, CTR, CPM,
+│       Attributed Orders, Attributed GMV, Attributed ROI,
+│       Overall Gross Revenue, …
+├── Ad Format Performance Report (Chart + Table)
+│   └── Columns: Ad Format, Ad Revenue, Ad Clicks, Ad Impressions,
+│       CPC, CPM, Attributed View Products, Add to Cart, Orders,
+│       Attributed GMV, Advertiser Count
+├── Channel Performance Report (Table)
+│   └── Columns: Channel Type, Advertiser Count, Ad Revenue, CPC,
+│       Ad Clicks, CPM, Ad Impressions, Attributed actions, Orders, GMV
+├── Campaign Performance Report (Table)
+│   └── 30+ columns including Campaign Name/ID, Type, Status, Budget, Bid,
+│       Performance metrics, Geo/Audience/Merchandise Targeting flags
+└── Advertiser Dimension Report (Table)
+    └── Columns: Advertiser Name/ID, Persona, Status, Onboarding Date,
+        Topup dates, Feed Sync, Lifetime Spend/Topup, Remaining Budget
+    [WORKFLOW COMPLETE — Analytical read-only, download available]
+```
+
+#### 2.3 Scheduled Reports
+**URL:** `/analytics/scheduledReports`
+**Description:** Create and manage scheduled report deliveries.
+```
+Analytics > Scheduled Reports
+├── Tabs: All Reports | My Reports
+├── Reports Count (353 Reports shown)
+├── Actions Bar
+│   ├── Refresh
+│   ├── Column Selector
+│   ├── Search Report Name
+│   └── [+ Create Report] → MODAL WORKFLOW (Level 3)
+│       ├── Report Name* (text, 0/50 chars)
+│       ├── Report Type* (dropdown — 64 options including)
+│       │   ├── Keyword Performance Report | Performance Campaigns
+│       │   ├── Category Level GMV Report
+│       │   ├── Search Query Performance & Category Mapping Report
+│       │   ├── Ad Creative Performance Report | Awareness Campaign
+│       │   ├── Hourly Campaign Performance Report | Awareness Campaigns
+│       │   ├── Keyword Performance Report With Offline Breakdown
+│       │   ├── Product Type Level Insights With Offline Breakdown
+│       │   ├── Merchant Performance Report With Offline Breakdown (2 types)
+│       │   ├── Campaign Performance Report With Offline Breakdown (2 types)
+│       │   ├── Transaction Report (Finance)
+│       │   ├── Actual and incentive spend report (Finance)
+│       │   ├── Campaign Performance Report | Awareness Campaigns
+│       │   ├── Merchant Performance Report (Awareness + Performance)
+│       │   ├── Inventory & Campaign Performance Report
+│       │   ├── Inventory Performance Report | Awareness
+│       │   ├── Ad Format Performance Report
+│       │   ├── Available Advertising SKU by Hour | Performance
+│       │   ├── Campaign Performance Report | Performance Campaigns
+│       │   ├── Merchant Dimension Report
+│       │   ├── Consolidated performance report | PLA and Display
+│       │   ├── INSTORE CAMPAIGN OVERVIEW REPORT
+│       │   └── … (64 total options)
+│       ├── Report Time Period* (date picker, Asia/Kolkata +05:30)
+│       ├── Report Delivery (radio)
+│       │   ├── Now
+│       │   ├── Daily
+│       │   ├── Weekly
+│       │   └── Monthly
+│       ├── Email ids (multi-entry)
+│       └── [Create Report] → Report created, appears in list
+├── Report List Table
+│   ├── Columns: Enabled/Disabled Toggle, Report Name, Report Type,
+│       Source Type, Time Period, Last Run, Next Run, Emails, Created By
+│   └── Row Actions (3-dot menu per row)
+│       ├── View History (clock icon)
+│       ├── Download (download icon)
+│       └── More Options (3-dot)
+└── [WORKFLOW COMPLETE — Report created and queued for delivery]
+```
+
+---
+
+### 3. HEALTH
+**URL:** `/health`
+**Description:** Health Report tracking platform KPI parameters day by day.
+```
+Health
+├── View Toggle: D (Daily) | W (Weekly)
+├── Column Selector
+├── Search Parameters
+├── Add Filter
+└── Health Report Table
+    ├── Category (Display Ads, Product Ads, Overall)
+    ├── Impact (Supply, Performance, Activation, Adoption)
+    ├── Parameters (50+ metrics including)
+    │   ├── Display Ads Ad Acceptance Rate (%)
+    │   ├── Ad Viewability Index
+    │   ├── Ad GMV Index (AGI) (%)
+    │   ├── Product Ad Penetration Per Order (APPO)
+    │   ├── Budget Utilization (%)
+    │   ├── CTR (%)
+    │   ├── Conversion Rate (%)
+    │   ├── ROAS
+    │   ├── Total Advertisers
+    │   ├── Spending Advertisers
+    │   ├── Core Advertising Advertisers (CAA)
+    │   ├── Active Campaigns Count
+    │   ├── Spending Campaigns Count
+    │   ├── Average Daily Budget
+    │   ├── Campaign Budget Share (%)
+    │   ├── Response Fill Rate (%)
+    │   └── Response Rate (%)
+    └── Date columns (rolling 7-day columns: 20/03–26/03)
+    [WORKFLOW COMPLETE — Read-only health monitoring]
+```
+
+---
+
+### 4. CONTROL CENTER
+
+#### 4.1 Onboarding
+
+##### 4.1.1 Seller Advertiser Onboarding
+**URL:** `/controlCenter/onboarding/sellerAdvertiserOnboarding`
+```
+Control Center > Onboarding > Seller Advertiser Onboarding
+├── [Advertiser Onboarding Guide] → EXTERNAL LINK (offsite)
+│   └── Opens documentation/guide (button, external URL)
+├── Sample File: sample_seller_onboarding.xlsx
+│   └── [Download] → Downloads Excel template
+└── Upload Your File
+    ├── Drag & Drop Zone (.xlsx files only)
+    └── [File Upload] → Processes bulk seller advertiser onboarding
+        └── On success: Advertisers created in platform
+        [WORKFLOW COMPLETE — Onboarding uploaded]
+```
+
+##### 4.1.2 Brand Advertiser Onboarding
+**URL:** `/controlCenter/onboarding/brandAdvertiserOnboarding`
+```
+Control Center > Onboarding > Brand Advertiser Onboarding
+├── [Advertiser Onboarding Guide] → EXTERNAL LINK (offsite)
+├── Sample File: sample_brand_onboarding.xlsx
+│   └── [Download] → Downloads Excel template
+└── Upload Your File
+    ├── Drag & Drop Zone (.xlsx files only)
+    └── [File Upload] → Processes bulk brand advertiser onboarding
+        [WORKFLOW COMPLETE]
+```
+
+#### 4.2 User Access Management
+
+##### 4.2.1 Super Admin Users
+**URL:** `/controlCenter/userAccessManagement/superAdminUsers`
+```
+Control Center > User Access Management > Super Admin Users
+├── Info Banner: "A super admin user can add another super admin user,
+│   modify access for admin and ops users, modify clients, and perform
+│   bulk actions. They can also access the Admin Dashboard."
+├── [Change Log] → Change History for this entity
+├── Column Selector
+├── Search
+├── [+ Add New User] → INLINE FORM / MODAL
+│   ├── Name
+│   ├── Phone Number
+│   └── Email → [Save] → User added as Super Admin
+└── User Table
+    └── Columns: Name, Phone Number, Email
+    [WORKFLOW COMPLETE]
+```
+
+##### 4.2.2 Ops Users
+**URL:** `/controlCenter/userAccessManagement/opsUsers`
+```
+Control Center > User Access Management > Ops Users
+├── Info Banner: "Ops Users can modify all current and future clients.
+│   They can also access the Admin Dashboard."
+├── [Change Log]
+├── [+ Add New User] → Name, Phone Number, Email, Access Level
+└── User Table: Name, Phone Number, Email, Access Level
+    [WORKFLOW COMPLETE]
+```
+
+##### 4.2.3 Advertiser Users
+**URL:** `/controlCenter/userAccessManagement/advertiserUsers`
+```
+Control Center > User Access Management > Advertiser Users
+├── View Tabs: By Advertiser | By User
+├── Advertiser Selector: (e.g. "Test Seller 1")
+├── [Change Log]
+├── [+ Add New User] → Name, Phone Number, Email, Access Level
+└── User Table: Name, Phone Number, Email, Access Level
+    [WORKFLOW COMPLETE]
+```
+
+##### 4.2.4 Advertiser Account Manager Mapping
+**URL:** `/controlCenter/userAccessManagement/advertiserAccountManagerMapping`
+```
+Control Center > User Access Management > Advertiser Account Manager Mapping
+├── Sample File: merchant_account_manager_mapping.xlsx
+├── [Download file for all advertisers] → Download current mapping
+├── Upload Your File
+│   └── Drag & Drop .xlsx
+└── How it works:
+    1. Download file → Edit account manager assignments
+    2. Save file
+    3. Upload back → Changes applied
+    [WORKFLOW COMPLETE]
+```
+
+#### 4.3 User Role Management
+
+##### 4.3.1 Admin User
+**URL:** `/controlCenter/userRoleManagement/adminUsers`
+```
+Control Center > User Role Management > Admin User
+├── [Change Log]
+├── [+ Add New User] → Name, Email, Access Role
+└── User Table: Name, Email, Access Role
+    └── Roles include: Administrator, API Access, Asset Library Admin,
+        Instore Administrator, Instore Planogramming Manager,
+        Instore Digital Ads Reviewer, Ad Client Creative Reviewer
+    [WORKFLOW COMPLETE]
+```
+
+##### 4.3.2 Advertiser User
+**URL:** `/controlCenter/userRoleManagement/advertiserUsers`
+```
+Control Center > User Role Management > Advertiser User
+├── Advertiser Selector (e.g. "Demo Multi Wallet")
+├── [Change Log]
+├── [+ Add New User] → Name, Email, Access Role
+└── User Table: Name, Email, Access Role
+    └── Roles include: Viewer, Editor, Administrator
+    [WORKFLOW COMPLETE]
+```
+
+#### 4.4 Advertiser Persona Management
+
+##### 4.4.1 Persona Configuration
+**URL:** `/controlCenter/advertiserPersonaManagement/personaConfiguration`
+```
+Control Center > Advertiser Persona Management > Persona Configuration
+├── App Level Config Tabs: Product Ads | Display Ads | Offsite Ads |
+│   In-Store Digital Ads
+└── Feature Configuration Table
+    ├── Personas: Platinum | Gold | Silver | Beta | Reach
+    └── Features (toggle per persona):
+        ├── Enable ask for rating
+        ├── Hide wallet balance & promotional balance split
+        ├── Enable Change History For Billing
+        ├── Enable Transaction Log
+        ├── Enable Notification Settings
+        ├── Enable Sofie Suggestions
+        ├── Enable Scheduled Reports
+        ├── Enable Change History
+        ├── Enable Help Center
+        ├── Enable Manage Billing & Wallet Balance
+        ├── Enable In App Notification
+        └── Enable Ads Packages
+    └── [Save] → Persona config saved
+    [WORKFLOW COMPLETE]
+```
+
+##### 4.4.2 Advertiser Persona Allocation
+**URL:** `/controlCenter/advertiserPersonaManagement/advertiserPersonaAllocation`
+```
+Control Center > Advertiser Persona Management > Advertiser Persona Allocation
+├── Sample File: seller_packages.xlsx
+├── [Download file for all advertisers] → Download current allocation
+├── Upload Your File
+│   └── Drag & Drop .xlsx
+└── How it works:
+    1. Download file → Contains persona per advertiser
+    2. Edit persona assignments
+    3. Save and re-upload
+    [WORKFLOW COMPLETE]
+```
+
+#### 4.5 Advertiser Settings
+
+##### 4.5.1 Segment Manager
+**URL:** `/controlCenter/advertiserSettings/segmentManager`
+```
+Control Center > Advertiser Settings > Segment Manager
+├── Segments Count: (e.g. 24)
+├── [+ Add Segment] → Create new advertiser segment
+│   └── Name, Visibility (Everyone / Private), Merchant selection
+└── Segment Table
+    ├── Columns: Segment Name, Visibility, Merchants in Segment,
+    │   Created by, Created on, Last Updated
+    └── Row Actions: Edit | Delete
+    [WORKFLOW COMPLETE]
+```
+
+##### 4.5.2 Attribution Overrides
+**URL:** `/controlCenter/advertiserSettings/attributionOverrides`
+```
+Control Center > Advertiser Settings > Attribution Overrides
+├── Sample File: seller_attribution_overrides.xlsx
+├── [Download file for all advertisers]
+├── Upload Your File
+│   └── Drag & Drop .xlsx
+└── How it works:
+    1. Download → Contains attribution window per advertiser
+    2. Edit attribution window
+    3. Save and re-upload
+    [WORKFLOW COMPLETE]
+```
+
+#### 4.6 Automated Rules
+
+##### 4.6.1 Wallet Rules
+**URL:** `/controlCenter/automatedRules/walletRules`
+```
+Control Center > Automated Rules > Wallet Rules
+├── Refresh
+├── Column Selector
+├── Search
+├── [+ Add Rule] → MODAL WORKFLOW (Create Rule)
+│   ├── Name (0/50)
+│   ├── Description
+│   ├── Rule Type (radio)
+│   │   ├── Trigger
+│   │   │   └── Trigger Event Dropdown:
+│   │   │       └── "On Wallet Top-up"
+│   │   └── Schedule
+│   ├── Look Back Period (dropdown: None, …)
+│   ├── Conditions
+│   │   └── [+ Add Conditions] → Condition builder
+│   ├── Actions (dropdown)
+│   │   ├── Add promotional balance as % of top-up amount
+│   │   └── New Advertiser Incentive Addition
+│   ├── Notify me (dropdown: None, Email, …)
+│   ├── [Preview] → Preview rule logic
+│   └── [Save] → Rule saved and activated
+└── Rules Table
+    ├── Columns: Toggle (Active/Inactive), Rule, Description,
+    │   Rule Type, Actions, Last Executed On, Created By,
+    │   Created On, Last Edited By
+    └── Row Actions: Edit (pencil) | View (eye)
+    [WORKFLOW COMPLETE]
+```
+
+#### 4.7 Debug Console
+
+##### 4.7.1 Product Catalog
+**URL:** `/controlCenter/debugConsole/productFeed`
+```
+Control Center > Debug Console > Product Catalog
+├── Add Filter
+└── Product Catalog Table (last 100 records)
+    └── Columns: Sku ID, Merchant ID, Feed Sync Time, Title,
+        Description, Category, Secondary Categories, Category ID,
+        Item Group ID, Link, Mobile Link, Image Link, Brand,
+        Availability, Price, Sale Price, Condition, Color, Is Deleted
+    Note: "Showing last 100 records only. Adjust time or filters."
+    [WORKFLOW COMPLETE — Read-only debug view]
+```
+
+##### 4.7.2 Event Logs
+**URL:** `/controlCenter/debugConsole/trackingEvents`
+```
+Control Center > Debug Console > Event Logs
+├── Timestamp Range Filter (default: last 1 hour)
+└── Event Logs Table
+    └── Columns: Timestamp, Merchant ID, Sku ID, UBID, Event Name,
+        Item Identifier, SCLID, Sales Currency, Product Prices,
+        Product Quantities, Event Source, Video View, Video Duration,
+        Video View OS Name, OS Version, Device
+    Note: "Showing last 100 records only."
+    [WORKFLOW COMPLETE — Read-only debug view]
+```
+
+##### 4.7.3 Product Ads Request Logs
+**URL:** `/controlCenter/debugConsole/productAdRequest`
+```
+Control Center > Debug Console > Product Ads Request Logs
+├── Timestamp Range Filter (default: last 1 hour)
+└── Request Logs Table
+    └── Columns: Timestamp, Request ID, UBID, Response Product Count,
+        Filter Product Count, Filter Brands, Filter Page Type,
+        Filter Page Name, Filter Store ID, Filter Network,
+        Filter Keywords, Filter Category L1-L5, Filter Category ID,
+        Filter Zone, Filter SKU IDs, Filter UDP, Custom Label 0,
+        Realtime Custom Labels 0-2, Parameters 1-6
+    [WORKFLOW COMPLETE — Read-only debug view]
+```
+
+##### 4.7.4 Display Ads Request Logs
+**URL:** `/controlCenter/debugConsole/displayAdsRequest`
+```
+Control Center > Debug Console > Display Ads Request Logs
+├── Timestamp Range Filter (default: last 1 hour)
+└── Request Logs Table
+    └── Columns: Timestamp, Request ID, UBID, Response Ad Count,
+        Page Type, Page Name, Store ID, Network, Filter Ad Unit,
+        Filter Ad Count, Category 1-5, Brands, Custom Label,
+        Keywords, Zones, City, State, Country, UDP
+    [WORKFLOW COMPLETE — Read-only debug view]
+```
+
+#### 4.8 Activity Log
+**URL:** `/controlCenter/activityLog`
+```
+Control Center > Activity Log
+├── Search
+└── Activity Log Table
+    └── Columns: Creation Time, User, Action, Description,
+        Advertisers Affected, File Processing Status, File (download)
+    └── Actions recorded include:
+        ├── Store Download
+        ├── Screen Download
+        ├── New package creation
+        ├── Pulse Report Download
+        ├── MONETISE_DOWNLOAD_KAM_DASHBOARD_SEGMENTS_CONFIGURATIONS
+        └── [Various bulk upload/download actions]
+    [WORKFLOW COMPLETE — Read-only audit trail]
+```
+
+---
+
+### 5. FINANCE
+
+#### 5.1 Finance Dashboard
+**URL:** `/finance/dashboard`
+```
+Finance > Dashboard
+├── Filters: Date Range, Add Filter, Merchant Selector, Refresh
+├── Payment Summary (KPI Cards)
+│   ├── Total Spends
+│   ├── Ad Credits Spend
+│   ├── Promotional Ad Credits Spend
+│   ├── Total Balance
+│   ├── Ad Credits Balance
+│   └── Promotional Ad Credits Balance
+├── Advertiser Wallet Snapshot (Table)
+│   ├── Add Filter
+│   ├── Search Advertiser Name
+│   ├── Column Selector
+│   ├── Download
+│   └── Columns: Advertiser Name, Advertiser ID, Wallet Name,
+│       Wallet ID, Balance, Promotional Balance, Max Usage Allowed
+│       └── [View] per wallet → Wallet Detail View
+│           └── Transaction history for that wallet
+└── Transactions (Table)
+    └── Columns: Date, Transaction ID, Amount, Transaction Status,
+        Description, Wallet Name, Advertiser ID, Advertiser Name,
+        User, OS Client ID, OS Transaction ID, Transaction Type,
+        Payment Mode, Campaign Type
+    [WORKFLOW COMPLETE — Financial read-only overview]
+```
+
+#### 5.2 Advertiser Management
+**URL:** `/finance/advertisers`
+```
+Finance > Advertiser Management
+├── Add Filter
+└── Advertiser Finance Settings Table
+    ├── Columns: Advertiser Name, Advertiser ID, Payment Type,
+    │   Status, Is Multi Wallet Enabled, Is Prepaid Auto Swipe
+    │   Enabled, Wallet Count
+    └── Row click → Advertiser Finance Detail
+        ├── Wallet list for advertiser
+        ├── Transaction history
+        └── Settings (Payment Type, Auto Swipe toggle)
+    [WORKFLOW COMPLETE]
+```
+
+#### 5.3 Advertiser Wallet Top Up
+**URL:** `/finance/financeAdvertiserWalletTopUp`
+```
+Finance > Advertiser Wallet Top Up
+├── Info: "How to add/remove ad credits using wallet topup"
+├── Sample File: sample_seller_wallet_topup.xlsx
+├── [Download file for all advertisers] → Download wallet list
+└── Upload Your File
+    └── Drag & Drop .xlsx
+        └── On Upload → Ad credits added/removed for specified advertisers
+        [WORKFLOW COMPLETE]
+```
+
+---
+
+### 6. APPS
+**URL:** `/appstore`
+```
+Apps
+├── Tabs: All Apps | Installed Apps | My Apps
+├── Search Apps
+├── Category Filter Pills: Product | Revenue | Impact | Growth | Adoption
+├── Type Filter: All Types dropdown
+│
+├── Explore Apps Section
+│   ├── Sponsored Display Ads (Adscape) — Installed
+│   │   └── [Details] → /appstore/drawer/APP_DETAIL_VIEW?appKey=DISPLAY_ADS
+│   ├── Sponsored Product Ads (Adscape) — Installed
+│   │   └── [Details] → App Detail View
+│   ├── In-Store Digital (Adscape) — Installed
+│   │   └── [Details] → App Detail View
+│   ├── In-Store Analog (Adscape) — Installed
+│   │   └── [Details] → App Detail View
+│   ├── Offsite Ads (Adscape) — Installed
+│   │   └── [Details] → App Detail View
+│   ├── DemandWise (StratEdge) — Installed
+│   │   └── [Details] → App Detail View
+│   ├── Ad Packages (StratEdge) — Installed
+│   │   └── [Details] → App Detail View
+│   └── Email Ads (Adscape) — Installed
+│       └── [Details] → App Detail View
+│
+└── Explore Add-ons Section
+    ├── Sponsorship Ads (Guaranteed Ads) — Add-on Sponsored Display Ads
+    ├── Meta Dynamic Product Ads — Add-on Offsite Ads
+    ├── Meta Display Ads — Add-on Offsite Ads
+    ├── Google Performance Max — Add-on Offsite Ads
+    ├── Google Shopping Performance Max — Add-on Offsite Ads
+    ├── TikTok Ads for Reach — Add-on Offsite Ads
+    ├── TikTok Ads for Traffic — Add-on Offsite Ads
+    ├── Custom Ads — Add-on Sponsored Display Ads
+    ├── Advertiser UX Manager (ControlHub) — Add-on Program
+    ├── Product Display Ads — Add-on Sponsored Display Ads
+    ├── Video Ads — Add-on Sponsored Display Ads
+    ├── Content Cop (ControlHub) — Add-on Program
+    ├── Banner Ads — Add-on Sponsored Display Ads
+    ├── WalletWise (ControlHub) — Add-on Program
+    ├── Shoppable Video — Add-on Sponsored Display Ads
+    ├── Pulse Pro (StratEdge) — Add-on Program
+    ├── Gamified Ads — Add-on Sponsored Display Ads
+    ├── House Ads (StratEdge) — Add-on Sponsored Display Ads
+    ├── OnboardPro (ControlHub) — Add-on Program
+    ├── Carousel Ads — Add-on Sponsored Display Ads
+    └── Story Ads — Add-on Sponsored Display Ads
+
+    App Detail View (any app)
+    ├── Back ←
+    ├── App Name + Category + Description
+    ├── Go live estimate
+    ├── [Installed] button (status indicator)
+    ├── Feature Carousel (scrollable)
+    │   ├── Geo Location
+    │   ├── Store Targeting
+    │   ├── Audience Targeting
+    │   └── … (feature highlights)
+    [WORKFLOW COMPLETE — Informational/install status view]
+```
+
+---
+
+### 7. PLUGINS (Beta)
+**URL:** `/plugins`
+```
+Plugins
+├── LiveAds
+│   URL: /plugins/IFRAME_APP_LIVE_ADS
+│   ├── Tabs: Display Ads | Product Ads (Coming Soon) | BYOC
+│   ├── Search bar (search ads by any field)
+│   ├── Select Page Type (dropdown)
+│   ├── Total Ads count
+│   ├── [Refresh] → Reload live ad data
+│   └── Ads Grid Display
+│       [WORKFLOW COMPLETE — Real-time live ad preview]
+│
+├── Ad Request Debugger
+│   URL: /plugins/adRequestDebugger
+│   ├── Status: Authenticated
+│   ├── Agency / Client / Token info
+│   ├── Test URLs:
+│   │   ├── Test Mode (mock): https://v0-ad-request-debugger-chatbot.vercel.app/?testMode=true
+│   │   │   [OFFSITE → vercel.app]
+│   │   └── Production Mode: https://v0-ad-request-debugger-chatbot.vercel.app/?uaToken=…
+│   │       [OFFSITE → vercel.app]
+│   ├── Mode Toggle: Generate | Debug
+│   ├── Input: Paste your ad request URL
+│   └── [Send →] → AI-powered debug response
+│       [WORKFLOW COMPLETE — Ad request debugging via external chatbot]
+│
+└── Live Screen Preview
+    URL: /plugins/LIVE_SCREEN_PREVIEW
+    ├── Screen Type (dropdown: Select screen type…)
+    ├── Screen (dropdown: Select screen type first…)
+    ├── Tabs: Preview | Details
+    └── Preview Area (shows live in-store screen content)
+        [WORKFLOW COMPLETE — In-store screen live preview]
+```
+
+---
+
+### 8. PACKAGES (Alpha)
+
+#### 8.1 Packages
+**URL:** `/packages/packagesList`
+```
+Packages > Packages
+├── KPI Cards
+│   ├── Total Packages (2,209)
+│   ├── Auction In Progress (30)
+│   ├── Packages with Bids (27)
+│   └── Pending Declaration (0)
+├── [+ Add Packages] (+ toggle dropdown for import)
+├── Refresh, Column Selector, Search Name, Download
+├── Default Filter: Status has none of [Auction Ended, Archived]
+└── Packages Table
+    ├── Columns: Status, Name, Description, Package Identifier,
+    │   Auction Ends In, Winner, Auction Start/End Date,
+    │   Flight Start/End Date, Base Price, Total Bidders,
+    │   Highest Bid, Highest Bidder
+    └── Row Action: [View] → Package Detail Page
+        ├── Package Summary
+        ├── Bid History
+        ├── Booking Details
+        └── Asset/Inventory details
+        [WORKFLOW COMPLETE — Package management]
+```
+
+#### 8.2 Bookings
+**URL:** `/packages/bookings`
+```
+Packages > Bookings
+├── KPI Cards
+│   ├── Total Bookings (306)
+│   ├── Active Bookings (16)
+│   └── Delivered Bookings (274)
+├── Add Filter
+└── Bookings Table
+    ├── Columns: Status, Name, Brand, Booking Cost,
+    │   Flight Start Date, Flight End Date
+    └── [View] → Booking Detail
+        [WORKFLOW COMPLETE]
+```
+
+#### 8.3 Analytics > Package Analytics
+**URL:** `/packages/flexiAnalytics/package`
+
+#### 8.4 Analytics > Sales Analytics
+**URL:** `/packages/flexiAnalytics/sales`
+
+#### 8.5 Analytics > Live Analytics
+**URL:** `/packages/flexiAnalytics/liveAnalytics`
+
+#### 8.6 Packages [Flexi]
+**URL:** `/packages/flexiPackages`
+
+#### 8.7 Sales Planner
+**URL:** `/packages/salesPlanner`
+
+#### 8.8 All Bookings > Bookings
+**URL:** `/packages/flexiBookings/list`
+
+#### 8.9 All Bookings > Line Item Review
+**URL:** `/packages/flexiBookings/review`
+
+---
+
+### 9. PRODUCT ADS
+
+#### 9.1 Analytics > Ad Server Analytics
+**URL:** `/productAds/anaytics/adServerAnalytics`
