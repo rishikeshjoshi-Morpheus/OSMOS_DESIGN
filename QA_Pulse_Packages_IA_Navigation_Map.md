@@ -6,7 +6,7 @@
 
 ---
 
-## Left Navigation — Packages (Alpha) Structure
+## Left Navigation — Packages Structure
 
 ```
 Packages (Alpha)  [icon: stacked layers]
