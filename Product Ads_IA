@@ -1,1 +1,1314 @@
+# Product Ads — Information Architecture & Navigation Map
+**Platform:** QA Pulse (staging-4.osmos.ai)
+**Module:** Product Ads
+**Date Documented:** 2026-03-27
 
+---
+
+## Module Navigation Tree
+
+```
+Product Ads (Left Nav Flyout)
+├── Analytics
+│   ├── Ad Server Analytics        /productAds/anaytics/adServerAnalytics
+│   ├── Demand & Supply            /productAds/anaytics/demandAndSupply
+│   └── Live Analytics             /productAds/anaytics/liveAnalytics
+├── Yield Controls
+│   ├── CPC Controls               /productAds/categoryMinMax/cpc
+│   └── CPM Controls               /productAds/categoryMinMax/cpm
+├── Keyword Bid Setting
+│   ├── CPC Controls               /productAds/keywordFloorBid/additionalCpcKeywordSettings
+│   └── CPM Controls               /productAds/keywordFloorBid/additionalCpmKeywordSettings
+└── Campaign Bulk Actions
+    ├── Create Campaign            /productAds/campaigns/createProductAdsCampaign
+    ├── Update Campaigns           /productAds/campaigns/updateProductAdsCampaigns
+    ├── Activate Campaigns         /productAds/campaigns/activateCampaigns
+    ├── Pause Campaigns            /productAds/campaigns/pauseCampaigns
+    └── Product Selection          /productAds/campaigns/productSelection
+```
+
+---
+
+## Global Header Controls (Present on all Product Ads pages)
+
+| Control | Type | Options / Behavior |
+|---|---|---|
+| Merchant Filter | Dropdown | List of merchants; single-select; filters all data |
+| Date Range Picker | Date selector | Presets: Today, Yesterday, Last 7 Days, Last 30 Days, Custom Range |
+| Refresh | Button | Reloads data (visible on Live Analytics) |
+
+---
+
+## SECTION 1 — Ad Server Analytics
+
+**URL:** `/productAds/anaytics/adServerAnalytics`
+
+### Page Layout Overview
+
+```
+[Global Filters: All Pages | Date Range]
+[KPI Cards Row: Requests | Response(%) | Program CPC | Program CPM | CTR | Ad Impressions]
+[Daily Performance Trend Chart 1]        [Daily Performance Trend Chart 2]
+[Page Level Contribution Chart]
+[Daily Page Performance Report — Chart View / List View Toggle]
+[Available Advertising SKU By Hour Table]
+```
+
+### KPI Cards
+
+| Card | Metric |
+|---|---|
+| 1 | Requests |
+| 2 | Response (%) |
+| 3 | Program CPC |
+| 4 | Program CPM |
+| 5 | CTR |
+| 6 | Ad Impressions |
+
+### Metric Groups (available in charts/reports)
+
+**Product Ads Insights (5 metrics):**
+Ad Revenue | Ad Impressions | Ad Clicks | CPC | CPM
+
+**Ad Program Insights (9 metrics):**
+Requests | Responses | Response(%) | Ad Acceptance(%) | Ad Viewability Index | Detail Page Views | Attributed GMV | Online Attribution | Offline Attribution
+
+### Global Page Filter Options
+
+All Pages | Home | Category | Search | Product | PSP | Custom | Purchase | TPA
+
+---
+
+### Workflow 1.1 — View Ad Server Analytics Dashboard
+
+**Entry:** Left Nav → Product Ads → Analytics → Ad Server Analytics
+
+Step 1 → Page loads at `/productAds/anaytics/adServerAnalytics`
+Step 2 → System displays 6 KPI cards in a row: Requests, Response(%), Program CPC, Program CPM, CTR, Ad Impressions
+Step 3 → System displays two Daily Performance Trend charts side by side
+Step 4 → System displays Page Level Contribution chart below the trend charts
+Step 5 → System displays Daily Page Performance Report section with Chart/List toggle
+Step 6 → System displays Available Advertising SKU By Hour table at the bottom
+Step 7 → Default date range is applied (Last 7 Days)
+Step 8 → Default page filter is "All Pages"
+Step 9 → All charts and KPI cards render with current data
+Step 10 → User can see all performance metrics at a glance
+✅ Workflow Complete — Dashboard is fully loaded and ready for interaction
+
+---
+
+### Workflow 1.2 — Filter by Page Type
+
+**Entry:** Ad Server Analytics Dashboard (loaded)
+
+Step 1 → User locates "All Pages" global filter dropdown at top of page
+Step 2 → User clicks dropdown to expand options
+Step 3 → System displays: All Pages, Home, Category, Search, Product, PSP, Custom, Purchase, TPA
+Step 4 → User selects desired page type (e.g., "Category")
+Step 5 → System closes dropdown and shows selected filter label
+Step 6 → All 6 KPI cards update with filtered data
+Step 7 → Both Daily Performance Trend charts update
+Step 8 → Page Level Contribution chart updates
+Step 9 → Daily Page Performance Report updates (both Chart and List views)
+Step 10 → Available Advertising SKU By Hour table updates
+Step 11 → Filter label shows selected page type
+✅ Workflow Complete — All data is filtered to the selected page type
+
+---
+
+### Workflow 1.3 — Change Date Range
+
+**Entry:** Ad Server Analytics Dashboard (loaded)
+
+Step 1 → User locates Date Range Picker in the global header area
+Step 2 → User clicks Date Range Picker to open calendar/presets
+Step 3 → System displays preset options: Today, Yesterday, Last 7 Days, Last 30 Days, Custom Range
+Step 4 → User selects a preset (e.g., "Last 30 Days")
+Step 5 → System applies selected date range
+Step 6 → All 6 KPI cards refresh with data for new range
+Step 7 → Both trend charts re-render for new range
+Step 8 → Page Level Contribution chart updates
+Step 9 → Daily Page Performance Report updates
+Step 10 → Available Advertising SKU By Hour table updates
+Step 11 → Date picker label displays selected range
+✅ Workflow Complete — All data reflects the selected date range
+
+---
+
+### Workflow 1.4 — View Daily Page Performance Report (Chart View)
+
+**Entry:** Ad Server Analytics Dashboard → Daily Page Performance Report section
+
+Step 1 → User scrolls to Daily Page Performance Report section
+Step 2 → Chart View is active by default (toggle shows "Chart" selected)
+Step 3 → System renders bar/line chart for daily page performance
+Step 4 → X-axis shows dates; Y-axis shows selected metric
+Step 5 → User can hover over data points to see tooltips with exact values
+Step 6 → Chart updates in real-time as global filters change
+Step 7 → Chart shows breakdown by page type or aggregated view
+Step 8 → User can interpret trends across the selected date range
+Step 9 → Data reflects current Merchant + Date + Page Type filter selections
+Step 10 → Chart provides visual summary of daily performance pattern
+✅ Workflow Complete — Chart view is displayed with full data
+
+---
+
+### Workflow 1.5 — Switch to List View in Daily Page Performance Report
+
+**Entry:** Daily Page Performance Report → Chart View active
+
+Step 1 → User locates the Chart/List view toggle in the Daily Page Performance Report section
+Step 2 → User clicks "List" toggle button
+Step 3 → System switches from chart to tabular/list view
+Step 4 → System renders table with all available columns
+Step 5 → Default columns displayed: Date | Page Type | Page Name | Network | Requests | Responses | Response(%) | Ad Acceptance(%) | Ad Revenue | Ad Impressions | Ad Clicks | CTR | Program CPC | Program CPM | Ad Viewability Index | Detail Page Views | Attributed GMV | Online Attribution | Offline Attribution
+Step 6 → Table rows represent individual records
+Step 7 → User can sort by any column header (ascending/descending)
+Step 8 → User can scroll horizontally to see all columns
+Step 9 → Add Filter button becomes available in List View
+Step 10 → Data remains consistent with active global filters
+✅ Workflow Complete — List view displays all report data in tabular format
+
+---
+
+### Workflow 1.6 — Add Dimension Filter in List View
+
+**Entry:** Daily Page Performance Report → List View active
+
+Step 1 → User clicks "Add Filter" button in List View
+Step 2 → System displays filter dropdown with dimension options
+Step 3 → Available filter dimensions: Page Type | Page Name | Network
+Step 4 → User selects a dimension (e.g., "Page Type")
+Step 5 → System shows operator options (e.g., "contains", "equals")
+Step 6 → User enters or selects filter value
+Step 7 → User clicks Apply/Confirm
+Step 8 → System filters table rows matching the condition
+Step 9 → Filter tag appears above the table showing active filter
+Step 10 → Table row count updates to reflect filtered dataset
+Step 11 → User can add multiple filters (AND logic)
+Step 12 → User can remove individual filters by clicking the "×" on filter tags
+✅ Workflow Complete — List view data is filtered by selected dimension
+
+---
+
+### Workflow 1.7 — View Available Advertising SKU By Hour Table
+
+**Entry:** Ad Server Analytics Dashboard (loaded)
+
+Step 1 → User scrolls to the bottom of the page
+Step 2 → System displays "Available Advertising SKU By Hour" table
+Step 3 → Table shows hourly breakdown of available advertising SKUs
+Step 4 → Data updates based on active date and page type filters
+Step 5 → User can identify peak hours for SKU availability
+Step 6 → Rows represent different time slots (hours)
+Step 7 → Columns represent days or categories (depending on view)
+Step 8 → User can cross-reference with KPI card data for analysis
+Step 9 → Table supports horizontal scrolling for extended date ranges
+Step 10 → Data is read-only (informational table only)
+✅ Workflow Complete — SKU by Hour table is reviewed
+
+---
+
+### Workflow 1.8 — View Page Level Contribution Chart
+
+**Entry:** Ad Server Analytics Dashboard (loaded)
+
+Step 1 → User scrolls to Page Level Contribution chart section
+Step 2 → System renders a chart (donut/pie/bar) showing contribution by page type
+Step 3 → Chart legend shows page type labels: Home, Category, Search, Product, PSP, Custom, Purchase, TPA
+Step 4 → Each segment represents a page type's share of a selected metric
+Step 5 → User hovers over a segment to see exact % contribution and metric value
+Step 6 → Chart updates when global Page Type filter is changed
+Step 7 → Chart updates when Date Range filter is changed
+Step 8 → Chart updates when Merchant filter is changed
+Step 9 → User can identify dominant page types driving ad performance
+Step 10 → Chart is read-only (no editing capability)
+✅ Workflow Complete — Page contribution is visualized
+
+---
+
+## SECTION 2 — Demand & Supply
+
+**URL:** `/productAds/anaytics/demandAndSupply`
+**Feature Gate:** PRO feature
+
+### Page Layout Overview
+
+```
+[PRO Badge] [Global Filters: Merchant | Advertiser Name | Advertiser ID | Date Range]
+[Scatter View Toggle] [List View Toggle]
+[Column Picker]
+[Main Visualization: Scatter Chart OR List Table]
+[Add Filter Button]
+```
+
+### Column Picker Options
+
+**Scatter View:**
+- Breakdown: L1 | L2 | L3 (category hierarchy)
+- Attributes: Request | Response Rate(%) | Budget Utilization(%) | Ad Acceptance(%) | Ad Viewability Index
+
+**List View:**
+- Default columns: Category L1 | Requests | Response Rate(%) | Ad Revenue
+
+### Filter Options
+- Dimension: Category L1 | Category L2 | Category L3
+- Operator: contains
+
+---
+
+### Workflow 2.1 — View Demand & Supply (Scatter View)
+
+**Entry:** Left Nav → Product Ads → Analytics → Demand & Supply
+
+Step 1 → Page loads at `/productAds/anaytics/demandAndSupply`
+Step 2 → System shows PRO feature badge
+Step 3 → Scatter View is active by default
+Step 4 → System renders scatter chart with categories plotted on axes
+Step 5 → Default breakdown is L1 (top-level categories)
+Step 6 → X-axis and Y-axis represent configurable metrics
+Step 7 → Each dot represents a category, sized/colored by a third metric
+Step 8 → User hovers over dots to see category name and metric values
+Step 9 → Chart helps identify demand vs supply imbalances per category
+Step 10 → Data reflects active merchant and date filters
+✅ Workflow Complete — Scatter view is displayed
+
+---
+
+### Workflow 2.2 — Customize Scatter View Columns
+
+**Entry:** Demand & Supply → Scatter View active
+
+Step 1 → User clicks the Column Picker icon/button
+Step 2 → System opens column picker panel
+Step 3 → Breakdown section shows: L1 | L2 | L3 (category hierarchy depth)
+Step 4 → User selects breakdown level (e.g., L2 for sub-categories)
+Step 5 → Attributes section shows: Request | Response Rate(%) | Budget Utilization(%) | Ad Acceptance(%) | Ad Viewability Index
+Step 6 → User selects/deselects attributes to plot on axes
+Step 7 → System updates axis labels based on selection
+Step 8 → User clicks Apply or closes picker
+Step 9 → Scatter chart re-renders with new breakdown/attributes
+Step 10 → Dots reposition to reflect new metric mappings
+Step 11 → Legend updates to reflect new attribute labels
+✅ Workflow Complete — Scatter view is customized
+
+---
+
+### Workflow 2.3 — Switch to List View
+
+**Entry:** Demand & Supply → Scatter View active
+
+Step 1 → User clicks "List View" toggle button
+Step 2 → System switches from scatter chart to list/table view
+Step 3 → System renders table with default columns: Category L1, Requests, Response Rate(%), Ad Revenue
+Step 4 → Each row represents a top-level category
+Step 5 → User can sort by any column header
+Step 6 → User can scroll horizontally for additional data
+Step 7 → Data reflects active merchant, advertiser, and date filters
+Step 8 → Column picker adapts to List View column options
+Step 9 → Add Filter button is available
+Step 10 → User can switch back to Scatter View at any time
+✅ Workflow Complete — List view is displayed
+
+---
+
+### Workflow 2.4 — Filter by Category in Demand & Supply
+
+**Entry:** Demand & Supply (either view)
+
+Step 1 → User clicks "Add Filter" button
+Step 2 → System shows dimension dropdown: Category L1 | Category L2 | Category L3
+Step 3 → User selects dimension (e.g., "Category L1")
+Step 4 → System shows operator: "contains"
+Step 5 → User types a category name/keyword in the value field
+Step 6 → System filters data to show only matching categories
+Step 7 → Filter tag appears above the chart/table
+Step 8 → Scatter/List view updates with filtered results
+Step 9 → User can add additional filters for more granular analysis
+Step 10 → User can clear filter by clicking "×" on filter tag
+Step 11 → Advanced Filter: User can also filter by Advertiser Name or Advertiser ID using the global filter area
+✅ Workflow Complete — Data is filtered by category dimension
+
+---
+
+## SECTION 3 — Live Analytics
+
+**URL:** `/productAds/anaytics/liveAnalytics`
+**Feature Gate:** PRO feature
+
+### Page Layout Overview
+
+```
+[PRO Badge] [Global Filters: Merchant | Advertiser Name | Advertiser ID] [Refresh Button]
+[KPI Cards Row: Ad Revenue | Ad Impressions | Ad Clicks | CPM | CPC | Product Ads Revenue]
+[Today Performance Trend Chart — Toggle: Today / Yesterday / Same Day Last Week]
+[Advertiser Performance Report — Column Picker]
+[Campaign Performance Report — Column Picker]
+```
+
+### KPI Cards (6 cards)
+
+Ad Revenue | Ad Impressions | Ad Clicks | CPM | CPC | Product Ads Revenue
+
+### Advertiser Performance Report — Column Picker
+
+| Group | Options |
+|---|---|
+| Breakdown | Advertiser Name |
+| Attributes | Advertiser ID, Advertiser Type |
+| Metrics | Ad Revenue, Ad Impressions, Ad Clicks, CPC, CPM, CTR, Product Ads Revenue, Product Ads Impressions, Product Ads Clicks, Product Ads CPC, Product Ads CPM, Product Ads CTR |
+
+### Campaign Performance Report — Column Picker
+
+| Group | Options |
+|---|---|
+| Breakdown | Campaign Name, Campaign ID |
+| Attributes | Advertiser ID, Advertiser Name, Advertiser Type, Campaign Status |
+| Metrics | Budget Type, Ad Revenue, Ad Impressions, Ad Clicks, CPC, CPM, CTR, Budget Utilization(%) |
+
+---
+
+### Workflow 3.1 — View Live Analytics Dashboard
+
+**Entry:** Left Nav → Product Ads → Analytics → Live Analytics
+
+Step 1 → Page loads at `/productAds/anaytics/liveAnalytics`
+Step 2 → System shows PRO feature badge
+Step 3 → System displays 6 real-time KPI cards: Ad Revenue, Ad Impressions, Ad Clicks, CPM, CPC, Product Ads Revenue
+Step 4 → Today Performance Trend chart renders with "Today" view selected
+Step 5 → Advertiser Performance Report table renders below
+Step 6 → Campaign Performance Report table renders below Advertiser Report
+Step 7 → No date picker shown (data is live/real-time)
+Step 8 → Data represents current day's performance
+Step 9 → All metrics update in near real-time
+Step 10 → Merchant filter is active to scope data to selected retailer
+✅ Workflow Complete — Live dashboard is loaded and displaying real-time data
+
+---
+
+### Workflow 3.2 — Refresh Live Data
+
+**Entry:** Live Analytics Dashboard (loaded)
+
+Step 1 → User locates Refresh button in the top header area
+Step 2 → User clicks Refresh button
+Step 3 → System triggers fresh data fetch for all components
+Step 4 → KPI cards refresh with latest values
+Step 5 → Today Performance Trend chart updates
+Step 6 → Advertiser Performance Report refreshes
+Step 7 → Campaign Performance Report refreshes
+Step 8 → Refresh timestamp (if shown) updates to current time
+Step 9 → Loading indicator appears briefly during data fetch
+Step 10 → All data reflects the most current available metrics
+✅ Workflow Complete — Dashboard data is refreshed
+
+---
+
+### Workflow 3.3 — Compare Today's Trend vs Yesterday / Same Day Last Week
+
+**Entry:** Live Analytics → Today Performance Trend section
+
+Step 1 → User locates the Today Performance Trend chart
+Step 2 → Chart has 3 toggle options: Today | Yesterday | Same Day Last Week
+Step 3 → "Today" is selected by default — chart shows today's hourly/time-based trend
+Step 4 → User clicks "Yesterday" toggle
+Step 5 → System overlays or switches to yesterday's trend line on the chart
+Step 6 → User can compare today vs yesterday performance patterns
+Step 7 → User clicks "Same Day Last Week" toggle
+Step 8 → System overlays or switches to same weekday last week's data
+Step 9 → User can identify week-over-week performance trends
+Step 10 → Toggle states are independent (one active at a time)
+Step 11 → Chart X-axis shows hours of the day; Y-axis shows selected metric
+✅ Workflow Complete — Trend comparison is complete
+
+---
+
+### Workflow 3.4 — Customize Advertiser Performance Report Columns
+
+**Entry:** Live Analytics → Advertiser Performance Report section
+
+Step 1 → User locates Column Picker button in Advertiser Performance Report header
+Step 2 → User clicks Column Picker
+Step 3 → System opens column picker panel
+Step 4 → Breakdown section shows: Advertiser Name (mandatory)
+Step 5 → Attributes section shows: Advertiser ID, Advertiser Type
+Step 6 → Metrics section shows: Ad Revenue, Ad Impressions, Ad Clicks, CPC, CPM, CTR, Product Ads Revenue, Product Ads Impressions, Product Ads Clicks, Product Ads CPC, Product Ads CPM, Product Ads CTR
+Step 7 → User checks/unchecks desired columns
+Step 8 → User clicks Apply
+Step 9 → System re-renders the Advertiser Performance table with selected columns
+Step 10 → Selected columns persist for the session
+Step 11 → Table can be sorted by any visible column
+✅ Workflow Complete — Advertiser report is customized
+
+---
+
+### Workflow 3.5 — Customize Campaign Performance Report Columns
+
+**Entry:** Live Analytics → Campaign Performance Report section
+
+Step 1 → User locates Column Picker button in Campaign Performance Report header
+Step 2 → User clicks Column Picker
+Step 3 → System opens column picker panel
+Step 4 → Breakdown section shows: Campaign Name, Campaign ID
+Step 5 → Attributes section shows: Advertiser ID, Advertiser Name, Advertiser Type, Campaign Status
+Step 6 → Metrics section shows: Budget Type, Ad Revenue, Ad Impressions, Ad Clicks, CPC, CPM, CTR, Budget Utilization(%)
+Step 7 → User checks/unchecks desired columns
+Step 8 → User clicks Apply
+Step 9 → System re-renders Campaign Performance table with selected columns
+Step 10 → Table can be sorted by any visible column
+Step 11 → Data reflects active merchant and advertiser filters
+✅ Workflow Complete — Campaign report is customized
+
+---
+
+### Workflow 3.6 — Filter by Advertiser in Live Analytics
+
+**Entry:** Live Analytics Dashboard
+
+Step 1 → User locates Advanced Filter section (Advertiser Name | Advertiser ID)
+Step 2 → User selects "Advertiser Name" dimension
+Step 3 → User types or selects an advertiser name
+Step 4 → System filters Advertiser and Campaign Performance tables
+Step 5 → KPI cards may update to reflect filtered advertiser scope
+Step 6 → Alternatively, user can filter by "Advertiser ID"
+Step 7 → User enters the numeric advertiser ID
+Step 8 → System filters all reports to show only that advertiser's data
+Step 9 → User can also use the Merchant filter dropdown to scope by retailer
+Step 10 → User can use Merchant → Create Segment to create custom merchant groupings
+Step 11 → Filter tags appear above the reports showing active filters
+Step 12 → User removes filters by clicking "×" on filter tags to return to all-advertiser view
+✅ Workflow Complete — Live analytics is filtered to specific advertiser
+---
+
+## SECTION 4 — Yield Controls: CPC Controls
+
+**URL:** `/productAds/categoryMinMax/cpc`
+
+### Page Layout Overview
+
+```
+[Global Defaults Bar: Floor CPC | Ceiling CPC | CPC Bid Multiplier] [Activity Log Button]
+[Column Picker] [Bulk Update Bid Button] [Bulk Reset Bid Button] [Review & Apply Button]
+[Category Bid Controls Table — Scrollable]
+```
+
+### Global Defaults
+
+| Field | Default Value |
+|---|---|
+| Floor CPC | ₹10 |
+| Ceiling CPC | ₹15 |
+| CPC Bid Multiplier | 5 |
+
+### Column Picker Groups
+
+| Group | Columns |
+|---|---|
+| Category | Category (mandatory) |
+| Yield Controls | Floor CPC, Ceiling CPC, CPC Bid Multiplier |
+| SKU Count | SKU count |
+| Category Performance (7D) | Impressions, Clicks, CTR, CPC, Spend, Revenue, ROI |
+| Category Performance (30D) | Impressions, Clicks, CTR, CPC, Spend, Revenue, ROI |
+| Ideal CPC | Ideal CPC range |
+| Ideal CPC Overrides | Floor CPC override, Ceiling CPC override |
+
+### Bulk Update Bid Fields
+
+| Field | Methods Available |
+|---|---|
+| Floor CPC | Set to absolute / Increase by / Decrease by |
+| Ceiling CPC | Set to absolute / Increase by / Decrease by |
+| CPC Bid Multiplier | Set to absolute / Increase by / Decrease by |
+| Ideal Floor CPC Override | Set to absolute / Increase by / Decrease by |
+| Ideal Ceiling CPC Override | Set to absolute / Increase by / Decrease by |
+
+### Bulk Reset Fields
+
+Floor CPC | Ceiling CPC | CPC Bid Multiplier | Ideal CPC Overrides
+
+---
+
+### Workflow 4.1 — View CPC Controls Dashboard
+
+**Entry:** Left Nav → Product Ads → Yield Controls → CPC Controls
+
+Step 1 → Page loads at `/productAds/categoryMinMax/cpc`
+Step 2 → System displays Global Defaults bar: Floor CPC (₹10), Ceiling CPC (₹15), CPC Bid Multiplier (5)
+Step 3 → Activity Log button is visible in the header
+Step 4 → Column Picker button is visible
+Step 5 → Bulk Update Bid button is visible
+Step 6 → Bulk Reset Bid button is visible
+Step 7 → Review & Apply button is visible (initially disabled/grayed if no changes)
+Step 8 → Category table renders with default visible columns
+Step 9 → Table rows represent individual product categories
+Step 10 → Each row shows category name, floor/ceiling CPC, and performance metrics
+✅ Workflow Complete — CPC Controls dashboard is loaded
+
+---
+
+### Workflow 4.2 — Edit Global Default CPC Values
+
+**Entry:** CPC Controls Dashboard
+
+Step 1 → User locates Global Defaults bar at top of page
+Step 2 → User clicks on Floor CPC field (shows current value ₹10)
+Step 3 → Field becomes editable (inline input)
+Step 4 → User types new Floor CPC value (e.g., ₹12)
+Step 5 → User presses Tab or clicks to next field
+Step 6 → User clicks on Ceiling CPC field (shows current value ₹15)
+Step 7 → User types new Ceiling CPC value (e.g., ₹18)
+Step 8 → User clicks on CPC Bid Multiplier field (shows current value 5)
+Step 9 → User types new multiplier value (e.g., 6)
+Step 10 → Review & Apply button becomes active/highlighted
+Step 11 → User clicks Review & Apply
+Step 12 → System opens "Category Bid Configurations Review" modal
+Step 13 → Modal shows summary of changes to be applied
+Step 14 → User clicks Apply in modal
+Step 15 → System saves new global default values
+✅ Workflow Complete — Global default CPC values are updated
+
+---
+
+### Workflow 4.3 — Inline Edit Category CPC Values
+
+**Entry:** CPC Controls Dashboard → Category table visible
+
+Step 1 → User locates a specific category row in the table
+Step 2 → User clicks on the Floor CPC cell for that category
+Step 3 → Cell becomes an inline editable input
+Step 4 → User types new Floor CPC value for that category
+Step 5 → User presses Tab to move to Ceiling CPC cell
+Step 6 → User types new Ceiling CPC value
+Step 7 → User presses Tab to move to CPC Bid Multiplier cell
+Step 8 → User types new multiplier value
+Step 9 → Edited cells are visually highlighted (dirty state)
+Step 10 → Review & Apply button becomes active
+Step 11 → User clicks Review & Apply
+Step 12 → "Category Bid Configurations Review" modal opens
+Step 13 → Modal displays all changed categories and their new values
+Step 14 → User reviews the changes
+Step 15 → User clicks Apply to confirm
+Step 16 → System saves the category-level overrides
+✅ Workflow Complete — Category-level CPC values are updated inline
+
+---
+
+### Workflow 4.4 — Bulk Update Bid
+
+**Entry:** CPC Controls Dashboard
+
+Step 1 → User clicks "Bulk Update Bid" button
+Step 2 → System opens Bulk Update Bid panel/modal
+Step 3 → Panel shows 5 fields: Floor CPC, Ceiling CPC, CPC Bid Multiplier, Ideal Floor CPC Override, Ideal Ceiling CPC Override
+Step 4 → For each field, user selects update method from dropdown:
+  - Option A: Set to absolute (sets all categories to this value)
+  - Option B: Increase by (increments current values by amount)
+  - Option C: Decrease by (decrements current values by amount)
+Step 5 → User selects method for Floor CPC (e.g., "Set to absolute")
+Step 6 → User enters value (e.g., 15)
+Step 7 → User selects method for Ceiling CPC (e.g., "Increase by")
+Step 8 → User enters increment value (e.g., 5)
+Step 9 → User configures remaining fields as needed
+Step 10 → User clicks Apply/Update
+Step 11 → System applies bulk changes to all categories in the table
+Step 12 → Review & Apply button becomes active
+Step 13 → User clicks Review & Apply
+Step 14 → "Category Bid Configurations Review" modal opens
+Step 15 → Modal lists all affected categories and new values
+Step 16 → User clicks Apply to confirm
+✅ Workflow Complete — Bulk bid update applied to all categories
+
+---
+
+### Workflow 4.5 — Customize Table Columns
+
+**Entry:** CPC Controls Dashboard
+
+Step 1 → User clicks Column Picker button
+Step 2 → System opens column picker panel
+Step 3 → Group 1: Category (mandatory, always visible)
+Step 4 → Group 2: Yield Controls — Floor CPC, Ceiling CPC, CPC Bid Multiplier
+Step 5 → Group 3: SKU Count — SKU count
+Step 6 → Group 4: Category Performance (7D) — Impressions, Clicks, CTR, CPC, Spend, Revenue, ROI
+Step 7 → Group 5: Category Performance (30D) — Impressions, Clicks, CTR, CPC, Spend, Revenue, ROI
+Step 8 → Group 6: Ideal CPC — Ideal CPC range
+Step 9 → Group 7: Ideal CPC Overrides — Floor CPC override, Ceiling CPC override
+Step 10 → User checks/unchecks column groups
+Step 11 → User clicks Apply
+Step 12 → Table re-renders with selected columns
+Step 13 → Column selection persists for the session
+✅ Workflow Complete — Table columns are customized
+
+---
+
+### Workflow 4.6 — Bulk Reset Bid
+
+**Entry:** CPC Controls Dashboard
+
+Step 1 → User clicks "Bulk Reset Bid" button
+Step 2 → System opens Bulk Reset Bid modal
+Step 3 → Modal shows checkboxes for: Floor CPC | Ceiling CPC | CPC Bid Multiplier | Ideal CPC Overrides
+Step 4 → User selects which fields to reset (e.g., checks "Floor CPC" and "Ceiling CPC")
+Step 5 → User clicks Reset/Confirm
+Step 6 → System shows confirmation dialog: "Are you sure you want to reset selected bid values?"
+Step 7 → User clicks Confirm in the confirmation dialog
+Step 8 → System resets selected fields to global default values for all categories
+Step 9 → Table updates to show reset values
+Step 10 → Review & Apply button becomes active
+Step 11 → User clicks Review & Apply
+Step 12 → "Category Bid Configurations Review" modal opens
+Step 13 → Modal shows reset values for all affected categories
+Step 14 → User clicks Apply to persist the reset
+✅ Workflow Complete — Selected bid fields are reset to global defaults
+
+---
+
+### Workflow 4.7 — View Activity Log
+
+**Entry:** CPC Controls Dashboard
+
+Step 1 → User clicks "Activity Log" button
+Step 2 → System opens Activity Log modal
+Step 3 → Modal shows table with columns: Date | Changed By | Action
+Step 4 → Each row represents a historical change event
+Step 5 → User can scroll through log to see all past changes
+Step 6 → Log shows who made each change and what type of action was taken
+Step 7 → Date column shows timestamp of the change
+Step 8 → Changed By shows the user's name/email who made the change
+Step 9 → Action shows the type of operation (e.g., Bulk Update, Inline Edit, Reset)
+Step 10 → Log is read-only (no editing capability)
+Step 11 → User closes modal by clicking X or clicking outside
+✅ Workflow Complete — Activity log is reviewed
+
+---
+
+### Workflow 4.8 — Review & Apply Changes
+
+**Entry:** CPC Controls Dashboard — after any edits (inline, bulk update, or global default change)
+
+Step 1 → User makes one or more changes (inline edit, bulk update, global default change)
+Step 2 → Review & Apply button becomes active (highlighted/enabled)
+Step 3 → User clicks Review & Apply
+Step 4 → System opens "Category Bid Configurations Review" modal
+Step 5 → Modal title: "Category Bid Configurations Review"
+Step 6 → Modal shows a summary table of all pending changes
+Step 7 → Columns show: Category Name | Field Changed | Old Value | New Value
+Step 8 → User reviews each change
+Step 9 → User can cancel to go back and make further edits
+Step 10 → User clicks Apply to confirm all changes
+Step 11 → System saves all changes to the backend
+Step 12 → Modal closes
+Step 13 → Table updates to reflect saved values
+Step 14 → Review & Apply button returns to inactive state
+✅ Workflow Complete — All CPC bid configuration changes are saved
+
+---
+
+## SECTION 5 — Yield Controls: CPM Controls
+
+**URL:** `/productAds/categoryMinMax/cpm`
+
+### Page Layout Overview
+
+(Identical structure to CPC Controls — all workflows mirror CPC Controls with CPM equivalents)
+
+### Global Defaults
+
+| Field | Default Value |
+|---|---|
+| Floor CPM | ₹11 |
+| Ceiling CPM | ₹16 |
+| CPM Bid Multiplier | 4 |
+
+### Column Picker Groups (CPM equivalents)
+
+| Group | Columns |
+|---|---|
+| Category | Category (mandatory) |
+| Yield Controls | Floor CPM, Ceiling CPM, CPM Bid Multiplier |
+| SKU Count | SKU count |
+| Category Performance (7D) | Impressions, Clicks, CTR, CPM, Spend, Revenue, ROI |
+| Category Performance (30D) | Impressions, Clicks, CTR, CPM, Spend, Revenue, ROI |
+| Ideal CPM | Ideal CPM range |
+| Ideal CPM Overrides | Floor CPM override, Ceiling CPM override |
+
+### Bulk Update Bid Fields (CPM)
+
+| Field | Methods Available |
+|---|---|
+| Floor CPM | Set to absolute / Increase by / Decrease by |
+| Ceiling CPM | Set to absolute / Increase by / Decrease by |
+| CPM Bid Multiplier | Set to absolute / Increase by / Decrease by |
+| Ideal Floor CPM Override | Set to absolute / Increase by / Decrease by |
+| Ideal Ceiling CPM Override | Set to absolute / Increase by / Decrease by |
+
+### Bulk Reset Fields (CPM)
+
+Floor CPM | Ceiling CPM | CPM Bid Multiplier | Ideal CPM Overrides
+
+---
+
+### Workflow 5.1 — View CPM Controls Dashboard
+
+**Entry:** Left Nav → Product Ads → Yield Controls → CPM Controls
+
+Step 1 → Page loads at `/productAds/categoryMinMax/cpm`
+Step 2 → System displays Global Defaults bar: Floor CPM (₹11), Ceiling CPM (₹16), CPM Bid Multiplier (4)
+Step 3 → Activity Log button is visible
+Step 4 → Column Picker, Bulk Update Bid, Bulk Reset Bid, Review & Apply buttons are visible
+Step 5 → Category table renders with default visible columns
+Step 6 → Table rows represent individual product categories
+Step 7 → Each row shows category name, floor/ceiling CPM, and performance metrics
+Step 8 → Table supports horizontal scrolling for all metric columns
+Step 9 → All controls mirror CPC Controls with CPM values
+Step 10 → Data reflects current merchant filter selection
+✅ Workflow Complete — CPM Controls dashboard is loaded
+
+### Workflows 5.2 through 5.8
+
+All workflows for CPM Controls are identical in structure to CPC Controls Workflows 4.2–4.8, with all CPC references replaced by CPM equivalents:
+
+- **Workflow 5.2** — Edit Global Default CPM Values (same as 4.2, uses ₹11/₹16/multiplier 4)
+- **Workflow 5.3** — Inline Edit Category CPM Values (same as 4.3)
+- **Workflow 5.4** — Bulk Update CPM Bid (same as 4.4, 5 fields: Floor CPM, Ceiling CPM, CPM Bid Multiplier, Ideal Floor/Ceiling CPM Override)
+- **Workflow 5.5** — Customize Table Columns (same as 4.5, CPM column groups)
+- **Workflow 5.6** — Bulk Reset CPM Bid (same as 4.6, resets Floor CPM/Ceiling CPM/CPM Bid Multiplier/Ideal CPM Overrides)
+- **Workflow 5.7** — View Activity Log (same as 4.7, Date/Changed By/Action columns)
+- **Workflow 5.8** — Review & Apply CPM Changes (same as 4.8, "Category Bid Configurations Review" modal)
+---
+
+## SECTION 6 — Keyword Bid Setting: CPC Controls
+
+**URL:** `/productAds/keywordFloorBid/additionalCpcKeywordSettings`
+
+### Page Layout Overview
+
+```
+[Page Title: Keyword Bid Setting — CPC Controls]
+[How It Works Section]
+[Step 1: Download Template] [Download Button] [Download file for all advertisers Button]
+[Step 2: Upload File] [Drag & Drop / Click Upload Zone]
+[Upload History / Status Table (if prior uploads)]
+```
+
+### Template Information
+
+| Field | Value |
+|---|---|
+| Template Filename | cpc_keyword_bid_settings.xlsx |
+| Template Format | .xlsx (Excel) |
+| Template Columns | Advertiser ID \| Keyword \| Match Type \| Floor CPC \| Ceiling CPC |
+
+### Upload Specifications
+
+| Spec | Value |
+|---|---|
+| Accepted Format | .xlsx only |
+| Method | Drag & Drop or Click to Browse |
+| Max File Size | Not specified |
+
+---
+
+### Workflow 6.1 — Download CPC Keyword Bid Settings Template
+
+**Entry:** Left Nav → Product Ads → Keyword Bid Setting → CPC Controls
+
+Step 1 → Page loads at `/productAds/keywordFloorBid/additionalCpcKeywordSettings`
+Step 2 → User reads "How it works" instructions on the page
+Step 3 → User sees two download options:
+  - "Download" (blank template)
+  - "Download file for all advertisers" (pre-populated with existing settings)
+Step 4 → User clicks "Download file for all advertisers"
+Step 5 → System generates an .xlsx file with all current advertiser keyword bid settings
+Step 6 → Browser downloads the file: `cpc_keyword_bid_settings.xlsx`
+Step 7 → File contains columns: Advertiser ID | Keyword | Match Type | Floor CPC | Ceiling CPC
+Step 8 → Each row represents a keyword bid setting for a specific advertiser
+Step 9 → User opens file in Excel or compatible spreadsheet software
+Step 10 → User can see all existing keyword floor/ceiling CPC values
+✅ Workflow Complete — Template with all advertiser CPC keyword settings is downloaded
+
+---
+
+### Workflow 6.2 — Edit and Upload CPC Keyword Bid Settings
+
+**Entry:** Keyword Bid Setting → CPC Controls → Template downloaded
+
+Step 1 → User opens the downloaded `cpc_keyword_bid_settings.xlsx` file
+Step 2 → Template columns: Advertiser ID | Keyword | Match Type | Floor CPC | Ceiling CPC
+Step 3 → User locates the keyword rows they want to modify
+Step 4 → User edits Floor CPC values in column D for target keywords
+Step 5 → User edits Ceiling CPC values in column E for target keywords
+Step 6 → User can add new rows for new keyword bid settings
+Step 7 → User saves the edited .xlsx file
+Step 8 → User returns to the CPC Controls page in QA Pulse
+Step 9 → User drags the .xlsx file onto the upload zone, OR clicks the upload zone to browse
+Step 10 → System validates the file format (.xlsx check)
+Step 11 → System processes the uploaded file
+Step 12 → System shows upload status: Success/Error/Processing
+Step 13 → If errors exist, system shows row-level error messages
+Step 14 → If successful, system applies new CPC keyword bid settings
+Step 15 → Upload history/status appears in the history table on the page
+✅ Workflow Complete — CPC keyword bid settings are updated via file upload
+
+---
+
+### Workflow 6.3 — Download Blank CPC Keyword Bid Template
+
+**Entry:** Keyword Bid Setting → CPC Controls page
+
+Step 1 → User locates the "Download" button (blank template, not pre-populated)
+Step 2 → User clicks "Download"
+Step 3 → Browser downloads blank template: `cpc_keyword_bid_settings.xlsx`
+Step 4 → File contains column headers only: Advertiser ID | Keyword | Match Type | Floor CPC | Ceiling CPC
+Step 5 → No data rows are pre-filled
+Step 6 → User fills in Advertiser ID for each row
+Step 7 → User fills in Keyword text for each row
+Step 8 → User specifies Match Type (Broad/Exact/Phrase)
+Step 9 → User enters Floor CPC and Ceiling CPC values
+Step 10 → User saves file and uploads via the upload zone on the page
+✅ Workflow Complete — New keyword bid settings are uploaded from blank template
+
+---
+
+## SECTION 7 — Keyword Bid Setting: CPM Controls
+
+**URL:** `/productAds/keywordFloorBid/additionalCpmKeywordSettings`
+
+### Page Layout Overview
+
+(Identical structure to CPC Controls with CPM equivalents)
+
+### Template Information
+
+| Field | Value |
+|---|---|
+| Template Filename | cpm_keyword_bid_settings.xlsx |
+| Template Format | .xlsx (Excel) |
+| Template Columns | Advertiser ID \| Keyword \| Match Type \| Floor CPM \| Ceiling CPM |
+
+---
+
+### Workflow 7.1 — Download CPM Keyword Bid Settings Template
+
+**Entry:** Left Nav → Product Ads → Keyword Bid Setting → CPM Controls
+
+Step 1 → Page loads at `/productAds/keywordFloorBid/additionalCpmKeywordSettings`
+Step 2 → User reads "How it works" instructions on the page
+Step 3 → User sees two download options: "Download" and "Download file for all advertisers"
+Step 4 → User clicks "Download file for all advertisers"
+Step 5 → System generates .xlsx file with all current advertiser keyword CPM bid settings
+Step 6 → Browser downloads: `cpm_keyword_bid_settings.xlsx`
+Step 7 → File contains columns: Advertiser ID | Keyword | Match Type | Floor CPM | Ceiling CPM
+Step 8 → Each row represents a keyword CPM bid setting for a specific advertiser
+Step 9 → User opens in Excel
+Step 10 → User reviews all existing CPM keyword floor/ceiling values
+✅ Workflow Complete — CPM keyword bid settings template is downloaded
+
+---
+
+### Workflow 7.2 — Edit and Upload CPM Keyword Bid Settings
+
+**Entry:** Keyword Bid Setting → CPM Controls → Template downloaded
+
+Step 1 → User opens `cpm_keyword_bid_settings.xlsx`
+Step 2 → Columns: Advertiser ID | Keyword | Match Type | Floor CPM | Ceiling CPM
+Step 3 → User locates keywords to modify
+Step 4 → User edits Floor CPM and/or Ceiling CPM values
+Step 5 → User can add new rows for new keyword CPM settings
+Step 6 → User saves the edited .xlsx file
+Step 7 → User returns to CPM Controls page in QA Pulse
+Step 8 → User drags file to upload zone OR clicks to browse
+Step 9 → System validates file format
+Step 10 → System processes uploaded file
+Step 11 → System shows upload status
+Step 12 → If errors exist, system shows row-level error messages
+Step 13 → If successful, new CPM keyword bid settings are applied
+Step 14 → Upload appears in upload history
+✅ Workflow Complete — CPM keyword bid settings updated via file upload
+
+---
+
+## SECTION 8 — Campaign Bulk Actions: Create Campaign
+
+**URL:** `/productAds/campaigns/createProductAdsCampaign`
+
+### Page Layout Overview
+
+```
+[Page Title: Create Campaign]
+[How It Works Section]
+[Step 1: Download Template] [Download Button]
+[Step 2: Upload File] [Upload Zone — Drag & Drop / Click to Browse]
+[Upload limit: up to 1,000 campaigns per file]
+[Upload History / Status]
+```
+
+### Template Information
+
+| Field | Value |
+|---|---|
+| Template Filename | sample_campaign_creation_spa.xlsx |
+| Upload Limit | Up to 1,000 campaigns per upload |
+| Accepted Format | .xlsx |
+
+### Template Columns (Create Campaign)
+
+Advertiser ID | Campaign Name | Campaign Type | Budget Type | Budget Amount | Start Date | End Date | Bidding Strategy | Target CPC/CPM | Campaign Status | Product Selection Type | Category Targets | Keyword Targets
+
+---
+
+### Workflow 8.1 — Download Create Campaign Template
+
+**Entry:** Left Nav → Product Ads → Campaign Bulk Actions → Create Campaign
+
+Step 1 → Page loads at `/productAds/campaigns/createProductAdsCampaign`
+Step 2 → User reads "How it works" section explaining the bulk campaign creation process
+Step 3 → User locates "Download" button (note: only blank template, no "all advertisers" option)
+Step 4 → User clicks "Download"
+Step 5 → Browser downloads `sample_campaign_creation_spa.xlsx`
+Step 6 → File contains column headers for all campaign attributes
+Step 7 → User opens file in Excel
+Step 8 → User reviews column descriptions/instructions (if provided in template)
+Step 9 → Template is blank — user must fill all required fields
+Step 10 → User notes the 1,000 campaign limit per upload
+✅ Workflow Complete — Campaign creation template is downloaded
+
+---
+
+### Workflow 8.2 — Create Campaigns via Bulk Upload
+
+**Entry:** Create Campaign page → Template downloaded and filled
+
+Step 1 → User opens `sample_campaign_creation_spa.xlsx`
+Step 2 → User fills in row 1 with first campaign: Advertiser ID, Campaign Name, Budget Type, Budget Amount, etc.
+Step 3 → User fills in additional rows for each new campaign (up to 1,000 rows)
+Step 4 → User ensures all required fields are filled (Advertiser ID, Campaign Name, Budget Type, Budget Amount minimum)
+Step 5 → User saves the .xlsx file
+Step 6 → User returns to Create Campaign page in QA Pulse
+Step 7 → User drags the .xlsx file to the upload zone, OR clicks to browse and select the file
+Step 8 → System validates the file (format, required columns, row count)
+Step 9 → System shows validation results
+Step 10 → If validation fails: system shows row-level errors (missing required fields, invalid values)
+Step 11 → If validation passes: system begins processing campaign creation
+Step 12 → System creates campaigns in the advertising platform
+Step 13 → Upload status shows: Processing → Success/Partial Success/Failed
+Step 14 → System shows count of campaigns created successfully
+Step 15 → Upload entry appears in upload history with timestamp and status
+✅ Workflow Complete — New campaigns are created via bulk upload
+
+---
+
+## SECTION 9 — Campaign Bulk Actions: Update Campaigns
+
+**URL:** `/productAds/campaigns/updateProductAdsCampaigns`
+
+### Template Information
+
+| Field | Value |
+|---|---|
+| Template Filename | update_spa_campaigns.xlsx |
+| Download Type | "Download file for all advertisers" (pre-populated) |
+| Process | Download → Edit → Re-upload |
+
+### How It Works
+
+1. Download the file — contains ALL current campaign settings for all advertisers
+2. Edit desired campaign settings in the spreadsheet
+3. Re-upload the edited file to apply changes
+
+---
+
+### Workflow 9.1 — Download All Campaign Settings
+
+**Entry:** Left Nav → Product Ads → Campaign Bulk Actions → Update Campaigns
+
+Step 1 → Page loads at `/productAds/campaigns/updateProductAdsCampaigns`
+Step 2 → User reads "How it works" section
+Step 3 → User sees "Download file for all advertisers" button
+Step 4 → User clicks "Download file for all advertisers"
+Step 5 → System generates `update_spa_campaigns.xlsx` with ALL existing campaigns
+Step 6 → File includes all campaign settings: Campaign ID, Campaign Name, Status, Budget Type, Budget Amount, Bidding Strategy, etc.
+Step 7 → Browser downloads the file
+Step 8 → User opens the file in Excel
+Step 9 → User can see all campaigns across all advertisers
+Step 10 → Each row represents one existing campaign
+✅ Workflow Complete — All campaign settings are downloaded
+
+---
+
+### Workflow 9.2 — Update Campaign Settings via Bulk Upload
+
+**Entry:** Update Campaigns → File downloaded
+
+Step 1 → User opens `update_spa_campaigns.xlsx`
+Step 2 → User locates the campaign(s) to update by Campaign ID or Campaign Name
+Step 3 → User edits the desired fields (e.g., Budget Amount, Bidding Strategy, End Date)
+Step 4 → User MUST NOT change Campaign ID (primary key for matching)
+Step 5 → User saves the edited .xlsx file
+Step 6 → User returns to Update Campaigns page in QA Pulse
+Step 7 → User drags file to upload zone OR clicks to browse
+Step 8 → System validates the file
+Step 9 → System matches rows to existing campaigns by Campaign ID
+Step 10 → System validates changes (e.g., valid budget amounts, valid dates)
+Step 11 → If validation fails: system shows row-level errors
+Step 12 → If validation passes: system applies campaign updates
+Step 13 → Upload status shows: Processing → Success/Partial/Failed
+Step 14 → System shows count of campaigns updated
+Step 15 → Upload history records the operation
+✅ Workflow Complete — Existing campaigns are updated in bulk
+
+---
+
+## SECTION 10 — Campaign Bulk Actions: Activate Campaigns
+
+**URL:** `/productAds/campaigns/activateCampaigns`
+
+### Template Information
+
+| Field | Value |
+|---|---|
+| Template Filename | activate_spa_campaigns.xlsx |
+| Download Type | "Download file for all advertisers" (PAUSED campaigns only) |
+| Process | Download PAUSED campaigns → Change Status to ACTIVE → Upload |
+
+### How It Works
+
+1. Download the file — contains only PAUSED campaigns
+2. Change the Status column value from "PAUSED" to "ACTIVE" for desired campaigns
+3. Upload the file to activate the selected campaigns
+
+---
+
+### Workflow 10.1 — Activate Campaigns via Bulk Upload
+
+**Entry:** Left Nav → Product Ads → Campaign Bulk Actions → Activate Campaigns
+
+Step 1 → Page loads at `/productAds/campaigns/activateCampaigns`
+Step 2 → User reads "How it works" — confirms process: download PAUSED → set ACTIVE → upload
+Step 3 → User clicks "Download file for all advertisers"
+Step 4 → System generates `activate_spa_campaigns.xlsx` containing only PAUSED campaigns
+Step 5 → Browser downloads the file
+Step 6 → User opens file in Excel
+Step 7 → User sees all PAUSED campaigns with columns: Campaign ID | Campaign Name | Status | Advertiser ID | etc.
+Step 8 → User locates campaigns to activate
+Step 9 → User changes Status value from "PAUSED" to "ACTIVE" for selected campaigns
+Step 10 → User saves the .xlsx file
+Step 11 → User returns to Activate Campaigns page
+Step 12 → User drags file to upload zone OR clicks to browse
+Step 13 → System validates file and identifies rows with Status = "ACTIVE"
+Step 14 → System processes activation requests
+Step 15 → Upload status shows: Processing → Success/Partial/Failed
+Step 16 → Activated campaigns begin serving ads
+Step 17 → Upload history records the activation event
+✅ Workflow Complete — Selected PAUSED campaigns are activated
+
+---
+
+## SECTION 11 — Campaign Bulk Actions: Pause Campaigns
+
+**URL:** `/productAds/campaigns/pauseCampaigns`
+
+### Template Information
+
+| Field | Value |
+|---|---|
+| Template Filename | pause_spa_campaigns.xlsx |
+| Download Type | "Download file for all advertisers" (ACTIVE campaigns only) |
+| Process | Download ACTIVE campaigns → Change Status to PAUSE → Upload |
+
+### How It Works
+
+1. Download the file — contains only ACTIVE campaigns
+2. Change the Status column value from "ACTIVE" to "PAUSE" for desired campaigns
+3. Upload the file to pause the selected campaigns
+
+---
+
+### Workflow 11.1 — Pause Campaigns via Bulk Upload
+
+**Entry:** Left Nav → Product Ads → Campaign Bulk Actions → Pause Campaigns
+
+Step 1 → Page loads at `/productAds/campaigns/pauseCampaigns`
+Step 2 → User reads "How it works" — confirms process: download ACTIVE → set PAUSE → upload
+Step 3 → User clicks "Download file for all advertisers"
+Step 4 → System generates `pause_spa_campaigns.xlsx` containing only ACTIVE campaigns
+Step 5 → Browser downloads the file
+Step 6 → User opens file in Excel
+Step 7 → User sees all ACTIVE campaigns with their current settings
+Step 8 → User locates campaigns to pause
+Step 9 → User changes Status value from "ACTIVE" to "PAUSE" for selected campaigns
+Step 10 → User saves the .xlsx file
+Step 11 → User returns to Pause Campaigns page
+Step 12 → User drags file to upload zone OR clicks to browse
+Step 13 → System validates file and identifies rows with Status = "PAUSE"
+Step 14 → System processes pause requests
+Step 15 → Upload status shows: Processing → Success/Partial/Failed
+Step 16 → Paused campaigns stop serving ads
+Step 17 → Upload history records the pause event
+✅ Workflow Complete — Selected ACTIVE campaigns are paused
+
+---
+
+## SECTION 12 — Campaign Bulk Actions: Product Selection
+
+**URL:** `/productAds/campaigns/productSelection`
+
+### Page Layout Overview
+
+```
+[Page Title: Product Selection]
+[How It Works Section]
+[Step 1: Download Template] [Download Button]
+[Step 2: Upload File] [Upload Zone — Drag & Drop / Click to Browse]
+[Upload limit: up to 100,000 products per file]
+[Upload History / Status]
+```
+
+### Template Information
+
+| Field | Value |
+|---|---|
+| Template Filename | product_selection_spa.xlsx |
+| Upload Limit | Up to 100,000 products per upload |
+| Accepted Format | .xlsx |
+| Download Type | Blank template (no "all advertisers" option) |
+
+### Template Columns (Product Selection)
+
+Advertiser ID | Campaign ID | SKU | Product Action (ADD/REMOVE)
+
+---
+
+### Workflow 12.1 — Download Product Selection Template
+
+**Entry:** Left Nav → Product Ads → Campaign Bulk Actions → Product Selection
+
+Step 1 → Page loads at `/productAds/campaigns/productSelection`
+Step 2 → User reads "How it works" section
+Step 3 → User notes the 100,000 product limit per upload
+Step 4 → User locates "Download" button (blank template)
+Step 5 → User clicks "Download"
+Step 6 → Browser downloads `product_selection_spa.xlsx`
+Step 7 → File contains column headers: Advertiser ID | Campaign ID | SKU | Product Action
+Step 8 → User opens file in Excel
+Step 9 → User reviews column requirements
+Step 10 → Template is blank — user fills in product selection data
+✅ Workflow Complete — Product selection template is downloaded
+
+---
+
+### Workflow 12.2 — Upload Product Selection (Add Products to Campaigns)
+
+**Entry:** Product Selection page → Template downloaded
+
+Step 1 → User opens `product_selection_spa.xlsx`
+Step 2 → User fills in Advertiser ID (column A) for each row
+Step 3 → User fills in Campaign ID (column B) — specifies which campaign to add products to
+Step 4 → User fills in SKU (column C) — the product SKU to associate with the campaign
+Step 5 → User fills in Product Action = "ADD" (column D) to add products
+Step 6 → User can add up to 100,000 product rows per file
+Step 7 → User saves the .xlsx file
+Step 8 → User returns to Product Selection page in QA Pulse
+Step 9 → User drags file to upload zone OR clicks to browse
+Step 10 → System validates file (format, column headers, row count limit)
+Step 11 → System validates SKU existence and Campaign ID validity
+Step 12 → System processes product associations
+Step 13 → Upload status shows: Processing → Success/Partial/Failed
+Step 14 → System reports count of products successfully added
+Step 15 → Products are now associated with specified campaigns
+Step 16 → Upload history records the product selection event
+✅ Workflow Complete — Products are added to campaigns via bulk upload
+
+---
+
+### Workflow 12.3 — Remove Products from Campaigns via Bulk Upload
+
+**Entry:** Product Selection page → Template downloaded
+
+Step 1 → User opens `product_selection_spa.xlsx`
+Step 2 → User fills in Advertiser ID, Campaign ID, and SKU for products to remove
+Step 3 → User sets Product Action = "REMOVE" (column D) for all rows
+Step 4 → User saves the file
+Step 5 → User uploads the file via the upload zone
+Step 6 → System validates the file
+Step 7 → System processes removal requests
+Step 8 → System disassociates specified SKUs from specified campaigns
+Step 9 → Upload status shows: Processing → Success/Partial/Failed
+Step 10 → System reports count of products successfully removed
+Step 11 → Removed products are no longer served in those campaigns
+Step 12 → Upload history records the removal operation
+✅ Workflow Complete — Products are removed from campaigns via bulk upload
+
+---
+
+## URL Reference Map
+
+| Section | Sub-Section | URL Path |
+|---|---|---|
+| Analytics | Ad Server Analytics | `/productAds/anaytics/adServerAnalytics` |
+| Analytics | Demand & Supply | `/productAds/anaytics/demandAndSupply` |
+| Analytics | Live Analytics | `/productAds/anaytics/liveAnalytics` |
+| Yield Controls | CPC Controls | `/productAds/categoryMinMax/cpc` |
+| Yield Controls | CPM Controls | `/productAds/categoryMinMax/cpm` |
+| Keyword Bid Setting | CPC Controls | `/productAds/keywordFloorBid/additionalCpcKeywordSettings` |
+| Keyword Bid Setting | CPM Controls | `/productAds/keywordFloorBid/additionalCpmKeywordSettings` |
+| Campaign Bulk Actions | Create Campaign | `/productAds/campaigns/createProductAdsCampaign` |
+| Campaign Bulk Actions | Update Campaigns | `/productAds/campaigns/updateProductAdsCampaigns` |
+| Campaign Bulk Actions | Activate Campaigns | `/productAds/campaigns/activateCampaigns` |
+| Campaign Bulk Actions | Pause Campaigns | `/productAds/campaigns/pauseCampaigns` |
+| Campaign Bulk Actions | Product Selection | `/productAds/campaigns/productSelection` |
+
+**Note:** The URL path uses `anaytics` (not `analytics`) — this appears to be a typo in the platform's routing configuration.
+
+---
+
+## Workflow Count Summary
+
+| Section | Workflows Documented |
+|---|---|
+| Ad Server Analytics | 8 workflows (1.1–1.8) |
+| Demand & Supply | 4 workflows (2.1–2.4) |
+| Live Analytics | 6 workflows (3.1–3.6) |
+| CPC Controls | 8 workflows (4.1–4.8) |
+| CPM Controls | 8 workflows (5.1–5.8) |
+| Keyword Bid Setting — CPC | 3 workflows (6.1–6.3) |
+| Keyword Bid Setting — CPM | 2 workflows (7.1–7.2) |
+| Create Campaign | 2 workflows (8.1–8.2) |
+| Update Campaigns | 2 workflows (9.1–9.2) |
+| Activate Campaigns | 1 workflow (10.1) |
+| Pause Campaigns | 1 workflow (11.1) |
+| Product Selection | 3 workflows (12.1–12.3) |
+| **TOTAL** | **48 workflows** |
+
+---
+
+## Notes & Observations
+
+1. **URL Typo:** All Analytics URLs use `/anaytics/` (missing the second `a`) instead of `/analytics/`. This is a known routing issue in the platform.
+
+2. **PRO Features:** Demand & Supply and Live Analytics are gated behind a PRO subscription badge.
+
+3. **CPC vs CPM Symmetry:** Yield Controls CPC and CPM pages are structurally identical — every feature in CPC has a direct CPM equivalent with the same workflows.
+
+4. **Keyword Bid Setting Symmetry:** Same pattern — CPC and CPM pages are mirrors of each other.
+
+5. **Campaign Bulk Actions Upload Pattern:** All 5 Campaign Bulk Action pages follow the same pattern: Download template → Edit in Excel → Upload .xlsx. The key differentiator is what the template contains (blank vs pre-filled, all campaigns vs ACTIVE/PAUSED only).
+
+6. **Review & Apply Pattern:** All changes in Yield Controls (CPC/CPM) require a 2-step confirmation: make changes → click Review & Apply → review modal → click Apply. Changes are NOT auto-saved.
+
+7. **Activity Log:** Only available on Yield Controls (CPC and CPM) pages. Not present on Analytics or Campaign Bulk Action pages.
+
+8. **Inline Editing:** Only available on Yield Controls (CPC and CPM) tables. All other sections are read-only or bulk-upload based.
+
+9. **Column Picker:** Available on Ad Server Analytics (List View), Demand & Supply (both views), Live Analytics (Advertiser & Campaign Reports), and Yield Controls (CPC/CPM).
+
+10. **No Date Picker on Live Analytics:** Unlike other Analytics pages, Live Analytics shows real-time data only and has no date range filter.
+
+11. **Product Selection Limit:** 100,000 products per upload — significantly larger than the 1,000 campaign limit for Create Campaign.
+
+12. **Download Variants:** Some pages offer only a blank template ("Download"), while others offer a pre-populated file ("Download file for all advertisers"). Create Campaign and Product Selection use blank templates; Update/Activate/Pause Campaigns and Keyword Bid Settings use pre-populated files.
+
+---
+
+*Document generated by automated IA mapping of QA Pulse staging-4.osmos.ai — Product Ads module.*
+*All workflows traced to completion at ≥10 depth steps per workflow.*
