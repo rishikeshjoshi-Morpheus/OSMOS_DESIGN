@@ -317,6 +317,101 @@ body.pain-mode .cn.ch-3 .cn-ticket-badge{display:block;background:#FEE2E2;color:
 .hint{position:fixed;bottom:20px;right:20px;background:rgba(91,79,233,0.88);color:#fff;font-size:11px;font-weight:600;padding:8px 16px;border-radius:20px;box-shadow:0 4px 16px rgba(91,79,233,0.28);pointer-events:none;opacity:1;transition:opacity 0.6s;display:flex;align-items:center;gap:6px}
 .hint.gone{opacity:0}
 @media(max-width:860px){.legend{display:none}}
+
+/* ── CLEAN BASE: heat classes invisible unless pain-mode ── */
+.cn.ch-1,.cn.ch-2,.cn.ch-3{background:#fff;border-color:#F0F0F8}
+body.pain-mode .cn.ch-1{background:#FFFBEB !important;border-color:#FDE68A !important}
+body.pain-mode .cn.ch-2{background:#FEF3C7 !important;border-color:#FCD34D !important}
+body.pain-mode .cn.ch-3{background:#FEE2E2 !important;border-color:#FECACA !important}
+
+/* ── NUDGE DOT ── */
+.nudge-dot{position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;background:#3B82F6;pointer-events:none;animation:nudge-pulse 2.2s ease-in-out infinite;border:1.5px solid #fff;z-index:2}
+@keyframes nudge-pulse{0%,100%{transform:scale(1);opacity:0.85}50%{transform:scale(1.55);opacity:0.38}}
+
+/* ── DA LIVE BADGE ── */
+.da-live-badge{display:inline-flex;align-items:center;gap:4px;font-size:8px;font-weight:800;background:rgba(255,255,255,0.22);color:#fff;padding:2px 8px;border-radius:20px;letter-spacing:0.4px;margin-left:6px;vertical-align:middle}
+.da-live-dot{width:5px;height:5px;border-radius:50%;background:#4ADE80;animation:live-blink 1.4s ease infinite}
+@keyframes live-blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* ── DRAWER NAV (back + breadcrumb) ── */
+.sp-nav{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.sp-back{display:none;background:none;border:none;cursor:pointer;font-size:12px;font-weight:700;color:#6B7280;padding:4px 8px;border-radius:6px;transition:background 0.15s}
+.sp-back:hover{background:#F3F4F6;color:#374151}
+.sp-back.visible{display:flex;align-items:center;gap:4px}
+.sp-breadcrumb{font-size:10px;color:#9CA3AF;letter-spacing:0.3px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── NUDGE CARD ── */
+.nudge-card{display:flex;align-items:center;gap:12px;border:1.5px solid #DBEAFE;background:#EFF6FF;border-radius:10px;padding:14px 16px;cursor:pointer;transition:all 0.15s;margin-top:16px}
+.nudge-card:hover{background:#DBEAFE;border-color:#3B82F6;transform:translateX(2px)}
+.nudge-card-icon{font-size:20px;flex-shrink:0}
+.nudge-card-text{flex:1}
+.nudge-card-label{font-size:13px;font-weight:700;color:#1E40AF}
+.nudge-card-sub{font-size:11px;color:#3B82F6;margin-top:2px}
+.nudge-card-arrow{font-size:14px;color:#93C5FD;flex-shrink:0}
+
+/* ── TICKET GROUP CARD ── */
+.ticket-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:#F9FAFB;border:1.5px solid #F3F4F6;cursor:pointer;transition:all 0.15s;margin-bottom:8px}
+.ticket-card:hover{background:#F3F4F6;transform:translateX(2px);border-color:#E5E7EB}
+.ticket-color-bar{width:4px;height:36px;border-radius:4px;flex-shrink:0}
+.tc-red{background:#EF4444}.tc-amber{background:#F59E0B}.tc-blue{background:#3B82F6}.tc-gray{background:#9CA3AF}
+.ticket-card-body{flex:1;min-width:0}
+.ticket-card-label{font-size:12px;font-weight:700;color:#1A1A2E;line-height:1.3}
+.ticket-card-meta{display:flex;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap}
+.tc-count{font-size:10px;font-weight:800;background:#E5E7EB;color:#374151;padding:1px 7px;border-radius:12px}
+.tc-type{font-size:9.5px;font-weight:600;color:#6B7280;background:#F3F4F6;padding:1px 7px;border-radius:12px}
+.tc-escalated{font-size:9.5px;font-weight:700;color:#B91C1C;background:#FEE2E2;padding:1px 7px;border-radius:12px}
+.ticket-card-arrow{font-size:14px;color:#D1D5DB;flex-shrink:0}
+
+/* ── SUGGESTION CARD ── */
+.suggestions-heading{font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.8px;margin:16px 0 10px}
+.suggestion-card{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:10px;background:#F0FDF4;border:1.5px solid #BBF7D0;cursor:pointer;transition:all 0.15s;margin-bottom:8px}
+.suggestion-card:hover{background:#DCFCE7;border-color:#4ADE80;transform:translateX(2px)}
+.sc-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.sc-body{flex:1;min-width:0}
+.sc-title{font-size:12px;font-weight:700;color:#166534;line-height:1.3}
+.sc-desc{font-size:11px;color:#4B5563;margin-top:3px;line-height:1.4}
+.sc-goto{font-size:10.5px;font-weight:700;color:#2563EB;margin-top:6px;display:inline-block}
+.sc-goto:hover{text-decoration:underline}
+
+/* ── TICKET DETAIL HEADER ── */
+.td-header{padding:14px 16px;border-radius:10px;margin-bottom:14px}
+.td-header-label{font-size:12px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:6px}
+.td-header-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.td-pill{font-size:9px;font-weight:700;background:rgba(255,255,255,0.22);color:#fff;padding:2px 8px;border-radius:12px}
+.td-desc{font-size:11.5px;color:#374151;line-height:1.5;margin-bottom:12px}
+.td-subjects-heading{font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px}
+.td-subject-item{font-size:11px;color:#4B5563;padding:4px 0;border-bottom:1px solid #F3F4F6;line-height:1.4}
+.td-subject-item:last-child{border-bottom:none}
+
+/* ── NAV HIGHLIGHT ── */
+@keyframes nav-ring{0%{box-shadow:0 0 0 0 rgba(251,191,36,0.7),var(--shadow-sm)}50%{box-shadow:0 0 0 8px rgba(251,191,36,0.15),var(--shadow-md)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0),var(--shadow-sm)}}
+.nav-highlight{animation:nav-ring 0.7s ease 3 !important;border-color:#FBBF24 !important;background:#FFFBEB !important}
+
+/* ── NODE DETAIL (L1) ── */
+.nd-icon{font-size:28px;margin-bottom:8px}
+.nd-name{font-size:18px;font-weight:900;color:#1A1A2E;letter-spacing:-0.3px;line-height:1.2}
+.nd-desc{font-size:12px;color:#6B7280;margin-top:6px;line-height:1.5}
+.nd-route{font-size:10px;font-weight:600;color:#A78BFA;margin-top:8px;font-family:'SF Mono','Fira Code','Courier New',monospace;background:#F5F3FF;padding:4px 10px;border-radius:6px;display:inline-block}
+
+/* ── SUB-FEATURE CARDS ── */
+.sf-heading{font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.8px;margin:16px 0 8px;display:flex;align-items:center;gap:6px}
+.sf-card{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border-radius:9px;background:#F9FAFB;border:1.5px solid #F3F4F6;margin-bottom:7px;transition:all 0.15s}
+.sf-card:hover{background:#F0F4FF;border-color:#C7D7FD;transform:translateX(2px)}
+.sf-icon{font-size:17px;flex-shrink:0;margin-top:1px;width:22px;text-align:center}
+.sf-body{flex:1;min-width:0}
+.sf-name{font-size:12px;font-weight:700;color:#1A1A2E;line-height:1.3}
+.sf-brief{font-size:11px;color:#6B7280;margin-top:3px;line-height:1.45}
+.sf-route{font-size:9px;font-weight:600;color:#A78BFA;margin-top:5px;font-family:'SF Mono','Fira Code','Courier New',monospace;display:block}
+.sf-format-row{display:flex;align-items:center;gap:5px;margin-top:6px;flex-wrap:wrap}
+.sf-format-pill{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:12px;letter-spacing:0.2px}
+.sfp-table{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.sfp-chart{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
+.sfp-live{background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA}
+.sfp-form{background:#F5F3FF;color:#5B21B6;border:1px solid #DDD6FE}
+.sfp-queue{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A}
+.sfp-code{background:#F1F5F9;color:#334155;border:1px solid #CBD5E1}
+.sfp-preview{background:#FDF2F8;color:#86198F;border:1px solid #F0ABFC}
+.sfp-list{background:#F9FAFB;color:#374151;border:1px solid #E5E7EB}
 </style>
 </head>
 <body>
@@ -326,8 +421,12 @@ body.pain-mode .cn.ch-3 .cn-ticket-badge{display:block;background:#FEE2E2;color:
 
 <!-- SIDE DETAIL PANEL -->
 <div class="side-panel" id="sidePanel">
-  <div class="sp-header">
+  <div class="sp-header" id="sp-header">
     <button class="sp-close" onclick="closePanel()">✕</button>
+    <div class="sp-nav">
+      <button class="sp-back" id="sp-back" onclick="drawerBack()">← Back</button>
+      <div class="sp-breadcrumb" id="sp-breadcrumb"></div>
+    </div>
     <div class="sp-module" id="sp-module">Module</div>
     <div class="sp-title" id="sp-title">Node Title</div>
     <div class="sp-total"><span id="sp-count">0</span> <span style="font-size:14px;font-weight:500;color:#9CA3AF">tickets raised here</span></div>
@@ -576,6 +675,270 @@ const TICKET_DATA = {
 };
 
 /* ══════════════════════════════════════════════════════════
+   DISPLAY ADS NODE DETAIL — sub-features per node
+══════════════════════════════════════════════════════════ */
+const DA_NODE_DETAIL = {
+  'n-display-ads-0': { subFeatures: [
+    { icon:'📡', name:'Ad Server Analytics', brief:'Request volume, Response Rate, CTR, CPC/CPM with fill-rate trends and ad-server health over time.', route:'/displayAds/analytics?tab=adServer',
+      formats:[{label:'📊 Line Chart',cls:'sfp-chart'},{label:'📋 Metrics Table',cls:'sfp-table'}] },
+    { icon:'⚖️', name:'Demand & Supply', brief:'Supply-demand balance per placement — fill ratio, demand depth, and inventory utilisation. Highlights under-monetised slots.', route:'/displayAds/analytics?tab=demandSupply',
+      formats:[{label:'📊 Bar Chart',cls:'sfp-chart'},{label:'📋 Table',cls:'sfp-table'}] },
+    { icon:'⚡', name:'Live Analytics', brief:'Real-time today\'s campaign performance — impressions, clicks, spend, and CTR as they happen. Auto-refreshes every 60 s.', route:'/displayAds/analytics?tab=live',
+      formats:[{label:'⚡ Live Feed',cls:'sfp-live'},{label:'📊 KPI Tiles',cls:'sfp-chart'}] },
+  ]},
+  'n-display-ads-1': { subFeatures: [
+    { icon:'📋', name:'Page List', brief:'All configured ad-serving pages with their associated inventory slots, targeting rules, and active status.', route:'/displayAds/pageSetup',
+      formats:[{label:'📋 Table',cls:'sfp-table'}] },
+    { icon:'➕', name:'Create Page', brief:'3-step wizard to define a new page: name & URL pattern → targeting (audience, geo, context) → slot assignment.', route:'/displayAds/pageSetup/create',
+      formats:[{label:'📝 Multi-step Form',cls:'sfp-form'}] },
+    { icon:'🎯', name:'Page Targeting', brief:'Audience segments, geo filters, and contextual keyword rules configured per page. These can override campaign-level targeting.', route:'/displayAds/pageSetup?tab=targeting',
+      formats:[{label:'📝 Form',cls:'sfp-form'},{label:'☰ Rule List',cls:'sfp-list'}] },
+  ]},
+  'n-display-ads-2': { subFeatures: [
+    { icon:'🖼️', name:'Banner', brief:'Static or animated image placements — supports 8 IAB standard sizes (e.g. 300×250, 728×90, 320×50).', route:'/displayAds/adFormatSetup?type=banner',
+      formats:[{label:'📝 Config Form',cls:'sfp-form'},{label:'👁 Preview',cls:'sfp-preview'}] },
+    { icon:'▶️', name:'Video', brief:'Pre-roll, mid-roll, and post-roll video formats. Supports MP4/WEBM up to 60 s with skip controls.', route:'/displayAds/adFormatSetup?type=video',
+      formats:[{label:'📝 Config Form',cls:'sfp-form'},{label:'👁 Preview',cls:'sfp-preview'}] },
+    { icon:'🎠', name:'Carousel', brief:'Multi-creative swipeable unit — up to 6 cards, each with image, headline, and CTA. Great for product showcases.', route:'/displayAds/adFormatSetup?type=carousel',
+      formats:[{label:'📝 Config Form',cls:'sfp-form'},{label:'👁 Preview',cls:'sfp-preview'}] },
+    { icon:'📖', name:'Story / Scratch Card / Spin Wheel', brief:'Interactive rich-media formats with gamified engagement mechanics. Requires custom creative assets.', route:'/displayAds/adFormatSetup?type=interactive',
+      formats:[{label:'📝 Config Form',cls:'sfp-form'},{label:'👁 Interactive Preview',cls:'sfp-preview'}] },
+    { icon:'🛍️', name:'Product Display', brief:'Native product carousel pulling live SKU data — up to 5 products per unit, prices and thumbnails auto-populated.', route:'/displayAds/adFormatSetup?type=product',
+      formats:[{label:'📝 Config Form',cls:'sfp-form'},{label:'📋 SKU Table',cls:'sfp-table'}] },
+    { icon:'🔧', name:'Custom Format', brief:'Upload and configure fully custom HTML5 ad unit templates. Size and behaviour defined by the creative itself.', route:'/displayAds/adFormatSetup?type=custom',
+      formats:[{label:'📤 Upload',cls:'sfp-form'},{label:'💻 Code Editor',cls:'sfp-code'}] },
+  ]},
+  'n-display-ads-3': { subFeatures: [
+    { icon:'🔨', name:'Auction Inventory', brief:'Real-time bidding slots — floor price set per slot. Highest eligible bid wins each impression in the auction.', route:'/displayAds/inventorySetup?type=auction',
+      formats:[{label:'📋 Table',cls:'sfp-table'},{label:'📝 Config Form',cls:'sfp-form'}] },
+    { icon:'🔒', name:'Guaranteed Inventory', brief:'Fixed-price pre-committed slots with flight windows and impression commitments. Used for premium placements.', route:'/displayAds/inventorySetup?type=guaranteed',
+      formats:[{label:'📋 Table',cls:'sfp-table'},{label:'📝 Booking Form',cls:'sfp-form'}] },
+    { icon:'📐', name:'Slot Configuration', brief:'Per-slot settings: creative dimensions, frequency cap, viewability threshold, and floor price overrides.', route:'/displayAds/inventorySetup?tab=slots',
+      formats:[{label:'📝 Config Form',cls:'sfp-form'}] },
+  ]},
+  'n-display-ads-4': { subFeatures: [
+    { icon:'📋', name:'Campaign List', brief:'All display campaigns with status (Active / Paused / Review / Ended), budget consumed, and flight date overview.', route:'/displayAds/campaigns',
+      formats:[{label:'📋 Table',cls:'sfp-table'},{label:'🔍 Filters',cls:'sfp-list'}] },
+    { icon:'✏️', name:'Edit Campaign', brief:'Update targeting, budget, bid, flight dates, and creative assignments for an existing campaign.', route:'/displayAds/campaigns/edit',
+      formats:[{label:'📝 Edit Form',cls:'sfp-form'}] },
+    { icon:'💰', name:'Inventory-Level Bids', brief:'Override default campaign bids per specific inventory slot — useful for premium placements that need higher CPM.', route:'/displayAds/campaigns?tab=bids',
+      formats:[{label:'📋 Bid Table',cls:'sfp-table'},{label:'📝 Inline Edit',cls:'sfp-form'}] },
+    { icon:'⚡', name:'Bulk Actions', brief:'Pause, activate, clone, or archive multiple campaigns at once. Supports CSV import for bulk bid updates.', route:'/displayAds/campaigns?tab=bulk',
+      formats:[{label:'☑ Multi-select',cls:'sfp-list'},{label:'📤 CSV Import',cls:'sfp-code'}] },
+  ]},
+  'n-display-ads-5': { subFeatures: [
+    { icon:'📥', name:'Review Queue', brief:'All creatives pending approval — sorted by submission date with reviewer assignment and SLA countdown.', route:'/displayAds/campaignReview',
+      formats:[{label:'📋 Queue Table',cls:'sfp-queue'},{label:'⏱ SLA Timer',cls:'sfp-live'}] },
+    { icon:'👁️', name:'Approval Drawer', brief:'Side drawer showing full creative preview (desktop + mobile) with one-click approve or structured reject controls.', route:'/displayAds/campaignReview?action=review',
+      formats:[{label:'👁 Side Drawer',cls:'sfp-preview'},{label:'📝 Decision Form',cls:'sfp-form'}] },
+    { icon:'📝', name:'Rejection Notes', brief:'Structured reason codes (dimension mismatch, policy violation, content quality) plus free-text feedback sent to the advertiser.', route:'/displayAds/campaignReview?tab=rejected',
+      formats:[{label:'📝 Reason Form',cls:'sfp-form'},{label:'📋 Rejected List',cls:'sfp-queue'}] },
+  ]},
+  'n-display-ads-6': { subFeatures: [
+    { icon:'🖥️', name:'cURL Generator', brief:'Copy-paste ad request commands for server-side testing. Configure slot ID, targeting params, and custom headers.', route:'/displayAds/adRequestStudio?sdk=curl',
+      formats:[{label:'💻 Code Block',cls:'sfp-code'},{label:'📋 Response Table',cls:'sfp-table'}] },
+    { icon:'🌐', name:'Web SDK', brief:'JavaScript snippet for browser-based ad request integration. Handles async loading, viewability, and click tracking.', route:'/displayAds/adRequestStudio?sdk=web',
+      formats:[{label:'💻 Code Snippet',cls:'sfp-code'}] },
+    { icon:'📱', name:'Android SDK', brief:'Native Android integration with Kotlin/Java samples. Includes ad response parsing and impression callback hooks.', route:'/displayAds/adRequestStudio?sdk=android',
+      formats:[{label:'💻 Code Snippet',cls:'sfp-code'}] },
+    { icon:'🍎', name:'iOS SDK', brief:'Swift/ObjC integration code for in-app ad requests. WKWebView and native rendering paths both supported.', route:'/displayAds/adRequestStudio?sdk=ios',
+      formats:[{label:'💻 Code Snippet',cls:'sfp-code'}] },
+  ]},
+  'n-display-ads-7': { subFeatures: [
+    { icon:'🔑', name:'Key-Value Setup', brief:'Define custom key-value pairs (e.g. page_type=home, category=electronics) used to match ads to page context.', route:'/displayAds/customTargeting?tab=keys',
+      formats:[{label:'📋 Key-Value Table',cls:'sfp-table'},{label:'📝 Add Form',cls:'sfp-form'}] },
+    { icon:'🔀', name:'Targeting Rules', brief:'Combine multiple key-value pairs with AND/OR logic into named rule sets. Rules are reusable across campaigns.', route:'/displayAds/customTargeting?tab=rules',
+      formats:[{label:'☰ Rule Builder',cls:'sfp-form'},{label:'☑ Rule List',cls:'sfp-list'}] },
+    { icon:'🧪', name:'Rule Preview', brief:'Test a targeting rule against a sample request payload to verify it fires correctly before assigning to a campaign.', route:'/displayAds/customTargeting?tab=preview',
+      formats:[{label:'💻 JSON Input',cls:'sfp-code'},{label:'✅ Match Result',cls:'sfp-chart'}] },
+  ]},
+};
+
+/* ══════════════════════════════════════════════════════════
+   DISPLAY ADS TICKET INTELLIGENCE (from Shravan CSV — 397 tickets)
+══════════════════════════════════════════════════════════ */
+const DA_TICKETS = {
+  'n-display-ads-0': {
+    total: 151, nodeName: 'Analytics', nodeIcon: '📊',
+    nodeDesc: 'Ad Server, Demand & Supply, Live Analytics',
+    nodeRoute: '/displayAds/analytics',
+    groups: [
+      { id:'g-da-0-0', label:'Campaign not responding / banner not visible', count:110, sev:'Sev 3', type:'Query', escalated:8, colorClass:'tc-red',
+        desc:'Campaigns show as active but ad responses are absent or irregular. Banner creatives are not rendering on the page.',
+        subjects:['Banner Ads Performance Issue (×5)','Banner not visible (×2)','FTA isn\'t visible (×2)','Inquiry on Ad Response for Cart Banner (×2)'],
+        solutions:[
+          {icon:'📦', title:'Check Inventory Setup', desc:'Verify auction/guaranteed inventory is configured and active for the relevant placements.', nodeKey:'n-display-ads-3', nodeName:'Inventory Setup'},
+          {icon:'⚙️', title:'Review Campaign Management', desc:'Confirm campaign status, flight dates, and budget allocation are correctly set.', nodeKey:'n-display-ads-4', nodeName:'Campaign Management'},
+          {icon:'🎨', title:'Inspect Ad Format Setup', desc:'Ensure creative dimensions and format types match the inventory slot requirements.', nodeKey:'n-display-ads-2', nodeName:'Ad Format Setup'},
+        ]
+      },
+      { id:'g-da-0-1', label:'Campaign not spending / low impressions', count:34, sev:'Sev 2', type:'Operations', escalated:4, colorClass:'tc-amber',
+        desc:'Campaigns are active but budget is not being consumed. Low impression counts reported across analytics dashboards.',
+        subjects:['Zero spend reported (×4)','Low impression count (×3)','CTR drop (×2)','SPA Query (×2)'],
+        solutions:[
+          {icon:'🏷️', title:'Review Custom Targeting rules', desc:'Over-restrictive key-value targeting can starve campaigns of eligible inventory.', nodeKey:'n-display-ads-7', nodeName:'Custom Targeting'},
+          {icon:'📋', title:'Audit Page Setup targeting', desc:'Confirm the page and its audience targeting rules are not excluding the target segments.', nodeKey:'n-display-ads-1', nodeName:'Page Setup'},
+          {icon:'🔍', title:'Check Campaign Review status', desc:'Pending creative approvals block ad serving. Ensure all creatives are approved.', nodeKey:'n-display-ads-5', nodeName:'Campaign Review'},
+        ]
+      },
+      { id:'g-da-0-2', label:'High / Low CTR anomalies', count:7, sev:'Sev 4', type:'Query', escalated:0, colorClass:'tc-blue',
+        desc:'Advertisers reporting unexpectedly high or low click-through rates that do not correlate with historical benchmarks.',
+        subjects:['CTR drop (×3)','Abnormal CTR spike (×2)','Benchmark query (×2)'],
+        solutions:[
+          {icon:'🎨', title:'Review creative quality', desc:'CTR outliers are often linked to creative mismatch. Review format setup and creative assets.', nodeKey:'n-display-ads-2', nodeName:'Ad Format Setup'},
+          {icon:'🏷️', title:'Validate targeting configuration', desc:'Broad or narrow targeting segments skew CTR. Audit custom targeting rules.', nodeKey:'n-display-ads-7', nodeName:'Custom Targeting'},
+        ]
+      },
+    ]
+  },
+  'n-display-ads-1': {
+    total: 9, nodeName: 'Page Setup', nodeIcon: '📄',
+    nodeDesc: 'Create & manage pages with targeting',
+    nodeRoute: '/displayAds/pageSetup',
+    groups: [
+      { id:'g-da-1-0', label:'Page configuration and UI issues', count:9, sev:'Sev 4', type:'Operations', escalated:1, colorClass:'tc-gray',
+        desc:'Issues creating new pages, configuring targeting parameters, or updating existing page settings.',
+        subjects:['Page creation error (×3)','Targeting toggle not saving (×2)','Page not loading (×2)','Duplicate page entries (×2)'],
+        solutions:[
+          {icon:'📦', title:'Verify Inventory Setup', desc:'Pages must have associated inventory slots. Check that slots are linked correctly.', nodeKey:'n-display-ads-3', nodeName:'Inventory Setup'},
+          {icon:'⚙️', title:'Check Global Configurations', desc:'Platform-level settings may override page-level targeting. Review in Settings.', nodeKey:'n-settings-0', nodeName:'Global Configurations'},
+        ]
+      },
+    ]
+  },
+  'n-display-ads-2': {
+    total: 12, nodeName: 'Ad Format Setup', nodeIcon: '🎨',
+    nodeDesc: 'Banner, Video, Carousel, Story (8 types)',
+    nodeRoute: '/displayAds/adFormatSetup',
+    groups: [
+      { id:'g-da-2-0', label:'Creative upload and format errors', count:12, sev:'Sev 3', type:'Operations', escalated:2, colorClass:'tc-amber',
+        desc:'Creatives fail to upload or render correctly. Dimension mismatches and unsupported formats are the most common causes.',
+        subjects:['Creative upload failing (×5)','Dimension mismatch error (×3)','Video format not supported (×2)','Preview not rendering (×2)'],
+        solutions:[
+          {icon:'📋', title:'Validate inventory slot dimensions', desc:'Confirm creative dimensions match the target inventory slot size in Inventory Setup.', nodeKey:'n-display-ads-3', nodeName:'Inventory Setup'},
+          {icon:'🔍', title:'Review campaign creative approval', desc:'Uploaded creatives require approval before they serve. Check Campaign Review status.', nodeKey:'n-display-ads-5', nodeName:'Campaign Review'},
+        ]
+      },
+    ]
+  },
+  'n-display-ads-3': {
+    total: 10, nodeName: 'Inventory Setup', nodeIcon: '📦',
+    nodeDesc: 'Auction & Guaranteed inventory',
+    nodeRoute: '/displayAds/inventorySetup',
+    groups: [
+      { id:'g-da-3-0', label:'Delete / modify inventory slots', count:8, sev:'Sev 4', type:'Operations', escalated:1, colorClass:'tc-gray',
+        desc:'Requests to delete or restructure existing inventory slots. Some slots are locked due to active campaign associations.',
+        subjects:['Cannot delete inventory slot (×4)','Slot update not reflecting (×2)','Inventory not visible in campaign (×2)'],
+        solutions:[
+          {icon:'⚙️', title:'Pause linked campaigns first', desc:'Active campaigns lock inventory slots. Pause or end linked campaigns before modifying slots.', nodeKey:'n-display-ads-4', nodeName:'Campaign Management'},
+          {icon:'📄', title:'Check Page Setup association', desc:'Slots tied to pages may need page-level changes before slot deletion is possible.', nodeKey:'n-display-ads-1', nodeName:'Page Setup'},
+        ]
+      },
+      { id:'g-da-3-1', label:'Attribution setup queries', count:2, sev:'Sev 4', type:'Query', escalated:0, colorClass:'tc-blue',
+        desc:'Questions about how attributed conversions are counted for guaranteed vs auction inventory.',
+        subjects:['Attribution window query (×1)','Guaranteed vs auction attribution (×1)'],
+        solutions:[
+          {icon:'🛡️', title:'Review Advertiser Settings', desc:'Attribution overrides are managed per-advertiser in Control Center → Advertiser Settings.', nodeKey:'n-control-4', nodeName:'Advertiser Settings'},
+        ]
+      },
+    ]
+  },
+  'n-display-ads-4': {
+    total: 165, nodeName: 'Campaign Management', nodeIcon: '⚙️',
+    nodeDesc: 'Update campaigns & inventory-level bids',
+    nodeRoute: '/displayAds/campaigns',
+    groups: [
+      { id:'g-da-4-0', label:'Unable to edit or update campaigns', count:11, sev:'Sev 3', type:'Operations', escalated:3, colorClass:'tc-amber',
+        desc:'Campaign edit actions are greyed out or fail to save. Often caused by pending review status or permission restrictions.',
+        subjects:['Campaign edit issue (×3)','Bid update not reflecting (×2)','Campaign not activating (×2)','Budget update issue (×2)','Edit locked message (×2)'],
+        solutions:[
+          {icon:'🔍', title:'Check Campaign Review status', desc:'Campaigns in "Under Review" state are locked for editing. Resolve review items first.', nodeKey:'n-display-ads-5', nodeName:'Campaign Review'},
+          {icon:'🛡️', title:'Verify user permissions', desc:'Only Ops and Admin roles can edit campaign bids. Check user access level in UAM.', nodeKey:'n-control-1', nodeName:'User Access Management'},
+        ]
+      },
+      { id:'g-da-4-1', label:'Targeting configuration issues', count:18, sev:'Sev 3', type:'Query', escalated:2, colorClass:'tc-amber',
+        desc:'Campaigns not reaching intended audiences. Targeting rules may conflict with page-level or custom targeting settings.',
+        subjects:['Targeting not working (×6)','Audience not matching (×4)','Segment configuration query (×4)','Geo-targeting issue (×4)'],
+        solutions:[
+          {icon:'🏷️', title:'Review Custom Targeting setup', desc:'Key-value pairs must match exactly. Check for typos or mismatched values in targeting rules.', nodeKey:'n-display-ads-7', nodeName:'Custom Targeting'},
+          {icon:'📄', title:'Audit Page Setup targeting', desc:'Page-level targeting overrides campaign targeting in some configurations.', nodeKey:'n-display-ads-1', nodeName:'Page Setup'},
+          {icon:'🛡️', title:'Check Persona / Segment config', desc:'Persona tiers can restrict targeting reach. Review in Control Center → Persona Management.', nodeKey:'n-control-3', nodeName:'Persona Management'},
+        ]
+      },
+      { id:'g-da-4-2', label:'Campaign review and approval delays', count:19, sev:'Sev 2', type:'Operations', escalated:4, colorClass:'tc-red',
+        desc:'Creative approval is taking longer than expected or campaigns are stuck in review queue.',
+        subjects:['Campaign stuck in review (×8)','Approval SLA breach (×5)','Review rejection without reason (×4)','Re-submission loop (×2)'],
+        solutions:[
+          {icon:'🔍', title:'Open Campaign Review drawer', desc:'Check the review queue status and any rejection notes in the Campaign Review section.', nodeKey:'n-display-ads-5', nodeName:'Campaign Review'},
+          {icon:'🎨', title:'Verify creative specifications', desc:'Rejected creatives often fail dimension or content policy checks. Review Ad Format Setup guidelines.', nodeKey:'n-display-ads-2', nodeName:'Ad Format Setup'},
+        ]
+      },
+      { id:'g-da-4-3', label:'Other campaign management issues', count:117, sev:'Sev 4', type:'Query', escalated:3, colorClass:'tc-gray',
+        desc:'Miscellaneous campaign management queries including scheduling, budget pacing, and general operational requests.',
+        subjects:['Budget pacing query (×12)','Schedule not triggering (×8)','Campaign cloning issue (×6)','General operations query (×91)'],
+        solutions:[
+          {icon:'📊', title:'Check Analytics dashboard', desc:'Analytics → Live Analytics shows real-time campaign pacing and performance indicators.', nodeKey:'n-display-ads-0', nodeName:'Analytics'},
+          {icon:'🔧', title:'Use Ad Request Studio for debugging', desc:'For API/integration-level issues, use Ad Request Studio to test request/response behaviour.', nodeKey:'n-display-ads-6', nodeName:'Ad Request Studio'},
+        ]
+      },
+    ]
+  },
+  'n-display-ads-5': {
+    total: 19, nodeName: 'Campaign Review', nodeIcon: '🔍',
+    nodeDesc: 'Creative & approval drawer workflow',
+    nodeRoute: '/displayAds/campaignReview',
+    groups: [
+      { id:'g-da-5-0', label:'Campaign review workflow issues', count:19, sev:'Sev 3', type:'Operations', escalated:3, colorClass:'tc-amber',
+        desc:'Issues with the creative review and approval process. Campaigns stuck in review or rejected without clear guidance.',
+        subjects:['Campaign stuck in review (×8)','Rejection without reason (×5)','Re-submission loop (×4)','SLA breach (×2)'],
+        solutions:[
+          {icon:'🎨', title:'Verify creative specifications', desc:'Check creative dimensions and content match the Ad Format Setup requirements for this placement.', nodeKey:'n-display-ads-2', nodeName:'Ad Format Setup'},
+          {icon:'⚙️', title:'Check campaign configuration', desc:'Misconfigured campaign settings (flight dates, budget) can block review approval.', nodeKey:'n-display-ads-4', nodeName:'Campaign Management'},
+        ]
+      },
+    ]
+  },
+  'n-display-ads-6': {
+    total: 3, nodeName: 'Ad Request Studio', nodeIcon: '🔧',
+    nodeDesc: 'Code gen: Curl, Web, Android, iOS (Beta)',
+    nodeRoute: '/displayAds/adRequestStudio',
+    groups: [
+      { id:'g-da-6-0', label:'API and integration queries', count:3, sev:'Sev 4', type:'Query', escalated:0, colorClass:'tc-blue',
+        desc:'Developer queries about ad request formatting, SDK integration, and response parsing for Display Ads.',
+        subjects:['Curl request format (×1)','Android SDK integration (×1)','Ad response parsing (×1)'],
+        solutions:[
+          {icon:'⚙️', title:'Check Developer Settings', desc:'API keys, event debugging, and PLA ad-server credentials are managed in Settings → Developer Settings.', nodeKey:'n-settings-4', nodeName:'Developer Settings'},
+          {icon:'📊', title:'Monitor via Analytics', desc:'Ad Request Studio → test then verify responses appear in Analytics → Ad Server dashboard.', nodeKey:'n-display-ads-0', nodeName:'Analytics'},
+        ]
+      },
+    ]
+  },
+  'n-display-ads-7': {
+    total: 24, nodeName: 'Custom Targeting', nodeIcon: '🏷️',
+    nodeDesc: 'Key-value pairs & targeting rules',
+    nodeRoute: '/displayAds/customTargeting',
+    groups: [
+      { id:'g-da-7-0', label:'Targeting rules not working as expected', count:18, sev:'Sev 3', type:'Operations', escalated:2, colorClass:'tc-amber',
+        desc:'Key-value targeting rules are configured but campaigns are not matching the intended audience segments.',
+        subjects:['Key-value not matching (×6)','Targeting rule ignored (×5)','Audience too small (×4)','Rule conflict (×3)'],
+        solutions:[
+          {icon:'⚙️', title:'Verify in Campaign Management', desc:'Confirm the campaign has custom targeting enabled and the correct rule set is assigned.', nodeKey:'n-display-ads-4', nodeName:'Campaign Management'},
+          {icon:'📄', title:'Check Page Setup targeting', desc:'Page-level targeting must be compatible with custom targeting rules — conflicts cause silent failures.', nodeKey:'n-display-ads-1', nodeName:'Page Setup'},
+          {icon:'🔧', title:'Test with Ad Request Studio', desc:'Use Ad Request Studio to send targeted requests and verify the targeting rules fire correctly.', nodeKey:'n-display-ads-6', nodeName:'Ad Request Studio'},
+        ]
+      },
+      { id:'g-da-7-1', label:'Keyword targeting configuration', count:6, sev:'Sev 4', type:'Query', escalated:0, colorClass:'tc-blue',
+        desc:'Queries about setting up keyword-based targeting and how it interacts with inventory-level bid customisation.',
+        subjects:['Keyword targeting setup (×3)','Keyword vs key-value difference (×2)','Bulk keyword import (×1)'],
+        solutions:[
+          {icon:'⚙️', title:'Review Campaign Management bids', desc:'Inventory-level bid customisation for keyword targeting is managed in Campaign Management.', nodeKey:'n-display-ads-4', nodeName:'Campaign Management'},
+        ]
+      },
+    ]
+  },
+};
+
+/* ══════════════════════════════════════════════════════════
    IA MODULE DATA
 ══════════════════════════════════════════════════════════ */
 const MODULES = [
@@ -774,7 +1137,13 @@ function buildModules(){
         <span class="mh-icon">${m.icon}</span>
         <div class="mh-label">${m.label}</div>
         <div class="mh-sub">${m.sub}</div>
-        <span class="mh-badge">${m.badge}</span>
+        ${m.id === 'display-ads'
+          ? `<span class="mh-badge" style="display:none">${m.badge}</span>
+             <span class="mh-badge" id="mhb-da-badge" style="display:inline-flex;align-items:center;gap:0">
+               ${m.badge}&nbsp;<span class="da-live-badge"><span class="da-live-dot"></span>LIVE</span>
+             </span>`
+          : `<span class="mh-badge">${m.badge}</span>`
+        }
         <span class="mh-heat-badge" id="mhb-${m.id}">
           ${mTotal ? `🔥 ${mTotal.toLocaleString()} tickets` : m.badge}
         </span>
@@ -793,6 +1162,7 @@ function buildModules(){
                data-nodekey="${nkey}"
                onclick="onNodeClick('${nkey}')">
             ${nTotal ? `<span class="cn-ticket-badge">🎫 ${nTotal}</span>` : ''}
+            ${(m.id === 'display-ads' && DA_TICKETS[nkey]) ? `<span class="nudge-dot"></span>` : ''}
             <div class="cn-lbl">${n.l}</div>
             ${n.d?`<div class="cn-desc">${n.d}</div>`:''}
             ${n.r?`<div class="cn-route">${n.r}</div>`:''}
@@ -845,9 +1215,189 @@ function togglePainPoints(){
 }
 
 /* ══════════════════════════════════════════════════════════
+   DISPLAY ADS DRAWER (L1 → L2 → L3 progressive)
+══════════════════════════════════════════════════════════ */
+let drawerStack = []; // each entry: { layer:'L1'|'L2'|'L3', nodeKey, groupId }
+let drawerCurrentNode = null;
+
+function setDrawerNav(breadcrumb){
+  const backEl = document.getElementById('sp-back');
+  const bcEl = document.getElementById('sp-breadcrumb');
+  bcEl.textContent = breadcrumb || '';
+  if(drawerStack.length > 0){
+    backEl.classList.add('visible');
+  } else {
+    backEl.classList.remove('visible');
+  }
+}
+
+function openNodeDrawer(nkey){
+  const da = DA_TICKETS[nkey];
+  if(!da) return;
+  drawerStack = [];
+  drawerCurrentNode = nkey;
+
+  const m = MODULES.find(x=>x.id==='display-ads');
+
+  // Populate header (simplified for DA drawer)
+  document.getElementById('sp-module').textContent = `${m.icon} ${m.label}`;
+  document.getElementById('sp-title').textContent = da.nodeName;
+  document.getElementById('sp-count').style.display = 'none';
+  document.getElementById('sp-meta').innerHTML = '';
+  // Hide old total line
+  document.querySelector('#sidePanel .sp-total').style.display = 'none';
+
+  setDrawerNav('OSMOS  ›  Display Ads  ›  ' + da.nodeName);
+
+  // Build sub-features section
+  const detail = DA_NODE_DETAIL[nkey];
+  const sfHTML = detail && detail.subFeatures.length ? `
+    <div class="sf-heading">📂 What's inside</div>
+    ${detail.subFeatures.map(sf=>`
+      <div class="sf-card">
+        <span class="sf-icon">${sf.icon}</span>
+        <div class="sf-body">
+          <div class="sf-name">${sf.name}</div>
+          <div class="sf-brief">${sf.brief}</div>
+          ${sf.formats && sf.formats.length ? `<div class="sf-format-row">${sf.formats.map(f=>`<span class="sf-format-pill ${f.cls}">${f.label}</span>`).join('')}</div>` : ''}
+          <span class="sf-route">${sf.route}</span>
+        </div>
+      </div>`).join('')}
+  ` : '';
+
+  // L1 body
+  document.getElementById('sp-body').innerHTML = `
+    <div style="padding:4px 0 12px">
+      <div class="nd-icon">${da.nodeIcon}</div>
+      <div class="nd-name">${da.nodeName}</div>
+      <div class="nd-desc">${da.nodeDesc}</div>
+      <div class="nd-route">${da.nodeRoute}</div>
+    </div>
+    ${sfHTML}
+    <div class="nudge-card" onclick="openTicketList('${nkey}')">
+      <span class="nudge-card-icon">⚠️</span>
+      <div class="nudge-card-text">
+        <div class="nudge-card-label">${da.total} issues reported here</div>
+        <div class="nudge-card-sub">See what users encountered →</div>
+      </div>
+      <span class="nudge-card-arrow">›</span>
+    </div>
+  `;
+
+  document.getElementById('sidePanel').classList.add('open');
+  document.getElementById('panelOverlay').classList.add('on');
+}
+
+function openTicketList(nkey){
+  const da = DA_TICKETS[nkey];
+  if(!da) return;
+
+  drawerStack.push({ layer:'L1', nodeKey:nkey });
+  drawerCurrentNode = nkey;
+  setDrawerNav('OSMOS  ›  Display Ads  ›  ' + da.nodeName + '  ›  Issues');
+
+  document.getElementById('sp-module').textContent = `🖼️ Display Ads`;
+  document.getElementById('sp-title').textContent = da.nodeName;
+
+  const groupCards = da.groups.map(g=>`
+    <div class="ticket-card" onclick="openTicketDetail('${g.id}','${nkey}')">
+      <div class="ticket-color-bar ${g.colorClass}"></div>
+      <div class="ticket-card-body">
+        <div class="ticket-card-label">${g.label}</div>
+        <div class="ticket-card-meta">
+          <span class="tc-count">${g.count} tickets</span>
+          <span class="tc-type">${g.type}</span>
+          ${g.escalated ? `<span class="tc-escalated">🚨 ${g.escalated} escalated</span>` : ''}
+        </div>
+      </div>
+      <span class="ticket-card-arrow">›</span>
+    </div>`).join('');
+
+  document.getElementById('sp-body').innerHTML = `
+    <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:12px">
+      ${da.total} issues in <strong>${da.nodeName}</strong>
+    </div>
+    ${groupCards}
+  `;
+}
+
+function openTicketDetail(groupId, nkey){
+  const da = DA_TICKETS[nkey];
+  if(!da) return;
+  const group = da.groups.find(g=>g.id===groupId);
+  if(!group) return;
+
+  drawerStack.push({ layer:'L2', nodeKey:nkey });
+  setDrawerNav('OSMOS  ›  Display Ads  ›  ' + da.nodeName + '  ›  Issues  ›  Detail');
+
+  const colorMap = { 'tc-red':'#EF4444','tc-amber':'#F59E0B','tc-blue':'#3B82F6','tc-gray':'#9CA3AF' };
+  const headerColor = colorMap[group.colorClass] || '#9CA3AF';
+
+  const suggestions = group.solutions.map(s=>`
+    <div class="suggestion-card" onclick="navigateToNode('${s.nodeKey}')">
+      <span class="sc-icon">${s.icon}</span>
+      <div class="sc-body">
+        <div class="sc-title">${s.title}</div>
+        <div class="sc-desc">${s.desc}</div>
+        <span class="sc-goto">→ Go to ${s.nodeName}</span>
+      </div>
+    </div>`).join('');
+
+  const subjectItems = group.subjects.map(s=>`<div class="td-subject-item">• ${s}</div>`).join('');
+
+  document.getElementById('sp-body').innerHTML = `
+    <div class="td-header" style="background:${headerColor}">
+      <div class="td-header-label">${group.label}</div>
+      <div class="td-header-meta">
+        <span class="td-pill">${group.count} tickets</span>
+        <span class="td-pill">${group.type}</span>
+        <span class="td-pill">${group.sev}</span>
+        ${group.escalated ? `<span class="td-pill">🚨 ${group.escalated} escalated</span>` : ''}
+      </div>
+    </div>
+    <div class="td-desc">${group.desc}</div>
+    <div class="td-subjects-heading">Top reported subjects</div>
+    ${subjectItems}
+    <div class="suggestions-heading">💡 AI Suggestions</div>
+    ${suggestions}
+  `;
+}
+
+function navigateToNode(nodeKey){
+  closePanel();
+  const el = document.getElementById(nodeKey);
+  if(!el) return;
+  // Small delay so panel closes before scroll
+  setTimeout(()=>{
+    el.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
+    el.classList.add('nav-highlight');
+    setTimeout(()=>el.classList.remove('nav-highlight'), 2200);
+  }, 320);
+}
+
+function drawerBack(){
+  const prev = drawerStack.pop();
+  if(!prev) return closePanel();
+  // prev.layer is where we came FROM, so we go back to the layer before it
+  if(prev.layer === 'L1'){
+    // Was at L2 (ticket list), go back to L1 (node info)
+    drawerStack = [];
+    openNodeDrawer(prev.nodeKey);
+  } else if(prev.layer === 'L2'){
+    // Was at L3 (ticket detail), go back to L2 (ticket list)
+    openTicketList(prev.nodeKey);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
    SIDE PANEL
 ══════════════════════════════════════════════════════════ */
 function onNodeClick(nkey){
+  // Display Ads nodes with DA ticket data → 3-layer drawer (unless pain mode)
+  if(nkey.startsWith('n-display-ads-') && DA_TICKETS[nkey] && !painMode){
+    openNodeDrawer(nkey);
+    return;
+  }
   const nHit = TICKET_DATA.nodeHits[nkey];
   if(!nHit) return;
   openPanel(nkey, nHit);
@@ -921,6 +1471,10 @@ function openPanel(nkey, nh){
 function closePanel(){
   document.getElementById('sidePanel').classList.remove('open');
   document.getElementById('panelOverlay').classList.remove('on');
+  drawerStack = [];
+  drawerCurrentNode = null;
+  // Restore sp-total visibility for the standard pain-mode panel
+  document.querySelector('#sidePanel .sp-total').style.display = '';
 }
 
 /* ══════════════════════════════════════════════════════════
