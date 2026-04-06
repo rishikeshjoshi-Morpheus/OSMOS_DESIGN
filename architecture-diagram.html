@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSMOS — Information Architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#5B4FE9;
+  --bg:#EEEDF8;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.10),0 2px 6px rgba(0,0,0,0.06);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.14),0 4px 14px rgba(0,0,0,0.08);
+  --radius:14px;--radius-sm:9px;--line:#D1D5DB;
+}
+html,body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);min-height:100vh;
+  background-image:radial-gradient(circle,rgba(91,79,233,0.08) 1px,transparent 1px);
+  background-size:28px 28px;background-attachment:fixed;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:sticky;top:0;z-index:300;
+  background:rgba(255,255,255,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(91,79,233,0.10);
+  padding:11px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  box-shadow:0 2px 20px rgba(91,79,233,0.07);
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand-logo{
+  width:36px;height:36px;background:linear-gradient(135deg,#5B4FE9,#A78BFA);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:900;color:#fff;letter-spacing:-1px;
+  box-shadow:0 3px 10px rgba(91,79,233,0.28);flex-shrink:0;
+}
+.brand-name{font-size:15px;font-weight:800;color:#1A1A2E;letter-spacing:-0.3px}
+.brand-sub{font-size:10px;color:#9CA3AF;font-weight:500;margin-top:1px}
+.div{width:1px;height:26px;background:#E5E7EB;flex-shrink:0}
+.search-wrap{
+  flex:1;max-width:380px;min-width:160px;
+  display:flex;align-items:center;gap:8px;
+  background:#F3F4F6;border:1.5px solid transparent;
+  border-radius:50px;padding:8px 16px;transition:all 0.2s;
+}
+.search-wrap:focus-within{background:#fff;border-color:var(--purple);box-shadow:0 0 0 3px rgba(91,79,233,0.12)}
+.si{font-size:13px;color:#9CA3AF;flex-shrink:0}
+#searchInput{background:transparent;border:none;outline:none;font-size:13px;color:#1A1A2E;width:100%;font-family:inherit}
+#searchInput::placeholder{color:#9CA3AF}
+#searchCount{font-size:11px;font-weight:700;color:var(--purple);white-space:nowrap;min-width:52px;text-align:right}
+.clr{
+  display:none;align-items:center;justify-content:center;
+  width:17px;height:17px;background:#D1D5DB;border-radius:50%;
+  border:none;cursor:pointer;font-size:9px;color:#374151;flex-shrink:0;transition:background 0.15s;
+}
+.clr:hover{background:#9CA3AF;color:#fff}.clr.on{display:flex}
+
+/* Pain Points toggle */
+.pp-toggle{
+  display:flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:50px;
+  border:1.5px solid #E5E7EB;background:#F9FAFB;
+  cursor:pointer;font-size:12px;font-weight:700;color:#374151;
+  transition:all 0.2s;white-space:nowrap;flex-shrink:0;
+}
+.pp-toggle:hover{border-color:#FB923C;background:#FFF7ED;color:#C2410C}
+.pp-toggle.active{border-color:#FB923C;background:#FFF7ED;color:#C2410C;box-shadow:0 0 0 3px rgba(251,146,60,0.15)}
+.pp-dot{width:8px;height:8px;border-radius:50%;background:#D1D5DB;transition:background 0.2s}
+.pp-toggle.active .pp-dot{background:#EF4444}
+.pp-total{
+  font-size:10px;font-weight:800;
+  background:rgba(239,68,68,0.12);color:#DC2626;
+  padding:1px 7px;border-radius:20px;margin-left:2px;
+}
+
+.legend{display:flex;flex-wrap:wrap;gap:5px;margin-left:auto}
+.lp{
+  display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:#374151;
+  padding:3px 9px;background:#F9FAFB;border-radius:20px;border:1px solid #E5E7EB;
+  cursor:pointer;transition:all 0.15s;user-select:none;
+}
+.lp:hover{background:#EDE9FE;border-color:var(--purple)}
+.ld{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ── HEAT LEGEND BAR ── */
+.heat-bar{
+  display:none;
+  background:#FFF7ED;border-bottom:1px solid #FED7AA;
+  padding:7px 24px;
+  align-items:center;gap:20px;flex-wrap:wrap;
+  font-size:11px;font-weight:600;
+}
+.heat-bar.visible{display:flex}
+.heat-bar-label{color:#92400E;font-size:10.5px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase}
+.heat-items{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.heat-item{display:flex;align-items:center;gap:5px;color:#6B7280}
+.heat-swatch{width:12px;height:12px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)}
+.heat-bar-right{margin-left:auto;color:#9CA3AF;font-size:10px}
+.heat-bar-right strong{color:#374151}
+
+/* ── ROOT SECTION ── */
+.root-section{display:flex;flex-direction:column;align-items:center;padding:36px 24px 0;position:relative;z-index:10}
+.root-node{
+  display:inline-flex;align-items:center;gap:16px;
+  background:linear-gradient(135deg,#5B4FE9 0%,#7C6FF7 55%,#A78BFA 100%);
+  color:#fff;padding:18px 36px;border-radius:22px;
+  box-shadow:0 12px 40px rgba(91,79,233,0.32),0 4px 12px rgba(91,79,233,0.18);
+  position:relative;z-index:2;
+}
+.root-icon{font-size:30px;line-height:1}
+.root-text h2{font-size:21px;font-weight:900;letter-spacing:-0.5px;line-height:1}
+.root-text p{font-size:11.5px;opacity:0.75;margin-top:4px}
+.root-ver{font-size:10px;font-weight:700;background:rgba(255,255,255,0.20);padding:4px 12px;border-radius:20px;margin-left:8px}
+.trunk{width:2px;height:36px;background:linear-gradient(#8B7CF8,#D1D5DB);margin:0 auto;position:relative;z-index:1}
+
+/* ── MODULES ── */
+.modules-area{overflow-x:auto;overflow-y:visible;padding:0 32px 80px;position:relative}
+.modules-area::-webkit-scrollbar{height:5px}
+.modules-area::-webkit-scrollbar-track{background:transparent}
+.modules-area::-webkit-scrollbar-thumb{background:rgba(91,79,233,0.25);border-radius:10px}
+.modules-area::-webkit-scrollbar-thumb:hover{background:rgba(91,79,233,0.45)}
+.modules-inner{min-width:max-content;position:relative}
+.branch{height:2px;background:var(--line);margin:0 104px;position:relative;z-index:0}
+.modules-row{display:flex;gap:16px;align-items:flex-start;position:relative;z-index:2;padding-top:0}
+
+/* ── MODULE COLUMN ── */
+.module-col{flex:0 0 auto;width:210px;display:flex;flex-direction:column;align-items:stretch;transition:opacity 0.25s;position:relative}
+.module-col.dimmed{opacity:0.18;pointer-events:none}
+.drop{width:2px;height:24px;margin:0 auto;position:relative;z-index:1}
+
+/* ── MODULE HEADER ── */
+.mh{
+  border-radius:var(--radius);padding:14px 14px 13px;color:#fff;position:relative;
+  box-shadow:var(--shadow-md);transition:transform 0.18s,box-shadow 0.18s;
+  cursor:default;border:2.5px solid transparent;overflow:hidden;
+}
+.mh::after{content:'';position:absolute;bottom:-20px;right:-20px;width:70px;height:70px;background:rgba(255,255,255,0.10);border-radius:50%;pointer-events:none}
+.mh:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.mh.highlighted{border-color:#FBBF24 !important;box-shadow:0 0 0 3px rgba(251,191,36,0.28),var(--shadow-md)}
+/* pain points heat border */
+.mh.heat-low{border-color:#FCD34D !important}
+.mh.heat-med{border-color:#FB923C !important}
+.mh.heat-high{border-color:#EF4444 !important;animation:heat-pulse 2s ease infinite}
+@keyframes heat-pulse{0%,100%{box-shadow:0 0 0 3px rgba(239,68,68,0.15),var(--shadow-md)}50%{box-shadow:0 0 0 5px rgba(239,68,68,0.25),var(--shadow-lg)}}
+.mh-icon{font-size:22px;margin-bottom:7px;display:block;line-height:1}
+.mh-label{font-size:12.5px;font-weight:800;letter-spacing:-0.2px;line-height:1.2}
+.mh-sub{font-size:9.5px;opacity:0.78;margin-top:3px;font-weight:400;line-height:1.35}
+/* module ticket badge */
+.mh-badge{position:absolute;top:10px;right:10px;font-size:8.5px;font-weight:700;background:rgba(255,255,255,0.22);padding:2px 8px;border-radius:20px;letter-spacing:0.3px}
+.mh-heat-badge{
+  display:none;position:absolute;top:10px;right:10px;
+  font-size:9px;font-weight:800;
+  padding:3px 9px;border-radius:20px;letter-spacing:0.3px;
+  white-space:nowrap;
+}
+.heat-low .mh-heat-badge{background:#FEF9C3;color:#92400E;display:block}
+.heat-med .mh-heat-badge{background:#FEF3C7;color:#B45309;display:block}
+.heat-high .mh-heat-badge{background:#FEE2E2;color:#B91C1C;display:block}
+body.pain-mode .mh-badge{display:none}
+body.pain-mode [class*='heat-'] .mh-heat-badge{display:block}
+
+/* ── CHILDREN ── */
+.children-top{width:2px;height:14px;margin:0 auto}
+.mc{padding-left:14px;border-left:2px solid var(--mc,#D1D5DB);margin-left:8px;display:flex;flex-direction:column;gap:5px;position:relative}
+
+/* ── CHILD NODE ── */
+.cn{
+  background:#fff;border-radius:var(--radius-sm);
+  padding:9px 11px 9px 13px;box-shadow:var(--shadow-sm);
+  cursor:pointer;transition:transform 0.15s,box-shadow 0.15s,background 0.15s,opacity 0.25s;
+  border:1.5px solid #F0F0F8;position:relative;
+}
+.cn::before{content:'';position:absolute;left:-14px;top:50%;width:14px;height:1.5px;background:var(--mc,#D1D5DB);opacity:0.7}
+.cn:hover{transform:translateX(2px);box-shadow:var(--shadow-md)}
+.cn.highlighted{background:#FFFBEB !important;border-color:#FBBF24 !important;box-shadow:0 0 0 2px rgba(251,191,36,0.22),var(--shadow-sm)}
+.cn.dimmed{opacity:0.22}
+/* heat tiers */
+.cn.ch-1{background:#FFFBEB;border-color:#FDE68A}
+.cn.ch-2{background:#FEF3C7;border-color:#FCD34D}
+.cn.ch-3{background:#FEE2E2;border-color:#FECACA;cursor:pointer}
+.cn:hover.ch-3{box-shadow:0 0 0 2px rgba(239,68,68,0.18),var(--shadow-md)}
+.cn-lbl{font-size:12px;font-weight:700;color:#1A1A2E;line-height:1.25}
+.cn-desc{font-size:10px;color:#6B7280;margin-top:2px;line-height:1.4}
+.cn-route{font-size:9px;font-weight:600;color:#A78BFA;margin-top:5px;font-family:'SF Mono','Fira Code','Courier New',monospace}
+/* last-task tag */
+.cn-dropoff{
+  display:none;
+  font-size:9px;font-weight:700;
+  margin-top:6px;
+  padding:3px 8px;border-radius:6px;
+  background:rgba(239,68,68,0.08);color:#B91C1C;
+  border:1px solid rgba(239,68,68,0.18);
+  line-height:1.3;
+}
+body.pain-mode .cn.ch-1 .cn-dropoff,
+body.pain-mode .cn.ch-2 .cn-dropoff,
+body.pain-mode .cn.ch-3 .cn-dropoff{display:block}
+/* ticket count badge on node */
+.cn-ticket-badge{
+  display:none;
+  position:absolute;top:8px;right:8px;
+  font-size:8.5px;font-weight:800;
+  padding:2px 7px;border-radius:20px;
+  background:#FEE2E2;color:#B91C1C;
+  border:1px solid #FECACA;
+  white-space:nowrap;
+}
+body.pain-mode .cn.ch-1 .cn-ticket-badge{display:block;background:#FEF9C3;color:#92400E;border-color:#FDE68A}
+body.pain-mode .cn.ch-2 .cn-ticket-badge{display:block;background:#FEF3C7;color:#B45309;border-color:#FCD34D}
+body.pain-mode .cn.ch-3 .cn-ticket-badge{display:block;background:#FEE2E2;color:#B91C1C;border-color:#FECACA}
+
+/* ── SIDE PANEL ── */
+.side-panel{
+  position:fixed;top:0;right:-420px;width:380px;height:100vh;
+  background:#fff;z-index:500;
+  box-shadow:-4px 0 40px rgba(0,0,0,0.12);
+  transition:right 0.3s cubic-bezier(0.4,0,0.2,1);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.side-panel.open{right:0}
+.sp-header{
+  padding:20px 20px 16px;
+  border-bottom:1px solid #F3F4F6;
+  background:linear-gradient(135deg,#F9FAFB,#F3F4F6);
+  flex-shrink:0;
+}
+.sp-close{
+  float:right;width:28px;height:28px;border-radius:50%;
+  border:none;background:#E5E7EB;cursor:pointer;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.15s;
+}
+.sp-close:hover{background:#D1D5DB}
+.sp-module{font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.sp-title{font-size:17px;font-weight:900;color:#1A1A2E;letter-spacing:-0.3px;line-height:1.2}
+.sp-total{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:10px;
+  font-size:22px;font-weight:900;color:#1A1A2E;
+}
+.sp-total-label{font-size:11px;font-weight:500;color:#6B7280;margin-top:2px}
+.sp-meta{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap}
+.sp-meta-item{font-size:10.5px;color:#6B7280}
+.sp-meta-item strong{color:#1A1A2E;font-weight:700}
+
+.sp-body{flex:1;overflow-y:auto;padding:16px 20px 32px}
+.sp-body::-webkit-scrollbar{width:4px}
+.sp-body::-webkit-scrollbar-thumb{background:#E5E7EB;border-radius:4px}
+
+.sp-section{margin-bottom:20px}
+.sp-section-title{font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px}
+
+/* Breakdown bars */
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.bar-label{font-size:11.5px;font-weight:600;color:#374151;width:90px;flex-shrink:0}
+.bar-track{flex:1;height:7px;background:#F3F4F6;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width 0.4s ease}
+.bar-count{font-size:11px;font-weight:700;color:#374151;width:28px;text-align:right;flex-shrink:0}
+
+/* Type colours */
+.bar-Bug{background:#EF4444}.bar-Operations{background:#8B5CF6}.bar-Query{background:#3B82F6}
+.bar-Data{background:#10B981}.bar-Feature{background:#F59E0B}.bar-other{background:#D1D5DB}
+
+/* Top subjects list */
+.subj-item{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:8px;
+  padding:6px 0;border-bottom:1px solid #F9FAFB;
+  font-size:11px;color:#374151;line-height:1.4;
+}
+.subj-item:last-child{border-bottom:none}
+.subj-count{
+  flex-shrink:0;font-size:10px;font-weight:800;
+  background:#F3F4F6;color:#374151;padding:1px 7px;border-radius:20px;white-space:nowrap;
+}
+
+/* Last task card */
+.last-task-card{
+  background:linear-gradient(135deg,#FFF7ED,#FEF3C7);
+  border:1px solid #FDE68A;border-radius:10px;
+  padding:12px 14px;
+}
+.last-task-label{font-size:9px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.last-task-val{font-size:13px;font-weight:800;color:#78350F;line-height:1.3}
+.last-task-hint{font-size:10px;color:#B45309;margin-top:4px;line-height:1.4}
+
+/* Severity indicator */
+.severity-row{display:flex;align-items:center;gap:10px;margin-top:8px}
+.sev-pill{
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.sev-high{background:#FEE2E2;color:#B91C1C;border:1px solid #FECACA}
+.sev-med{background:#FEF3C7;color:#B45309;border:1px solid #FDE68A}
+.sev-low{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
+.sev-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* Panel overlay */
+.panel-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.15);z-index:499;
+  backdrop-filter:blur(2px);transition:opacity 0.2s;
+}
+.panel-overlay.on{display:block}
+
+/* ── HIGHLIGHT ANIMATION ── */
+@keyframes hpulse{0%{box-shadow:0 0 0 0 rgba(251,191,36,0.5)}70%{box-shadow:0 0 0 10px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
+.highlighted{animation:hpulse 0.6s ease}
+
+/* empty state */
+.empty{display:none;text-align:center;padding:60px 24px;color:#9CA3AF;font-size:14px;font-weight:500}
+.empty span{font-size:36px;display:block;margin-bottom:10px}
+
+/* scroll hint */
+.hint{position:fixed;bottom:20px;right:20px;background:rgba(91,79,233,0.88);color:#fff;font-size:11px;font-weight:600;padding:8px 16px;border-radius:20px;box-shadow:0 4px 16px rgba(91,79,233,0.28);pointer-events:none;opacity:1;transition:opacity 0.6s;display:flex;align-items:center;gap:6px}
+.hint.gone{opacity:0}
+@media(max-width:860px){.legend{display:none}}
+</style>
+</head>
+<body>
+
+<!-- SIDE PANEL OVERLAY -->
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+
+<!-- SIDE DETAIL PANEL -->
+<div class="side-panel" id="sidePanel">
+  <div class="sp-header">
+    <button class="sp-close" onclick="closePanel()">✕</button>
+    <div class="sp-module" id="sp-module">Module</div>
+    <div class="sp-title" id="sp-title">Node Title</div>
+    <div class="sp-total"><span id="sp-count">0</span> <span style="font-size:14px;font-weight:500;color:#9CA3AF">tickets raised here</span></div>
+    <div class="sp-meta" id="sp-meta"></div>
+  </div>
+  <div class="sp-body" id="sp-body"></div>
+</div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-logo">O</div>
+    <div>
+      <div class="brand-name">OSMOS Platform</div>
+      <div class="brand-sub">Information Architecture · v2-1-173</div>
+    </div>
+  </div>
+  <div class="div"></div>
+  <div class="search-wrap">
+    <span class="si">🔍</span>
+    <input id="searchInput" type="text" placeholder="Search modules, features… (e.g. Instore, Campaign)">
+    <button class="clr" id="clrBtn">✕</button>
+    <span id="searchCount"></span>
+  </div>
+  <button class="pp-toggle" id="ppToggle" onclick="togglePainPoints()">
+    <span class="pp-dot"></span>
+    Pain Points
+    <span class="pp-total" id="ppTotalBadge">3,119 tickets</span>
+  </button>
+  <div class="legend" id="legend"></div>
+</header>
+
+<!-- HEAT LEGEND BAR -->
+<div class="heat-bar" id="heatBar">
+  <span class="heat-bar-label">🔥 Ticket Heat Map</span>
+  <div class="heat-items">
+    <div class="heat-item"><div class="heat-swatch" style="background:#FEF9C3;border-color:#FDE68A"></div>1–30 tickets</div>
+    <div class="heat-item"><div class="heat-swatch" style="background:#FEF3C7;border-color:#FCD34D"></div>31–100 tickets</div>
+    <div class="heat-item"><div class="heat-swatch" style="background:#FEE2E2;border-color:#FECACA"></div>100+ tickets</div>
+    <div class="heat-item" style="margin-left:8px">
+      <div class="heat-swatch" style="background:linear-gradient(135deg,#EF4444,#F97316)"></div>
+      <span style="color:#B91C1C;font-weight:700">🛑 = Last task before ticket</span>
+    </div>
+  </div>
+  <div class="heat-bar-right" id="heatBarRight"></div>
+</div>
+
+<!-- ROOT NODE -->
+<div class="root-section">
+  <div class="root-node">
+    <span class="root-icon">🏛️</span>
+    <div class="root-text">
+      <h2>OSMOS Platform</h2>
+      <p>Retail Media &amp; Advertising Intelligence Platform</p>
+    </div>
+    <span class="root-ver">PRO · v2-1-173</span>
+  </div>
+  <div class="trunk"></div>
+</div>
+
+<!-- MODULES -->
+<div class="modules-area" id="modulesArea">
+  <div class="modules-inner">
+    <div class="branch" id="branch"></div>
+    <div class="modules-row" id="modulesRow"></div>
+  </div>
+</div>
+
+<div class="empty" id="emptyState"><span>🔍</span>No matches found. Try a different term.</div>
+<div class="hint" id="hint">↔ Scroll to explore all 13 modules</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   TICKET DATA (processed from Shravan Report CSV — 3,119/3,311 tickets mapped)
+══════════════════════════════════════════════════════════ */
+const TICKET_DATA = {
+  meta:{ totalRows:3311, mappedRows:3119 },
+  moduleHits:{
+    "product-ads":{ total:731, escalated:84, avgResHours:18.5,
+      byType:{"Operations":343,"Query":308,"Bug":41,"Relevancy Issue":14,"Feature Request":12},
+      topSubjects:[{text:"Irrelevant Ad Responses",count:4},{text:"Irrelevant Ads",count:3},{text:"Ad Triggering Issue",count:3},{text:"Ad Relevancy",count:3},{text:"Campaign Bidding Review",count:2}]
+    },
+    "control":{ total:618, escalated:51, avgResHours:17.3,
+      byType:{"Operations":501,"Query":62,"Feature Request":32,"Bug":4,"Data Request":6},
+      topSubjects:[{text:"Store Not Found",count:29},{text:"Sandbox access",count:8},{text:"Stores Not Found",count:8},{text:"close account",count:5},{text:"OSMOS User setup",count:4}]
+    },
+    "analytics":{ total:449, escalated:59, avgResHours:28.0,
+      byType:{"Data Request":119,"Query":131,"Operations":123,"Bug":31,"Feature Request":35},
+      topSubjects:[{text:"Search Query by Campaign Report",count:22},{text:"Need Clarification on Data Types",count:2},{text:"Transaction Type change",count:2},{text:"Daily Data Request",count:2},{text:"Report Requirement",count:2}]
+    },
+    "display-ads":{ total:402, escalated:48, avgResHours:20.0,
+      byType:{"Query":183,"Bug":40,"Operations":147,"Feature Request":19,"Data Request":1},
+      topSubjects:[{text:"Banner Ads Performance Issue",count:5},{text:"FTA isn't visible",count:2},{text:"Inquiry on Ad Response",count:2},{text:"Banner not visible",count:2},{text:"SPA Query",count:2}]
+    },
+    "settings":{ total:273, escalated:39, avgResHours:28.4,
+      byType:{"Query":102,"Operations":127,"Feature Request":9,"Bug":21},
+      topSubjects:[{text:"Merchandise Feed Sync Failing",count:7},{text:"Troubleshooting Source IPs for Product Feed",count:4},{text:"SKU are not reflecting",count:4},{text:"Update Product Catalogue",count:3},{text:"Credentials not working",count:3}]
+    },
+    "platform":{ total:248, escalated:23, avgResHours:12.5,
+      byType:{"Operations":184,"Query":31,"Bug":5},
+      topSubjects:[{text:"Password reset link not received",count:4},{text:"Brand not received password reset link",count:3},{text:"User Addition",count:3},{text:"Password Reset link not received",count:2},{text:"Not able to access dashboard",count:2}]
+    },
+    "finance":{ total:203, escalated:22, avgResHours:13.8,
+      byType:{"Operations":138,"Query":49,"Bug":13,"Feature Request":1},
+      topSubjects:[{text:"Credit Addition for Ambassador Program",count:18},{text:"Urgent - Issue with Actual Spend versus Incentive",count:3},{text:"Lapse Ad Credits",count:3},{text:"Ad Credit Reversal",count:3},{text:"Credit Addition Request",count:2}]
+    },
+    "instore-digital":{ total:167, escalated:16, avgResHours:20.9,
+      byType:{"Operations":99,"Bug":8,"Feature Request":14,"Query":39,"Data Request":1},
+      topSubjects:[{text:"Remove Screen",count:5},{text:"Request to Delete Playlist",count:2},{text:"Impression number backtracking",count:2},{text:"Remove Screens",count:2},{text:"Error in Re-register Screens",count:2}]
+    },
+    "demand-wise":{ total:22, escalated:3, avgResHours:20.8,
+      byType:{"Operations":8,"Query":10,"Bug":2},
+      topSubjects:[{text:"Campaign daily budget reached",count:1},{text:"Seller pop-up issue",count:1},{text:"Comms pack daily budget",count:1},{text:"Bulk Advertiser Onboarding",count:1}]
+    },
+    "offsite":{ total:4, escalated:0, avgResHours:80.3,
+      byType:{"Operations":1},
+      topSubjects:[{text:"Meta campaign not spending",count:1},{text:"Offsite modifications audience selection",count:1},{text:"TikTok ad creation or ad preview",count:1},{text:"Swiggy priority fixes for offsite ads",count:1}]
+    },
+    "packages":{ total:2, escalated:1, avgResHours:11.9,
+      byType:{"Query":1},
+      topSubjects:[{text:"Duplicate Homepage Banner",count:1},{text:"Invalid keyword packages",count:1}]
+    }
+  },
+  nodeHits:{
+    "n-control-0":{ total:395, label:"Onboarding", module:"control", escalated:34, avgResHours:14.0,
+      topDropOff:"Manufacturer to Brand Mapping",
+      byType:{"Operations":362,"Query":27,"Feature Request":2,"Bug":1},
+      topSubjects:[{text:"Store Not Found",count:29},{text:"Stores Not Found",count:8},{text:"close account",count:5},{text:"Update Ownbrands",count:4},{text:"Create the following accounts",count:4}]
+    },
+    "n-platform-2":{ total:248, label:"Auth & RBAC", module:"platform", escalated:23, avgResHours:12.5,
+      topDropOff:"Login / Password Reset",
+      byType:{"Operations":184,"Query":31,"Bug":5},
+      topSubjects:[{text:"Password reset link not received",count:4},{text:"Password Reset not received",count:3},{text:"User Addition",count:3},{text:"Not able to access dashboard",count:2},{text:"White Label Sign in with Google",count:1}]
+    },
+    "n-analytics-1":{ total:242, label:"Advertiser Insights", module:"analytics", escalated:39, avgResHours:26.4,
+      topDropOff:"Merchant Dashboard Reporting",
+      byType:{"Query":109,"Operations":82,"Bug":22,"Feature Request":21,"Data Request":8},
+      topSubjects:[{text:"Search Query by Campaign Report",count:12},{text:"Transaction Type change",count:2},{text:"Daily Data Request",count:2},{text:"Report Requirement",count:2},{text:"Campaign by Wallet Report",count:2}]
+    },
+    "n-product-ads-5":{ total:214, label:"Campaign Bulk Actions", module:"product-ads", escalated:28, avgResHours:18.2,
+      topDropOff:"Campaign Review / Budget Issue",
+      byType:{"Operations":92,"Query":98,"Bug":14,"Feature Request":7,"Relevancy Issue":3},
+      topSubjects:[{text:"Irrelevant Ad Responses",count:4},{text:"Irrelevant Ads",count:3},{text:"Ad Triggering Issue",count:3},{text:"Ad Relevancy",count:3},{text:"Campaign Bidding Review",count:2}]
+    },
+    "n-display-ads-0":{ total:198, label:"Analytics", module:"display-ads", escalated:26, avgResHours:21.4,
+      topDropOff:"Campaign not responding / Banner not visible",
+      byType:{"Query":102,"Bug":22,"Operations":58,"Feature Request":12,"Data Request":1},
+      topSubjects:[{text:"Banner Ads Performance Issue",count:5},{text:"FTA isn't visible",count:2},{text:"Inquiry on Ad Response for Cart Banner",count:2},{text:"Banner not visible",count:2},{text:"SPA Query",count:2}]
+    },
+    "n-product-ads-4":{ total:196, label:"Keyword Bid Settings", module:"product-ads", escalated:22, avgResHours:17.8,
+      topDropOff:"Keyword Not Performing",
+      byType:{"Query":102,"Operations":71,"Bug":15,"Relevancy Issue":8},
+      topSubjects:[{text:"Keyword performance issue",count:5},{text:"Keyword not working",count:3},{text:"Ad not triggering",count:2},{text:"Low CTR on keyword",count:2}]
+    },
+    "n-product-ads-2":{ total:186, label:"Live Analytics", module:"product-ads", escalated:18, avgResHours:19.1,
+      topDropOff:"Campaign not spending",
+      byType:{"Query":86,"Operations":74,"Bug":18,"Feature Request":5,"Relevancy Issue":3},
+      topSubjects:[{text:"Campaign not spending",count:8},{text:"Low impression count",count:4},{text:"CTR drop",count:3},{text:"Zero spend reported",count:2}]
+    },
+    "n-analytics-2":{ total:170, label:"Scheduled Reports", module:"analytics", escalated:20, avgResHours:28.9,
+      topDropOff:"Custom Data Request",
+      byType:{"Data Request":81,"Query":25,"Operations":41,"Bug":9,"Feature Request":14},
+      topSubjects:[{text:"Search Query by Campaign Report",count:10},{text:"Need Clarification on Data Types",count:2},{text:"Report Requirement",count:2},{text:"Dollar Spent by Wakefern Banner",count:2},{text:"Campaign by Wallet Report",count:2}]
+    },
+    "n-settings-2":{ total:159, label:"Integrations", module:"settings", escalated:15, avgResHours:24.2,
+      topDropOff:"Feed API / Feed Sync",
+      byType:{"Operations":92,"Query":50,"Bug":9,"Feature Request":2,"Data Request":1},
+      topSubjects:[{text:"Merchandise Feed Sync Failing",count:7},{text:"Troubleshooting Source IPs",count:4},{text:"SKU are not reflecting",count:4},{text:"Update Product Catalogue",count:3},{text:"Credentials not working",count:3}]
+    },
+    "n-finance-2":{ total:149, label:"Wallet Top-Up", module:"finance", escalated:14, avgResHours:12.8,
+      topDropOff:"Bulk Wallet Topup",
+      byType:{"Operations":106,"Query":32,"Bug":9,"Feature Request":1},
+      topSubjects:[{text:"Credit Addition for Ambassador Program",count:18},{text:"Lapse Ad Credits",count:3},{text:"Ad Credit Reversal",count:3},{text:"Credit Addition Request",count:2},{text:"Urgent - Incentive spend issue",count:2}]
+    },
+    "n-product-ads-0":{ total:135, label:"Ad Server Analytics", module:"product-ads", escalated:16, avgResHours:17.2,
+      topDropOff:"Low ROI / Impression issues",
+      byType:{"Query":70,"Operations":45,"Bug":14,"Feature Request":4,"Relevancy Issue":2},
+      topSubjects:[{text:"Ad not responding",count:4},{text:"Low fill rate",count:3},{text:"Response rate dropped",count:2},{text:"Ad server latency",count:2}]
+    },
+    "n-instore-digital-0":{ total:117, label:"Store Management", module:"instore-digital", escalated:12, avgResHours:19.5,
+      topDropOff:"Workflow customisations / Screen Registration",
+      byType:{"Operations":72,"Query":30,"Bug":6,"Feature Request":9},
+      topSubjects:[{text:"Remove Screen",count:5},{text:"Remove Screens",count:2},{text:"Error in Re-register Screens",count:2},{text:"Screen setup issue",count:2},{text:"Add new store location",count:1}]
+    },
+    "n-settings-4":{ total:114, label:"Developer Settings", module:"settings", escalated:24, avgResHours:36.6,
+      topDropOff:"API / PLA Ad-Server integration",
+      byType:{"Query":52,"Operations":35,"Bug":12,"Feature Request":7},
+      topSubjects:[{text:"Credentials not working",count:3},{text:"Merchandise Feed Sync Failing",count:3},{text:"Not receiving response for PDA",count:2},{text:"OS Events issue",count:2},{text:"Adding geolocation capability",count:1}]
+    },
+    "n-control-7":{ total:109, label:"Activity Log", module:"control", escalated:10, avgResHours:21.3,
+      topDropOff:"Custom operations / audit requests",
+      byType:{"Operations":84,"Query":18,"Feature Request":4,"Bug":2},
+      topSubjects:[{text:"Sandbox access",count:8},{text:"Change advertiser name",count:3},{text:"Custom data export",count:2},{text:"Platform audit request",count:2}]
+    },
+    "n-display-ads-4":{ total:106, label:"Campaign Management", module:"display-ads", escalated:12, avgResHours:19.8,
+      topDropOff:"Campaign update / Bid customisation",
+      byType:{"Query":55,"Operations":36,"Bug":10,"Feature Request":5},
+      topSubjects:[{text:"Campaign edit issue",count:3},{text:"Bid update not reflecting",count:2},{text:"Campaign not activating",count:2},{text:"Budget update issue",count:2}]
+    },
+    "n-control-1":{ total:89, label:"User Access Management", module:"control", escalated:7, avgResHours:14.6,
+      topDropOff:"Grant / Revoke Access",
+      byType:{"Operations":72,"Query":12,"Bug":3,"Feature Request":2},
+      topSubjects:[{text:"OSMOS User setup",count:4},{text:"Add user to instances",count:3},{text:"User Addition",count:2},{text:"Revoke advertiser access",count:2}]
+    },
+    "n-finance-3":{ total:54, label:"Transaction History", module:"finance", escalated:8, avgResHours:14.2,
+      topDropOff:"Wallet Refund",
+      byType:{"Operations":32,"Query":17,"Bug":4,"Feature Request":1},
+      topSubjects:[{text:"Wallet refund request",count:5},{text:"Credit deduction query",count:3},{text:"Transaction discrepancy",count:2}]
+    },
+    "n-control-4":{ total:29, label:"Advertiser Settings", module:"control", escalated:2, avgResHours:11.0,
+      topDropOff:"Segment / Attribution override",
+      byType:{"Operations":20,"Query":7,"Bug":2},
+      topSubjects:[{text:"Attribution override request",count:3},{text:"Segment setup issue",count:2},{text:"Change advertiser name",count:2}]
+    },
+    "n-instore-digital-3":{ total:28, label:"Ad Screen Management", module:"instore-digital", escalated:3, avgResHours:22.0,
+      topDropOff:"Playlist management",
+      byType:{"Operations":15,"Query":9,"Bug":2,"Feature Request":2},
+      topSubjects:[{text:"Request to Delete Playlist",count:2},{text:"Impression number backtracking",count:2},{text:"Playlist scheduling issue",count:1}]
+    },
+    "n-control-3":{ total:6, label:"Persona Management", module:"control", escalated:0, avgResHours:9.5,
+      topDropOff:"Persona tier allocation",
+      byType:{"Operations":4,"Query":2},
+      topSubjects:[{text:"Persona tier change request",count:2},{text:"Silver to Gold upgrade",count:1}]
+    },
+    "n-demand-wise-1":{ total:13, label:"Channel Setup", module:"demand-wise", escalated:2, avgResHours:18.4,
+      topDropOff:"Channel config / budget",
+      byType:{"Operations":5,"Query":6,"Bug":2},
+      topSubjects:[{text:"Campaign daily budget reached",count:1},{text:"Seller pop-up issue",count:1},{text:"Comms pack spamming",count:1}]
+    },
+    "n-demand-wise-0":{ total:9, label:"Dashboard", module:"demand-wise", escalated:1, avgResHours:22.0,
+      topDropOff:"Engagement overview confusion",
+      byType:{"Query":5,"Operations":3,"Bug":1},
+      topSubjects:[{text:"SPA Ad Credit Offer",count:1},{text:"Bulk Advertiser Onboarding issue",count:1}]
+    },
+    "n-offsite-0":{ total:4, label:"Offsite Insights", module:"offsite", escalated:0, avgResHours:80.3,
+      topDropOff:"External channel not spending",
+      byType:{"Operations":1},
+      topSubjects:[{text:"Meta campaign not spending",count:1},{text:"TikTok ad creation",count:1},{text:"Offsite audience selection",count:1},{text:"Swiggy offsite fixes",count:1}]
+    },
+    "n-packages-0":{ total:2, label:"Packages List", module:"packages", escalated:1, avgResHours:11.9,
+      topDropOff:"Package creation / booking",
+      byType:{"Query":1},
+      topSubjects:[{text:"Duplicate Homepage Banner",count:1},{text:"Invalid keyword packages",count:1}]
+    }
+  }
+};
+
+/* ══════════════════════════════════════════════════════════
+   IA MODULE DATA
+══════════════════════════════════════════════════════════ */
+const MODULES = [
+  { id:'platform', icon:'🏛️', label:'Platform Shell', sub:'Shared UI chrome · all pages',
+    color:'#7C6FF7', bg:'linear-gradient(135deg,#7C6FF7 0%,#A78BFA 100%)', badge:'Global',
+    kw:'platform shell global header toolbar shared ui chrome navigation',
+    nodes:[
+      {l:'Home Dashboard',d:'KPI overview & daily performance trends',r:'/home',kw:'home dashboard kpi ad revenue impressions clicks roas attributed gmv projects performance trend'},
+      {l:'Header Toolbar',d:'Brand, theme, date range, merchant selector',r:'Global — All Pages',kw:'header toolbar logo brand theme toggle dark light search user profile date range picker merchant selector'},
+      {l:'Auth & RBAC',d:'Session-based roles & access control',r:'Session',kw:'auth rbac role based access control session login logout user permission security password reset'},
+      {l:"What's New",d:'Notifications & platform announcements',r:'Badge · 7',kw:"whats new notifications announcements badge updates releases"},
+      {l:'Support',d:'Help center & documentation',r:'/support',kw:'support help resources documentation center guide tutorial'},
+    ]
+  },
+  { id:'analytics', icon:'📊', label:'Analytics', sub:'Platform-wide reporting & insights',
+    color:'#10B981', bg:'linear-gradient(135deg,#10B981 0%,#34D399 100%)', badge:'Highcharts',
+    kw:'analytics reporting insights data visualization charts performance',
+    nodes:[
+      {l:'Live Insights',d:"Real-time today's ad performance",r:'/analytics/liveInsights',kw:'live insights realtime today performance advertiser kpi tiles revenue impressions clicks'},
+      {l:'Advertiser Insights',d:'Deep program-level analytics',r:'/analytics/programInsights',kw:'advertiser insights program analytics deep campaign performance roas gmv movers shakers budget'},
+      {l:'Scheduled Reports',d:'Create & schedule report delivery (64 types)',r:'/analytics/scheduledReports',kw:'scheduled reports create schedule delivery xlsx keyword performance category gmv hourly campaign custom data request'},
+      {l:'Health',d:'50+ KPIs: Supply, Performance, Activation',r:'/health',kw:'health report kpi supply performance activation adoption daily weekly impact 50'},
+    ]
+  },
+  { id:'finance', icon:'💰', label:'Finance', sub:'Wallet & transaction management',
+    color:'#F59E0B', bg:'linear-gradient(135deg,#F59E0B 0%,#FCD34D 100%)', badge:'Wallet',
+    kw:'finance wallet payment transaction ledger budget money credits',
+    nodes:[
+      {l:'Finance Dashboard',d:'Payment summary KPIs overview',r:'/finance',kw:'finance dashboard payment summary kpi overview balance revenue'},
+      {l:'Advertiser Management',d:'Per-advertiser wallet tracking',r:'/finance/advertisers',kw:'advertiser management wallet tracking finance balance per advertiser billing'},
+      {l:'Wallet Top-Up',d:'Advertiser funding management',r:'/finance/topup',kw:'wallet top up topup advertiser funding payment finance add money credits bulk topup'},
+      {l:'Transaction History',d:'Full financial ledger & wallet details',r:'/finance/transactions',kw:'transaction history ledger financial wallet details finance audit log refund reversal deduction'},
+    ]
+  },
+  { id:'control', icon:'🛡️', label:'Control Center', sub:'Administration & configuration',
+    color:'#F43F5E', bg:'linear-gradient(135deg,#F43F5E 0%,#FB7185 100%)', badge:'Admin',
+    kw:'control center admin configuration management platform administration onboarding',
+    nodes:[
+      {l:'Onboarding',d:'Seller & Brand Advertiser onboarding',r:'/controlCenter/onboarding',kw:'onboarding seller brand advertiser control center flow setup new merchant manufacturer brand mapping'},
+      {l:'User Access Management',d:'Super Admin, Ops, Advertiser, Acct Manager',r:'/userAccess',kw:'user access management super admin ops advertiser account manager rbac control center users uam grant revoke'},
+      {l:'Role Management',d:'Admin & Advertiser role configuration',r:'/userRoles',kw:'user role management admin advertiser role configuration control center permissions'},
+      {l:'Persona Management',d:'Platinum, Gold, Silver, Beta, Reach tiers',r:'/advertiserPersona',kw:'advertiser persona management platinum gold silver beta reach persona allocation tiers segments'},
+      {l:'Advertiser Settings',d:'Segment Manager, Attribution Overrides',r:'/advertiserSettings',kw:'segment manager attribution overrides advertiser settings control center configuration'},
+      {l:'Automated Rules',d:'Wallet rules with trigger/schedule logic',r:'/automatedRules',kw:'automated rules wallet rules trigger schedule control center automation'},
+      {l:'Debug Console',d:'Product Catalog, Event Logs, Request Logs',r:'/debugConsole',kw:'debug console product catalog event logs request logs debugging'},
+      {l:'Activity Log',d:'Full audit trail of platform actions',r:'/activityLog',kw:'activity log audit trail control center actions history changes custom requests sandbox'},
+    ]
+  },
+  { id:'product-ads', icon:'📦', label:'Product Ads', sub:'Sponsored product campaigns',
+    color:'#6366F1', bg:'linear-gradient(135deg,#6366F1 0%,#818CF8 100%)', badge:'Adscape',
+    kw:'product ads sponsored adscape campaigns cpc cpm keyword sponsored search relevancy',
+    nodes:[
+      {l:'Ad Server Analytics',d:'Requests, Response Rate, CTR, CPC/CPM',r:'/productAds/analytics',kw:'product ads ad server analytics requests response rate ctr cpc cpm impressions fill rate'},
+      {l:'Demand & Supply',d:'Supply-demand balance insights',r:'/productAds/demandAndSupply',kw:'demand supply product ads analytics balance insights fill rate'},
+      {l:'Live Analytics',d:"Real-time today's performance",r:'/productAds/liveAnalytics',kw:'live analytics realtime product ads today performance real time campaign not spending zero spend'},
+      {l:'Yield Controls',d:'CPC & CPM floor/ceiling controls',r:'/productAds/categoryMinMax',kw:'cpc controls category min max yield product ads floor bid ceiling cpm controls price floor'},
+      {l:'Keyword Bid Settings',d:'Additional CPC/CPM keyword floor bids',r:'/productAds/keywordFloorBid',kw:'keyword bid setting cpc cpm additional keyword floor bid product ads search query keyword not performing'},
+      {l:'Campaign Bulk Actions',d:'Create, update, activate, pause',r:'/productAds/campaigns',kw:'campaign bulk actions create update activate pause product ads product selection bulk operations review budget'},
+    ]
+  },
+  { id:'display-ads', icon:'🖼️', label:'Display Ads', sub:'Sponsored display campaigns',
+    color:'#3B82F6', bg:'linear-gradient(135deg,#3B82F6 0%,#60A5FA 100%)', badge:'Adscape',
+    kw:'display ads sponsored banner video carousel story adscape creative rich media',
+    nodes:[
+      {l:'Analytics',d:'Ad Server, Demand & Supply, Live Analytics',r:'/displayAds/analytics',kw:'display ads ad server analytics demand supply live analytics performance metrics impressions banner not visible'},
+      {l:'Page Setup',d:'Create & manage pages with targeting',r:'/displayAds/pageSetup',kw:'page setup display ads ad inventory management pages targeting create configure'},
+      {l:'Ad Format Setup',d:'Banner, Video, Carousel, Story (8 types)',r:'/displayAds/adFormatSetup',kw:'ad format setup banner video product display carousel scratch cards spin wheel story custom formats'},
+      {l:'Inventory Setup',d:'Auction & Guaranteed inventory',r:'/displayAds/inventorySetup',kw:'inventory setup auction guaranteed display ads inventory creation placements ad inventory management'},
+      {l:'Campaign Management',d:'Update campaigns & inventory-level bids',r:'/displayAds/campaigns',kw:'campaign management update campaigns inventory level bid customization display ads manage'},
+      {l:'Campaign Review',d:'Creative & approval drawer workflow',r:'/displayAds/campaignReview',kw:'campaign review display ads drawer review interface update approval creative moderate'},
+      {l:'Ad Request Studio',d:'Code gen: Curl, Web, Android, iOS (Beta)',r:'/displayAds/adRequestStudio',kw:'ad request studio display ads code generation curl web android ios beta developer integration'},
+      {l:'Custom Targeting',d:'Key-value pairs & targeting rules',r:'/displayAds/customTargeting',kw:'custom targeting key value setup targeting display ads rules segments audience'},
+    ]
+  },
+  { id:'offsite', icon:'🌐', label:'Offsite Ads', sub:'External channel advertising',
+    color:'#06B6D4', bg:'linear-gradient(135deg,#06B6D4 0%,#22D3EE 100%)', badge:'Adscape',
+    kw:'offsite ads external channel meta google tiktok off-platform retargeting',
+    nodes:[
+      {l:'Offsite Insights',d:'External advertising performance analytics',r:'/offsiteAds',kw:'offsite ads insights performance external channel meta google tiktok analytics'},
+      {l:'Channel Integrations',d:'Meta, Google, TikTok, Custom Ads',r:'/offsiteAds/channels',kw:'offsite ads channel meta google tiktok custom external integration partner network'},
+    ]
+  },
+  { id:'instore-digital', icon:'🏪', label:'In-Store Digital', sub:'Digital screen campaigns',
+    color:'#14B8A6', bg:'linear-gradient(135deg,#14B8A6 0%,#2DD4BF 100%)', badge:'Adscape',
+    kw:'instore digital screen campaigns store physical digital display signage dooh',
+    nodes:[
+      {l:'Store Management',d:'Physical store & screen inventory',r:'/inStoreDigital/stores',kw:'instore digital store management physical store screen inventory location retail register screen'},
+      {l:'All Campaigns',d:'Dashboard + Booking Calendar',r:'/inStoreDigital/allCampaigns',kw:'instore digital all campaigns dashboard booking calendar instore digital schedule view'},
+      {l:'In-Store Analytics',d:'Analytics dashboard & booking calendar',r:'/inStoreDigital/analytics',kw:'instore digital analytics dashboard booking calendar analytics performance metrics in store'},
+      {l:'Ad Screen Management',d:'Playlist, Screen Mgmt, Ad Formats',r:'/inStoreDigital/adScreenMgmt',kw:'ad screen management playlist templates screen management ad format setup instore digital screens digital signage'},
+      {l:'Compliance Report',d:'Playback Logs & Screenshot evidence',r:'/inStoreDigital/compliance',kw:'compliance report playback logs screenshot logs instore digital evidence proof of play'},
+      {l:'Schema Setup',d:'Store, Screen, Placement & Category schemas',r:'/inStoreDigital/schema',kw:'schema setup store screen placement category instore digital configuration schema'},
+      {l:'Campaign Review',d:'Creative & inventory approval',r:'/inStoreDigital/campaignReview',kw:'campaign review instore digital review creative inventory approval workflow'},
+    ]
+  },
+  { id:'instore-analog', icon:'🗺️', label:'In-Store Analog', sub:'Physical placement campaigns',
+    color:'#0D9488', bg:'linear-gradient(135deg,#0D9488 0%,#14B8A6 100%)', badge:'Adscape',
+    kw:'instore analog physical placement campaigns store poster banner shelf print',
+    nodes:[
+      {l:'Store Management',d:'Physical placement store inventory',r:'/inStoreAnalog/stores',kw:'instore analog store management physical instore analog placement location retail store'},
+      {l:'Campaign',d:'Dashboard & Booking Calendar',r:'/inStoreAnalog/campaign',kw:'instore analog campaign dashboard booking calendar physical instore schedule analog'},
+      {l:'Asset Management',d:'Activation Types & Assets library',r:'/inStoreAnalog/assets',kw:'asset management activation type assets instore analog physical library materials creative'},
+      {l:'Schema Setup',d:'Store Schema & Assets Schema',r:'/inStoreAnalog/schema',kw:'schema setup store schema assets schema instore analog configuration structure'},
+    ]
+  },
+  { id:'demand-wise', icon:'📣', label:'Demand Wise', sub:'Advertiser engagement & comms',
+    color:'#F97316', bg:'linear-gradient(135deg,#F97316 0%,#FB923C 100%)', badge:'StratEdge',
+    kw:'demand wise advertiser engagement communication stratedge email sms outreach crm comms pack',
+    nodes:[
+      {l:'Dashboard',d:'Engagement program overview',r:'/demandWise',kw:'demand wise dashboard overview engagement program stratedge performance'},
+      {l:'Channel Setup',d:'Communication channel configuration',r:'/demandWise/channelSetup',kw:'demand wise channel setup communication channels configuration email sms push whatsapp budget'},
+      {l:'Communication Templates',d:'Message templates (Email, SMS, Push…)',r:'/demandWise/templates',kw:'communication templates demand wise message templates email sms advertiser outreach'},
+      {l:'System Templates Config',d:'Platform-wide default message templates',r:'/demandWise/systemTemplates',kw:'system templates configuration demand wise default templates platform notification'},
+    ]
+  },
+  { id:'packages', icon:'📋', label:'Packages', sub:'Ad package booking engine',
+    color:'#0EA5E9', bg:'linear-gradient(135deg,#0EA5E9 0%,#38BDF8 100%)', badge:'Alpha',
+    kw:'packages bookings ad packages booking engine alpha flexi sales planner',
+    nodes:[
+      {l:'Packages List',d:'Bookable ad packages & 5-step wizard',r:'/packages',kw:'packages list flexi packages bookable ad packages flight windows 5-step wizard create package'},
+      {l:'Bookings',d:'Scheduled, Active, Delivered, Cancelled',r:'/packages/bookings',kw:'bookings packages booking management status scheduled active delivered cancelled reservations'},
+      {l:'Package Analytics',d:'Package, Sales & Live analytics',r:'/packages/analytics',kw:'package analytics sales analytics live analytics packages performance keyword breakdown'},
+      {l:'Flexi Packages',d:'Flexible packaging system',r:'/packages/flexi',kw:'flexi packages packages flexible packaging system custom'},
+      {l:'Sales Planner',d:'Revenue planning & line items',r:'/packages/salesPlanner',kw:'sales planner packages revenue planning line item booking details forecast'},
+      {l:'Booking Review',d:'Inventory & creative approval workflow',r:'/packages/review',kw:'all bookings line item review inventory creative approval packages review workflow'},
+    ]
+  },
+  { id:'apps', icon:'🧩', label:'Apps & Plugins', sub:'App marketplace & real-time tools',
+    color:'#9333EA', bg:'linear-gradient(135deg,#9333EA 0%,#C084FC 100%)', badge:'Marketplace',
+    kw:'apps plugins marketplace adscape stratedge installed beta appstore extensions',
+    nodes:[
+      {l:'Sponsored Display Ads',d:'Adscape · Display ad engine',r:'/apps',kw:'sponsored display ads adscape app appstore installed marketplace display'},
+      {l:'Sponsored Product Ads',d:'Adscape · Product ad engine',r:'/apps',kw:'sponsored product ads adscape app appstore installed marketplace product'},
+      {l:'In-Store Digital App',d:'Adscape · Digital screen placements',r:'/apps',kw:'instore digital app adscape appstore installed in-store digital screen instore marketplace'},
+      {l:'In-Store Analog App',d:'Adscape · Physical placements',r:'/apps',kw:'instore analog app adscape appstore installed in-store analog physical marketplace'},
+      {l:'Offsite Ads App',d:'Adscape · External channel advertising',r:'/apps',kw:'offsite ads adscape appstore installed external channel marketplace'},
+      {l:'DemandWise',d:'StratEdge · Advertiser engagement',r:'/apps',kw:'demandwise stratedge appstore installed demand engagement marketplace'},
+      {l:'Ad Packages',d:'StratEdge · Package booking engine',r:'/apps',kw:'ad packages stratedge appstore installed packages booking marketplace'},
+      {l:'LiveAds Plugin',d:'Real-time ad preview by page type · Beta',r:'/plugins/liveAds',kw:'liveads live ads real-time ad preview page type plugin beta'},
+      {l:'Ad Request Debugger',d:'AI-powered ad request debugging · Beta',r:'/plugins/debugger',kw:'ad request debugger ai powered debugging plugin beta tool'},
+      {l:'Live Screen Preview',d:'In-store screen live content preview · Beta',r:'/plugins/screenPreview',kw:'live screen preview instore screen live content preview plugin beta in-store'},
+    ]
+  },
+  { id:'settings', icon:'⚙️', label:'Settings', sub:'Platform configuration & tools',
+    color:'#64748B', bg:'linear-gradient(135deg,#64748B 0%,#94A3B8 100%)', badge:'Config',
+    kw:'settings configuration global developer integrations metrics help preferences api',
+    nodes:[
+      {l:'Global Configurations',d:'Platform-wide settings & preferences',r:'/settings/global',kw:'settings global configuration platform wide preferences system'},
+      {l:'Change History',d:'Settings & config change audit log',r:'/settings/changeHistory',kw:'change history settings audit log configuration changes tracking version'},
+      {l:'Integrations',d:'Third-party integrations & API connections',r:'/settings/integrations',kw:'integrations third party settings connection setup api external services webhook feed api feed sync sku product catalogue'},
+      {l:'Metrics Config',d:'Metric definitions & column mapping',r:'/settings/metrics',kw:'metrics config configuration settings definitions mapping columns kpi definition'},
+      {l:'Developer Settings',d:'Setup Details & Events Debugging',r:'/settings/developer',kw:'developer settings setup details events debugging api settings technical sdk pixel pla ad-server credentials'},
+      {l:'Help Center',d:'Documentation & support resources',r:'/support',kw:'help center documentation support resources guide tutorial faq'},
+    ]
+  },
+];
+
+/* ══════════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════════ */
+let painMode = false;
+
+/* ══════════════════════════════════════════════════════════
+   HEAT HELPERS
+══════════════════════════════════════════════════════════ */
+function heatClass(n){ return n>=100?'ch-3':n>=30?'ch-2':n>=1?'ch-1':''; }
+function heatModClass(n){ return n>=200?'heat-high':n>=60?'heat-med':n>=1?'heat-low':''; }
+function fmtRes(h){ if(!h) return '—'; if(h<8) return `${Math.round(h)}h avg`; const d=Math.floor(h/8); const r=Math.round(h%8); return r?`${d}d ${r}h avg`:`${d}d avg`; }
+
+/* ══════════════════════════════════════════════════════════
+   BUILD LEGEND
+══════════════════════════════════════════════════════════ */
+function buildLegend(){
+  document.getElementById('legend').innerHTML = MODULES.map(m=>`
+    <div class="lp" onclick="filterBy('${m.label}')">
+      <span class="ld" style="background:${m.color}"></span>${m.label}
+    </div>`).join('');
+}
+
+/* ══════════════════════════════════════════════════════════
+   BUILD MODULES
+══════════════════════════════════════════════════════════ */
+function buildModules(){
+  const row = document.getElementById('modulesRow');
+  row.innerHTML = MODULES.map(m=>{
+    const mHit = TICKET_DATA.moduleHits[m.id];
+    const mTotal = mHit ? mHit.total : 0;
+    const mClass = heatModClass(mTotal);
+    return `
+    <div class="module-col" id="col-${m.id}" style="--mc:${m.color}">
+      <div class="drop" style="background:${m.color};opacity:0.55"></div>
+      <div class="mh ${mClass}" id="mh-${m.id}"
+           data-kw="${m.kw} ${m.label} ${m.sub}"
+           data-module="${m.id}"
+           style="background:${m.bg}">
+        <span class="mh-icon">${m.icon}</span>
+        <div class="mh-label">${m.label}</div>
+        <div class="mh-sub">${m.sub}</div>
+        <span class="mh-badge">${m.badge}</span>
+        <span class="mh-heat-badge" id="mhb-${m.id}">
+          ${mTotal ? `🔥 ${mTotal.toLocaleString()} tickets` : m.badge}
+        </span>
+      </div>
+      <div class="children-top" style="background:${m.color};opacity:0.55"></div>
+      <div class="mc" id="mc-${m.id}">
+        ${m.nodes.map((n,i)=>{
+          const nkey = `n-${m.id}-${i}`;
+          const nHit = TICKET_DATA.nodeHits[nkey];
+          const nTotal = nHit ? nHit.total : 0;
+          const hClass = heatClass(nTotal);
+          const dropOff = nHit ? nHit.topDropOff : '';
+          return `
+          <div class="cn ${hClass}" id="${nkey}"
+               data-kw="${n.kw||''} ${n.l} ${n.d||''}"
+               data-nodekey="${nkey}"
+               onclick="onNodeClick('${nkey}')">
+            ${nTotal ? `<span class="cn-ticket-badge">🎫 ${nTotal}</span>` : ''}
+            <div class="cn-lbl">${n.l}</div>
+            ${n.d?`<div class="cn-desc">${n.d}</div>`:''}
+            ${n.r?`<div class="cn-route">${n.r}</div>`:''}
+            ${nTotal && dropOff ? `<div class="cn-dropoff">🛑 Last task: ${dropOff}</div>` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  requestAnimationFrame(()=>{
+    const inner = document.querySelector('.modules-inner');
+    const branch = document.getElementById('branch');
+    if(inner&&branch) branch.style.width = inner.scrollWidth+'px';
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   PAIN POINTS TOGGLE
+══════════════════════════════════════════════════════════ */
+function togglePainPoints(){
+  painMode = !painMode;
+  document.body.classList.toggle('pain-mode', painMode);
+  const btn = document.getElementById('ppToggle');
+  btn.classList.toggle('active', painMode);
+  const bar = document.getElementById('heatBar');
+  bar.classList.toggle('visible', painMode);
+
+  if(painMode){
+    // Update heat bar right stat
+    const totalMapped = TICKET_DATA.meta.mappedRows;
+    const topNode = Object.entries(TICKET_DATA.nodeHits).sort((a,b)=>b[1].total-a[1].total)[0];
+    document.getElementById('heatBarRight').innerHTML =
+      `<strong>${totalMapped.toLocaleString()}</strong> tickets analysed · Hottest: <strong>${topNode[1].label}</strong> (${topNode[1].total} tickets)`;
+    // Dim modules with no tickets
+    MODULES.forEach(m=>{
+      const col = document.getElementById('col-'+m.id);
+      const mHit = TICKET_DATA.moduleHits[m.id];
+      if(!mHit || mHit.total === 0){
+        col.classList.add('dimmed');
+      }
+    });
+  } else {
+    // Remove pain-mode dimming (but restore search dimming if active)
+    const q = document.getElementById('searchInput').value.trim();
+    if(!q){
+      document.querySelectorAll('.module-col.dimmed').forEach(c=>c.classList.remove('dimmed'));
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SIDE PANEL
+══════════════════════════════════════════════════════════ */
+function onNodeClick(nkey){
+  const nHit = TICKET_DATA.nodeHits[nkey];
+  if(!nHit) return;
+  openPanel(nkey, nHit);
+}
+
+function openPanel(nkey, nh){
+  const m = MODULES.find(x=>x.id===nh.module);
+  const mIcon = m ? m.icon : '';
+  const mLabel = m ? m.label : nh.module;
+
+  document.getElementById('sp-module').textContent = `${mIcon} ${mLabel}`;
+  document.getElementById('sp-title').textContent = nh.label;
+  document.getElementById('sp-count').textContent = nh.total.toLocaleString();
+
+  // Meta
+  const escRate = nh.escalated ? Math.round(nh.escalated/nh.total*100) : 0;
+  const sevClass = escRate>=20?'sev-high':escRate>=8?'sev-med':'sev-low';
+  document.getElementById('sp-meta').innerHTML = `
+    <div class="sp-meta-item">⏱ Avg resolution: <strong>${fmtRes(nh.avgResHours)}</strong></div>
+    <div class="sp-meta-item">🚨 Escalated: <strong>${nh.escalated}</strong> (${escRate}%)</div>
+  `;
+
+  // Body
+  const types = nh.byType || {};
+  const maxType = Math.max(...Object.values(types), 1);
+  const typeColors = {Bug:'#EF4444',Operations:'#8B5CF6',Query:'#3B82F6','Data Request':'#10B981','Feature Request':'#F59E0B','Relevancy Issue':'#F97316'};
+
+  const typeRows = Object.entries(types).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`
+    <div class="bar-row">
+      <div class="bar-label">${k}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/maxType*100)}%;background:${typeColors[k]||'#D1D5DB'}"></div></div>
+      <div class="bar-count">${v}</div>
+    </div>`).join('');
+
+  const subjItems = (nh.topSubjects||[]).map(s=>`
+    <div class="subj-item">
+      <span>${s.text}</span>
+      <span class="subj-count">${s.count}</span>
+    </div>`).join('') || '<div style="color:#9CA3AF;font-size:11px">No subjects recorded</div>';
+
+  document.getElementById('sp-body').innerHTML = `
+    <div class="sp-section">
+      <div class="sp-section-title">Last Task Before Ticket</div>
+      <div class="last-task-card">
+        <div class="last-task-label">🛑 User's drop-off point</div>
+        <div class="last-task-val">${nh.topDropOff || 'Unknown'}</div>
+        <div class="last-task-hint">Most common sub-task the user was performing when they stopped and raised a support ticket.</div>
+      </div>
+    </div>
+    <div class="sp-section">
+      <div class="sp-section-title">Ticket Type Breakdown</div>
+      ${typeRows}
+    </div>
+    <div class="sp-section">
+      <div class="sp-section-title">Top Reported Issues</div>
+      ${subjItems}
+    </div>
+    <div class="sp-section">
+      <div class="sp-section-title">Severity</div>
+      <div class="severity-row">
+        <span class="sev-pill ${sevClass}"><span class="sev-dot"></span>${escRate}% escalated</span>
+        <span style="font-size:11px;color:#6B7280">${nh.escalated} of ${nh.total} tickets escalated to tech</span>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('sidePanel').classList.add('open');
+  document.getElementById('panelOverlay').classList.add('on');
+}
+
+function closePanel(){
+  document.getElementById('sidePanel').classList.remove('open');
+  document.getElementById('panelOverlay').classList.remove('on');
+}
+
+/* ══════════════════════════════════════════════════════════
+   SEARCH
+══════════════════════════════════════════════════════════ */
+function doSearch(raw){
+  const q = (raw||'').trim().toLowerCase();
+  const countEl = document.getElementById('searchCount');
+  const clrBtn  = document.getElementById('clrBtn');
+  const emptyEl = document.getElementById('emptyState');
+
+  if(!q){
+    document.querySelectorAll('.module-col').forEach(c=>c.classList.remove('dimmed','has-match'));
+    document.querySelectorAll('.mh').forEach(h=>h.classList.remove('highlighted','dimmed'));
+    document.querySelectorAll('.cn').forEach(n=>n.classList.remove('highlighted','dimmed'));
+    countEl.textContent=''; clrBtn.classList.remove('on'); emptyEl.style.display='none';
+    // Re-apply pain-mode dimming
+    if(painMode){
+      MODULES.forEach(m=>{
+        const mHit = TICKET_DATA.moduleHits[m.id];
+        if(!mHit||mHit.total===0) document.getElementById('col-'+m.id).classList.add('dimmed');
+      });
+    }
+    return;
+  }
+  clrBtn.classList.add('on');
+  const terms = q.split(/\s+/).filter(Boolean);
+  function hit(txt){ return terms.every(t=>txt.toLowerCase().includes(t)); }
+
+  let total=0;
+  MODULES.forEach(m=>{
+    const col = document.getElementById('col-'+m.id);
+    const hdr = document.getElementById('mh-'+m.id);
+    const headerHit = hit(hdr.dataset.kw||'');
+    let colHit = headerHit;
+    m.nodes.forEach((n,i)=>{
+      const el = document.getElementById(`n-${m.id}-${i}`);
+      if(!el) return;
+      const nodeHit = hit(el.dataset.kw||'');
+      if(nodeHit){ el.classList.add('highlighted'); el.classList.remove('dimmed'); colHit=true; total++; }
+      else { el.classList.remove('highlighted'); el.classList.add('dimmed'); }
+    });
+    if(colHit){
+      col.classList.remove('dimmed'); col.classList.add('has-match');
+      if(headerHit){ hdr.classList.add('highlighted'); hdr.classList.remove('dimmed'); }
+      else { hdr.classList.remove('highlighted','dimmed'); }
+    } else {
+      col.classList.add('dimmed'); col.classList.remove('has-match');
+      hdr.classList.remove('highlighted'); hdr.classList.add('dimmed');
+    }
+  });
+  countEl.textContent = total ? `${total} match${total===1?'':'es'}` : 'No matches';
+  countEl.style.color = total ? 'var(--purple)' : '#EF4444';
+  emptyEl.style.display = total ? 'none' : 'block';
+  const first = document.querySelector('.module-col.has-match');
+  if(first) first.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+function filterBy(label){
+  const inp = document.getElementById('searchInput');
+  inp.value = label; doSearch(label);
+}
+
+/* ══════════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════════ */
+(function init(){
+  buildLegend();
+  buildModules();
+
+  document.getElementById('searchInput').addEventListener('input',e=>doSearch(e.target.value));
+  document.getElementById('clrBtn').addEventListener('click',()=>{ document.getElementById('searchInput').value=''; doSearch(''); document.getElementById('searchInput').focus(); });
+
+  document.addEventListener('keydown',e=>{
+    if((e.metaKey||e.ctrlKey)&&e.key==='k'){ e.preventDefault(); document.getElementById('searchInput').focus(); document.getElementById('searchInput').select(); }
+    if(e.key==='Escape') closePanel();
+  });
+
+  const hint = document.getElementById('hint');
+  document.getElementById('modulesArea').addEventListener('scroll',()=>hint.classList.add('gone'),{once:true});
+  setTimeout(()=>hint.classList.add('gone'), 6000);
+})();
+</script>
+</body>
+</html>
